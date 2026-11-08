@@ -1,0 +1,4 @@
+# Install alongside the main project requirements to review Complete_Experiment.ipynb.
+ipykernel>=6
+jupyter-server>=2
+matplotlib>=3.8

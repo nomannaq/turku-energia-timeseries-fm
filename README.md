@@ -33,8 +33,34 @@ local starter data are retained. The original package instructions are in
 
 `src/pkg/` is the final submission pipeline. Earlier experiments in `src/` use
 older availability assumptions, documented in their source and reports.
-The dashboard files are data exports; the handoff did not contain a dashboard
-application, presentation slides or a demo video.
+An interactive local dashboard is now available in `dashboard/`; the earlier
+`submission/dashboard/` files remain reference exports for the single-seed models.
+See the dashboard instructions below. Presentation slides are still separate deliverables.
+
+## Complete experiment notebook
+
+Open [`Complete_Experiment.ipynb`](Complete_Experiment.ipynb) from this repository
+in the project kernel. Install notebook support with
+`.venv/bin/python -m pip install -r experiments/requirements-notebook.txt`.
+Run All reviews every saved
+experiment, independently recomputes final validation/local-test metrics, plots
+forecasts and verifies saved submission hashes. Training and Chronos inference
+are opt-in; raw datasets and checkpoint files stay local. Full rebuild entry points
+and environment requirements are documented in the notebook.
+Section 10 generates eight inline charts and saves PNG copies to
+`results/notebook_charts/` (180 DPI), covering all experiment stages and the final forecast.
+
+## Interactive historical dashboard
+
+```sh
+.venv/bin/python dashboard/server.py
+```
+
+Open **http://127.0.0.1:8765** for final-ensemble ten-hour forecasts, historical replay,
+uncertainty, direction/spike risks, review alerts and historical evaluation.
+Previous-model driver explanations are explicitly labelled. Actuals are retrospective;
+as-of performance uses only outcomes published by the selected origin.
+See [dashboard/README.md](dashboard/README.md) for the walkthrough and data requirements.
 
 ## Final LightGBM + Chronos-2 ensemble
 
