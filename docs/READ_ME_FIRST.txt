@@ -1,3 +1,13 @@
+PROJECT NAVIGATION (added to the original package note)
+  Current project overview: ../README.md
+  Setup, dashboard, notebook, scoring and training: ../RUNNING.md
+  Current evaluation: ../EVALUATION_REPORT.md
+  Data sources and licences: ../DATA_SOURCES_AND_LICENSES.md
+  Final forecast to upload: ../submission/final_ensemble/forecast_backtest.csv
+
+The original organiser handoff note follows. Its archive/unzip directions
+describe the starter package, not the current completed project.
+
 Since AI Hackathon 2026 - Turku Energia challenge
 Imbalance price forecast, 10 hours ahead
 

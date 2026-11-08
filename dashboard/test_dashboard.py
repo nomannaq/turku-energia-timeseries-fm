@@ -1,5 +1,7 @@
 """Focused checks: frozen forecasts, metric parity, availability cutoff, API scope."""
 import unittest
+from unittest.mock import patch
+from pathlib import Path
 import pandas as pd
 from server import Data
 class DashboardTests(unittest.TestCase):
@@ -27,6 +29,16 @@ class DashboardTests(unittest.TestCase):
    after=self.data.performance(p,o,7,'asof')
    self.assertEqual(before,after)
   finally:f.loc[future,'imbalance_price']=saved
+ def test_fresh_checkout_reconstructs_test_actuals(self):
+  original=Path.exists
+  def exists(path):
+   if path.name=='local_actuals_test.csv':return False
+   return original(path)
+  with patch.object(Path,'exists',exists):
+   fresh=Data()
+  result=fresh.performance('test',pd.Timestamp(fresh.origins('test')[0]),0,'full')
+  self.assertEqual(result['rows'],26920)
+  self.assertAlmostEqual(result['final']['mae_p50'],26.702820052005947,places=8)
  def test_first_origin_has_no_historical_scores(self):
   for p in ['validation','test']:
    r=self.data.performance(p,pd.Timestamp(self.data.origins(p)[0]),7,'asof')

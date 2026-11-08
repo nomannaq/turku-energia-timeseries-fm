@@ -1,5 +1,8 @@
 # Turku Energia imbalance-price forecast: submission build (starter package v1)
 
+> Historical single-model report. For the final project, use the
+> [consolidated evaluation](EVALUATION_REPORT.md) and [run guide](RUNNING.md).
+
 This report documents the original single-model variants. The final five-seed
 LightGBM + Chronos-2 candidate, reproduced scores and checks are documented in
 [the ensemble report](results/final_ensemble/REPORT.md). Its test forecast is

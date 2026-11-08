@@ -1,5 +1,22 @@
 # Forecasting experiments
 
+**[Run guide](../RUNNING.md) · [Notebook and charts](../RUNNING.md#3-review-the-notebook-and-generate-charts) · [Current evaluation](../EVALUATION_REPORT.md)**
+
+This is a chronological research record. Earlier recommendations describe the
+single-seed LightGBM submission at that stage. The final submission now uses
+five-seed LightGBM + Chronos-2; initial short-context Chronos results are distinct
+from the later ensemble configuration.
+
+| Stage | Evidence |
+|---|---|
+| Original LightGBM A/B | [Single-model report](../REPORT.md) |
+| 2: Initial Chronos-2 | [Report](../results/experiment_2_chronos/REPORT.md) |
+| 3: TimesFM / Timestral | [Report](../results/experiment_3_foundation_models/REPORT.md) |
+| 4: Additional external data | [Report](../results/experiment_4_external_data/REPORT.md) |
+| 5: Parameter tuning | [Report](../results/experiment_5_parameter_tuning/REPORT.md) |
+| Final ensemble | [Audit](../results/final_ensemble/REPORT.md) · [Rebuild instructions](../RUNNING.md#5-rebuild-the-final-models-optional) |
+| Local test backtest | [Results](../results/final_ensemble/local_test_backtest/README.md) |
+
 ## Experiment 2: Chronos-2
 
 A completed zero-shot benchmark of `amazon/chronos-2` over all 672 official
@@ -7,7 +24,7 @@ validation origins. It compares direct price, spread, and spread with covariates
 against the baseline and both existing LightGBM variants.
 
 **Result:** best Chronos MAE 44.9159 EUR/MWh versus 42.0286 for LightGBM B.
-The current submission remains unchanged.
+This initial experiment retained the single-seed LightGBM submission.
 
 See [the experiment report](../results/experiment_2_chronos/REPORT.md) for the
 complete comparison, availability controls, limitations and reproduction commands.
@@ -23,7 +40,7 @@ complete comparison, availability controls, limitations and reproduction command
 Completed six zero-shot runs across all 672 validation origins, using the same
 three input configurations as Experiment 2. Best MAE: TimesFM 3 **43.5332**,
 Timestral **43.8162**, compared with LightGBM B **42.0286** EUR/MWh.
-Both new models improve on Chronos's best MAE but do not beat the submission.
+Both improve on the initial Chronos benchmark but do not beat single-seed LightGBM.
 
 See [the full report](../results/experiment_3_foundation_models/REPORT.md) for
 scores, paired uncertainty estimates, provenance and licence limitations.
@@ -45,7 +62,7 @@ histories, including cancellations, and publication-aware forecast-run selection
 Validation MAE: control **42.0286**, outages **41.9542**, weather **42.0642**,
 both **41.9510** EUR/MWh. The best point estimate is only 0.18% better; all
 paired day-bootstrap MAE intervals include zero. The control wins pre-validation
-fold MAE, so the current submission remains unchanged.
+fold MAE, so these additions were not adopted.
 
 See [the report](../results/experiment_4_external_data/REPORT.md) for all scored
 criteria, availability assumptions, source-access limitations and reproduction.
@@ -70,8 +87,8 @@ Original submission files are protected by SHA-256 checks.
 **Result:** no matched run improved median-price MAE. Baseline tuning changed
 MAE from **42.0286 to 42.0652**, outages **41.9542 to 42.0210**, weather
 **42.0642 to 42.1190**, and both remained **41.9510** EUR/MWh. The combined
-model's tiny spike-Brier gain was not statistically clear. Keep the current
-submission. See [the full report](../results/experiment_5_parameter_tuning/REPORT.md)
+model's tiny spike-Brier gain was not statistically clear. These tuning runs did
+not replace the single-seed model. See [the full report](../results/experiment_5_parameter_tuning/REPORT.md)
 for interval scores, seed checks, quantile-sorting effects and uncertainty.
 
 - `experiment_5_parameter_tuning.py`: reproducible search, confirmation,
@@ -88,7 +105,7 @@ It uses Chronos-2 with 2,048 quarters of context and the exact supplied horizon
 weights, independently reproduced on rolling OOS predictions. No conformal
 adjustment or TimesFM/Timestral member is included.
 
-Validation MAE **41.5988**, pinball **11.8864**. The separate test candidate is
+Validation MAE **41.5988**, pinball **11.8864**. The final test submission is
 [`submission/final_ensemble/forecast_backtest.csv`](../submission/final_ensemble/forecast_backtest.csv).
 The original single-model forecasts remain unchanged.
 

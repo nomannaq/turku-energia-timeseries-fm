@@ -1,38 +1,47 @@
-# Turku GridCast interactive dashboard
+# Turku GridCast dashboard
 
-From the project root:
+**[Setup and launch](../RUNNING.md#1-set-up-and-launch-the-dashboard) · [Walkthrough](../RUNNING.md#2-explore-the-dashboard) · [Troubleshooting](../RUNNING.md#7-troubleshooting-and-verification)**
+
+The main run guide contains the installation steps, required files and demo walkthrough. From the repository root, with the existing environment:
 
 ```sh
 .venv/bin/python dashboard/server.py
 ```
 
 Open **http://127.0.0.1:8765**. Choose another port with `--port 8766`.
-Uses the existing pandas/numpy/pyarrow environment and Python's HTTP server. The frontend is plain HTML, CSS, JavaScript and SVG; there are no CDN dependencies or frontend packages to install.
 
-## Demo walkthrough
+## Implementation and data provenance
 
-1. Review the full-period metric tables at the top: validation baseline, previous LightGBM and final ensemble, plus the local test comparison. These results are retrospective and independent of the replay origin.
-2. Choose validation or local test and move the origin slider. Play replay advances one hourly forecast at a time.
-3. Inspect the next ten hours: P50, P10–P90 and the previous hourly forecast aligned to the same delivery quarters.
-4. Select a quarter on the chart or dropdown to inspect direction/spike probabilities.
-5. Review threshold-based alerts and reference input freshness. Alerts suggest expert review, not automated action.
-6. Toggle retrospective actuals explicitly to inspect misses. These realised outcomes were not available at forecast issuance.
-7. Compare final ensemble and previous LightGBM metrics over one day, seven days, 28 days or the whole available period. The default restricts outcomes to those published by the selected origin. Select retrospective period end plus whole available period to reproduce complete saved scores.
-8. Download the selected origin's original 40 forecast rows.
+The backend uses Python's HTTP server with pandas, NumPy and PyArrow. The frontend is HTML, CSS, JavaScript and SVG, with no CDN dependencies or frontend package installation. This is not a Streamlit app.
 
-## Files and scope
+| Dashboard content | Source |
+|---|---|
+| Final forecasts | `submission/final_ensemble/` |
+| Previous-model comparison | Root `forecast_backtest.csv` and `submission/validation_forecast_B.csv` |
+| Reference drivers and freshness | `submission/dashboard/test_B.csv` and `validation_B.csv` |
+| Validation outcomes | `data/actuals_validation.csv` |
+| Local test outcomes | `work_private/final_ensemble/local_actuals_test.csv`, or reconstruction in memory from starter input and spot files |
+| Input publication times | `data/inputs.parquet` |
+| Opening full-period tables | Saved comparison CSVs in `results/final_ensemble/` |
 
-The final forecasts come from `submission/final_ensemble/`. Previous-model comparisons use root `forecast_backtest.csv` and `submission/validation_forecast_B.csv`. The driver/freshness panel uses `submission/dashboard/{period}_B.csv`: these are **previous single-seed LightGBM reference explanations**, not SHAP attributions of the final blend. No causal explanation is claimed.
+Paths in this table are relative to the repository root. Reference drivers are **previous single-seed LightGBM explanations**, not SHAP attributions of the final blend. No causal explanation is claimed.
 
-Evaluation uses official validation actuals and `work_private/final_ensemble/local_actuals_test.csv`. If the latter is missing, run `.venv/bin/python src/pkg/score_local_test.py` with the starter data available. Input publication times are read from `data/inputs.parquet`. Test evaluation remains local, not organiser-certified. Historical scoring intentionally repeats delivery quarters across forecast horizons, matching the scorer's row-based evaluation.
+The opening metric tables are retrospective and independent of the replay origin. Historical performance defaults to outcomes available at the selected origin. Full-period scoring intentionally repeats delivery quarters across forecast horizons, matching the organiser scorer's row-based evaluation. Test evaluation is local, not organiser-certified.
 
-The server binds only to localhost and serves an explicit static-route allowlist. It does not serve repository files, keys, or raw spot-price data. No model training, forecast mutation, external requests or data uploads occur. The demo thresholds (30% spike risk and €20/MWh revision) are illustrative, not tuned operating policies.
+The server binds only to localhost and serves an explicit static-route allowlist. It does not serve repository files, keys or raw spot-price data. Viewing the dashboard does not train models, change forecasts, make external requests or upload data. The default alerts (30% spike risk and EUR 20/MWh forecast revision) are illustrative review thresholds, not tuned operating policies.
 
 ## Verification
 
+From the repository root:
+
 ```sh
 .venv/bin/python dashboard/test_dashboard.py
+```
+
+Optional frontend syntax check, if Node is installed:
+
+```sh
 node --check dashboard/static/app.js
 ```
 
-Tests check exact forecast preservation, complete metric parity, absence of raw spot columns, future-outcome invariance for as-of evaluation, and empty initial windows. Visual browser QA was unavailable in the build environment; review desktop and mobile layouts locally before recording the demo.
+Tests cover forecast preservation, complete metric parity, absence of raw spot columns, future-outcome invariance for as-of evaluation, empty initial windows and local test-label reconstruction. Desktop Chrome checks passed for result tables, replay, actual overlays, risk panels and history-window changes. Mobile and external deployment remain unverified.

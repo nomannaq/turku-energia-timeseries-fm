@@ -16,7 +16,7 @@ def records(df):
 class Data:
     def __init__(self):
         self.frames={};self.previous={};self.explanations={};self.joined={}
-        inputs=pd.read_parquet(ROOT/'data/inputs.parquet',columns=['series_id','timestamp_utc','first_usable_origin_utc'])
+        inputs=pd.read_parquet(ROOT/'data/inputs.parquet',columns=['series_id','timestamp_utc','first_usable_origin_utc','value'])
         availability=inputs[inputs.series_id=='fi_imbalance_price'].copy()
         availability['delivery_start_utc']=pd.to_datetime(availability.timestamp_utc,utc=True)
         availability['usable']=pd.to_datetime(availability.first_usable_origin_utc,utc=True)
@@ -28,8 +28,18 @@ class Data:
             self.previous[period]=pd.read_csv(old,parse_dates=KEYS[:2])
             self.explanations[period]=pd.read_csv(ROOT/f'submission/dashboard/{period}_B.csv',parse_dates=KEYS[:2])
             ap=ROOT/('data/actuals_validation.csv' if period=='validation' else 'work_private/final_ensemble/local_actuals_test.csv')
-            if not ap.exists():raise FileNotFoundError(f'{ap}: run src/pkg/score_local_test.py first')
-            actual=pd.read_csv(ap,parse_dates=['delivery_start_utc']).drop(columns=['first_usable_origin_utc'],errors='ignore').merge(availability,on='delivery_start_utc',how='left',validate='one_to_one')
+            if ap.exists():
+                actual=pd.read_csv(ap,parse_dates=['delivery_start_utc'])
+            elif period=='test':
+                # Fresh checkouts need no private generated actuals file. Reconstruct in memory.
+                series=inputs[inputs.series_id.isin(['fi_imbalance_price','fi_mfrr_direction'])]
+                wide=series.pivot(index='timestamp_utc',columns='series_id',values='value')
+                spot=pd.read_csv(ROOT/'data/spot_nordpool.csv',parse_dates=['timestamp_utc']).set_index('timestamp_utc').value
+                wide.index=pd.to_datetime(wide.index,utc=True)
+                actual=pd.DataFrame({'delivery_start_utc':wide.index,'imbalance_price':wide.fi_imbalance_price.to_numpy(),
+                    'spot_price':spot.reindex(wide.index).to_numpy(),'direction':wide.fi_mfrr_direction.map({-1:'down',0:'none',1:'up'}).to_numpy()})
+            else:raise FileNotFoundError(f'Missing starter data: {ap}')
+            actual=actual.drop(columns=['first_usable_origin_utc'],errors='ignore').merge(availability,on='delivery_start_utc',how='left',validate='one_to_one')
             self.joined[period]=f.merge(actual,on='delivery_start_utc',how='left',validate='many_to_one')
             self.previous[period]=self.previous[period].merge(actual,on='delivery_start_utc',how='left',validate='many_to_one')
     def origins(self,p):return [t.isoformat() for t in sorted(self.frames[p].forecast_origin_utc.unique())]
@@ -99,5 +109,12 @@ def make_handler(data):
  return Handler
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--port',type=int,default=8765);args=parser.parse_args()
-    server=ThreadingHTTPServer(('127.0.0.1',args.port),make_handler(Data()))
+    try:
+        data=Data()
+    except FileNotFoundError as e:
+        parser.exit(1,f'Missing dashboard input: {e.filename or e}\nSee RUNNING.md for the local starter data and forecast files required.\n')
+    try:
+        server=ThreadingHTTPServer(('127.0.0.1',args.port),make_handler(data))
+    except OSError as e:
+        parser.exit(1,f'Cannot start dashboard on port {args.port}: {e}. Try --port 8766.\n')
     print(f'Turku GridCast: http://127.0.0.1:{args.port}',flush=True);server.serve_forever()
