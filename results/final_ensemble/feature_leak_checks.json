@@ -1,0 +1,23 @@
+{
+  "rebuilt_matches_cached": true,
+  "checks": [
+    {
+      "cutoff": "2026-07-10 09:00:00+00:00",
+      "rows_checked": 37000,
+      "bit_identical_features": true,
+      "mutation_visible_later": true
+    },
+    {
+      "cutoff": "2026-09-20 14:00:00+00:00",
+      "rows_checked": 106320,
+      "bit_identical_features": true,
+      "mutation_visible_later": true
+    },
+    {
+      "cutoff": "2026-10-20 03:00:00+00:00",
+      "rows_checked": 134680,
+      "bit_identical_features": true,
+      "mutation_visible_later": true
+    }
+  ]
+}

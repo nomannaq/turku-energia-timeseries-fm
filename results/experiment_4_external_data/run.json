@@ -1,0 +1,177 @@
+{
+  "experiment": 4,
+  "variants": {
+    "baseline": {
+      "added_features": [],
+      "calibration": {
+        "0": [
+          0.09108244015216659,
+          0.12136711669203284
+        ],
+        "1": [
+          0.08796186752341816,
+          0.139548302650432
+        ],
+        "2": [
+          0.05518129553300176,
+          0.20729437432211514
+        ]
+      },
+      "train_rows": 92900,
+      "validation_rows": 26880,
+      "runtime_seconds": 109.98381191599765
+    },
+    "outages": {
+      "added_features": [
+        "ex4_out_gen_unplanned_mw",
+        "ex4_out_gen_planned_mw",
+        "ex4_out_nuclear_mw",
+        "ex4_out_wind_mw",
+        "ex4_out_load_unplanned_mw",
+        "ex4_out_recent_unplanned_mw",
+        "ex4_out_gen_restoration_mw",
+        "ex4_out_net_unplanned_supply_mw",
+        "ex4_out_cable_FI_EE_mw",
+        "ex4_out_cable_EE_FI_mw",
+        "ex4_out_cable_FI_SE3_mw",
+        "ex4_out_cable_SE3_FI_mw",
+        "ex4_out_cable_FI_SE1_mw",
+        "ex4_out_cable_SE1_FI_mw"
+      ],
+      "calibration": {
+        "0": [
+          0.09770441146410623,
+          0.12730888728315068
+        ],
+        "1": [
+          0.09866883605351666,
+          0.08364018429384079
+        ],
+        "2": [
+          0.07881482548216025,
+          0.12683438890252735
+        ]
+      },
+      "train_rows": 92900,
+      "validation_rows": 26880,
+      "runtime_seconds": 110.94515608297661
+    },
+    "weather": {
+      "added_features": [
+        "ex4_wx_dmi_ws",
+        "ex4_wx_dmi_ws_revision",
+        "ex4_wx_dmi_power",
+        "ex4_wx_dmi_power_revision",
+        "ex4_wx_dmi_wd_sin",
+        "ex4_wx_dmi_wd_cos",
+        "ex4_wx_dmi_age_h",
+        "ex4_wx_dmi_power_minus_ecmwf",
+        "ex4_wx_dmi_ws_minus_ecmwf",
+        "ex4_wx_icon_ws",
+        "ex4_wx_icon_ws_revision",
+        "ex4_wx_icon_power",
+        "ex4_wx_icon_power_revision",
+        "ex4_wx_icon_wd_sin",
+        "ex4_wx_icon_wd_cos",
+        "ex4_wx_icon_age_h",
+        "ex4_wx_icon_power_minus_ecmwf",
+        "ex4_wx_icon_ws_minus_ecmwf",
+        "ex4_wx_model_power_disagreement",
+        "ex4_wx_model_ws_disagreement"
+      ],
+      "calibration": {
+        "0": [
+          0.08996691242827463,
+          0.11939349789276485
+        ],
+        "1": [
+          0.09000097458550549,
+          0.13937210135762867
+        ],
+        "2": [
+          0.0563973117416003,
+          0.20765733995961308
+        ]
+      },
+      "train_rows": 92900,
+      "validation_rows": 26880,
+      "runtime_seconds": 110.91366179101169
+    },
+    "both": {
+      "added_features": [
+        "ex4_out_gen_unplanned_mw",
+        "ex4_out_gen_planned_mw",
+        "ex4_out_nuclear_mw",
+        "ex4_out_wind_mw",
+        "ex4_out_load_unplanned_mw",
+        "ex4_out_recent_unplanned_mw",
+        "ex4_out_gen_restoration_mw",
+        "ex4_out_net_unplanned_supply_mw",
+        "ex4_out_cable_FI_EE_mw",
+        "ex4_out_cable_EE_FI_mw",
+        "ex4_out_cable_FI_SE3_mw",
+        "ex4_out_cable_SE3_FI_mw",
+        "ex4_out_cable_FI_SE1_mw",
+        "ex4_out_cable_SE1_FI_mw",
+        "ex4_wx_dmi_ws",
+        "ex4_wx_dmi_ws_revision",
+        "ex4_wx_dmi_power",
+        "ex4_wx_dmi_power_revision",
+        "ex4_wx_dmi_wd_sin",
+        "ex4_wx_dmi_wd_cos",
+        "ex4_wx_dmi_age_h",
+        "ex4_wx_dmi_power_minus_ecmwf",
+        "ex4_wx_dmi_ws_minus_ecmwf",
+        "ex4_wx_icon_ws",
+        "ex4_wx_icon_ws_revision",
+        "ex4_wx_icon_power",
+        "ex4_wx_icon_power_revision",
+        "ex4_wx_icon_wd_sin",
+        "ex4_wx_icon_wd_cos",
+        "ex4_wx_icon_age_h",
+        "ex4_wx_icon_power_minus_ecmwf",
+        "ex4_wx_icon_ws_minus_ecmwf",
+        "ex4_wx_model_power_disagreement",
+        "ex4_wx_model_ws_disagreement"
+      ],
+      "calibration": {
+        "0": [
+          0.09155568146030353,
+          0.1229921856984814
+        ],
+        "1": [
+          0.11402654570882986,
+          0.07418931650127265
+        ],
+        "2": [
+          0.0908158299073889,
+          0.10840789202944844
+        ]
+      },
+      "train_rows": 92900,
+      "validation_rows": 26880,
+      "runtime_seconds": 114.19052345800446
+    }
+  },
+  "selection": "Compare pre-validation rolling-fold MAE; validation is reported separately, never used for fitting/calibration.",
+  "training_cutoff": "2026-09-06 21:00:00+00:00",
+  "validation_end_exclusive": "2026-10-04 21:00:00+00:00",
+  "fold_boundaries": [
+    "2026-07-05 21:00:00+00:00",
+    "2026-07-19 21:00:00+00:00",
+    "2026-08-02 21:00:00+00:00",
+    "2026-08-16 21:00:00+00:00",
+    "2026-08-30 21:00:00+00:00",
+    "2026-09-06 21:00:00+00:00"
+  ],
+  "unchanged_artifact_sha256": {
+    "forecast_backtest.csv": "3324c377e2cb0d324f427b91847c7a9adcce688672c6b54d1cf1ef6e4d04869a",
+    "forecast_backtest_packageonly.csv": "0a2312d16630258d4c02030e69d3753a1dfbf09aa8504974123d6cd94e56f000",
+    "submission/validation_forecast_B.csv": "d2cfc1fb3a3bf344aeb8c61e509841e963064ed1a5e0c8b69f437243aaaa7dcc"
+  },
+  "packages": {
+    "lightgbm": "4.7.0",
+    "numpy": "2.4.3",
+    "pandas": "3.0.1"
+  }
+}

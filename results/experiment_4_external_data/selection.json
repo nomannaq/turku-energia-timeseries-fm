@@ -1,0 +1,7 @@
+{
+  "criterion": "minimum pre-validation rolling-fold MAE",
+  "selected_variant": "baseline",
+  "best_validation_mae_variant": "both",
+  "promoted_to_submission": false,
+  "reason": "Baseline wins pre-validation MAE; all added-data validation MAE difference intervals include zero."
+}

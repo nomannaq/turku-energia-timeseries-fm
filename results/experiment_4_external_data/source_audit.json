@@ -1,0 +1,77 @@
+[
+  {
+    "family": "Outage notices",
+    "status": "included",
+    "sources": [
+      "https://umm.nordpoolgroup.com/",
+      "https://ummapi.nordpoolgroup.com/messages"
+    ],
+    "evidence": "442 full notice histories; 1511 revisions; publicationDate and version retained, cancellations applied as-of. Generation and consumption units plus FI-EE/FI-SE1/FI-SE3 directional corridor notices.",
+    "availability": "ceil_hour(publicationDate + 5 minutes). Never use current isOutdated flags to rewrite earlier views.",
+    "limitation": "Public archive completeness is checked against listing totals, not independently certified; corridor reductions are not exact per-cable physical outage MW."
+  },
+  {
+    "family": "Intraday Fingrid wind revisions",
+    "status": "excluded_missing_vintages",
+    "sources": [
+      "https://data.fingrid.fi/en/datasets/245",
+      "https://data.fingrid.fi/en/datasets/246",
+      "https://data.fingrid.fi/en/datasets"
+    ],
+    "evidence": "Public catalogue inspection identified 245 (updates every 15 minutes) and 246 (once daily). Local 245 archive has datasetId/startTime/endTime/value only, 15456 rows, no duplicated delivery timestamps and no issue/version timestamps. No alternative versioned intraday wind archive was established.",
+    "availability": "Cannot infer historical availability of overwritten values from delivery timestamps.",
+    "limitation": "This is a finding about inspected sources, not proof that no other archive exists."
+  },
+  {
+    "family": "Additional weather runs",
+    "status": "included",
+    "sources": [
+      "https://open-meteo.com/en/docs/single-runs-api",
+      "https://open-meteo.com/en/docs/model-updates",
+      "https://open-meteo.com/en/docs/dmi-api",
+      "https://open-meteo.com/en/docs/dwd-api"
+    ],
+    "evidence": "Individual DMI HARMONIE AROME Europe runs sampled every 3 hours and ICON-EU every 6 hours; 100m wind speed and direction at Raahe, Oulu and Vaasa. Same locations and relative weights drawn from existing ECMWF proxy; predeclared three-location subset limits download volume.",
+    "availability": "Model initialisation + 6 hours, an assumed conservative operational delay. Only complete archived runs, no seamless analysis substitution.",
+    "limitation": "Historical actual API ingestion times are not supplied. Results are conditional on the stated delay. Forecasts are regional proxies, not official revised Fingrid wind-production forecasts."
+  },
+  {
+    "family": "Continuous intraday prices",
+    "status": "not_accessible_with_current_credentials",
+    "sources": [
+      "https://www.nordpoolgroup.com/en/services/power-market-data-services/intraday-market-data/",
+      "https://www.nordpoolgroup.com/en/trading/Operational-Message-List/2024/05/market-data-api-v1-eol-migration-to-v2-20240508075500/"
+    ],
+    "evidence": "Nord Pool historical intraday trades require an appropriate subscription. No such credentials are configured. No equivalent public ENTSO-E historical trade feed with trade/publication timestamps was established.",
+    "availability": "Would require trades published before each origin; final delivery-period averages cannot replace an as-of traded price.",
+    "limitation": "No purchase, account creation or external messages were made."
+  },
+  {
+    "family": "Neighbour real-time measurements",
+    "status": "excluded_unverified_historical_publication",
+    "sources": [
+      "https://dashboard.elering.ee/v3/api-docs",
+      "https://dashboard.elering.ee/api/system",
+      "https://www.svk.se/en/national-grid/the-control-room/",
+      "https://mimer.svk.se/ProductionConsumption/ProductionIndex",
+      "https://www.svk.se/press-och-nyheter/nyheter/balansansvar/2026/svenska-kraftnat-lanserar-svk-data-service--en-ny-plattform-for-oppna-data/",
+      "https://www.statnett.no/en/for-stakeholders-in-the-power-industry/data-from-the-power-system/",
+      "https://driftsdata.statnett.no/restapi/"
+    ],
+    "evidence": "Elering public system and balance schemas and one-day samples inspected. Measurement timestamps are present; publication/version timestamps are absent. Sample balance values were null. No verified historical publication archive was established for additional Swedish/Norwegian measurements. Swedish Mimer production statistics are settlement data, with newer records redirected to eSett; the new SDS portal launched June 2026. Statnett documents measurement aggregation and delayed corrections, without an archived as-of publication history established here.",
+    "availability": "A historical measurement timestamp is not proof of the value available at a forecast origin.",
+    "limitation": "Existing package neighbour prices and flows remain in the baseline. This experiment does not test all possible neighbour feeds."
+  },
+  {
+    "family": "Reserve bids and capacity",
+    "status": "deferred_api_access_and_publication_rule",
+    "sources": [
+      "https://data.fingrid.fi/en/datasets/373",
+      "https://data.fingrid.fi/en/datasets/374",
+      "https://data.fingrid.fi/en/instructions"
+    ],
+    "evidence": "Active quarterly mFRR up/down bid-volume datasets 373/374 identified. No FINGRID_API_KEY configured; no local archive for these IDs. Public descriptions reference final available bid statuses but do not establish historical early publication versions.",
+    "availability": "Must establish publication timing before using as forward reserve-tightness features.",
+    "limitation": "Existing activated reserves, calculated imbalance and scheduled-activation prices remain in the baseline; new bid/capacity series were not benchmarked."
+  }
+]

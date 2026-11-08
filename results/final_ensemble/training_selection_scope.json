@@ -1,0 +1,4 @@
+{
+  "target_cutoff": "2026-09-06 21:00:00+00:00",
+  "description": "Audits the supplied model choice against five-seed raw LightGBM using only rolling OOS training predictions; does not repeat the remote model's unprovided broader search."
+}

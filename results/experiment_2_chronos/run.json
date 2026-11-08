@@ -1,0 +1,146 @@
+{
+  "experiment": 2,
+  "model_id": "amazon/chronos-2",
+  "model_path": "/Users/nomanqureshi/Downloads/TurkuEnergia_SinceAI2026/starter_package_v1/work_private/models/chronos-2",
+  "model_download": {
+    "model_id": "amazon/chronos-2",
+    "revision": "29ec3766d36d6f73f0696f85560a422f50e8498c",
+    "last_modified": "2026-06-05 11:55:42+00:00",
+    "downloaded_files": [
+      "model.safetensors",
+      "config.json",
+      "README.md"
+    ]
+  },
+  "device": "cpu",
+  "context_quarters": 672,
+  "prediction_quarters": 40,
+  "delay_bridge_quarters": {
+    "price": 4,
+    "spread": 4,
+    "spread_covariates": 4
+  },
+  "origins": 672,
+  "first_origin": "2026-09-06 21:00:00+00:00",
+  "last_origin": "2026-10-04 20:00:00+00:00",
+  "parameter_updates": 0,
+  "cross_learning": false,
+  "availability_checks": [
+    {
+      "origin": "2026-09-06 21:00:00+00:00",
+      "mode": "price",
+      "passed": true
+    },
+    {
+      "origin": "2026-09-06 21:00:00+00:00",
+      "mode": "spread",
+      "passed": true
+    },
+    {
+      "origin": "2026-09-06 21:00:00+00:00",
+      "mode": "spread_covariates",
+      "passed": true
+    },
+    {
+      "origin": "2026-09-20 14:00:00+00:00",
+      "mode": "price",
+      "passed": true
+    },
+    {
+      "origin": "2026-09-20 14:00:00+00:00",
+      "mode": "spread",
+      "passed": true
+    },
+    {
+      "origin": "2026-09-20 14:00:00+00:00",
+      "mode": "spread_covariates",
+      "passed": true
+    },
+    {
+      "origin": "2026-10-04 20:00:00+00:00",
+      "mode": "price",
+      "passed": true
+    },
+    {
+      "origin": "2026-10-04 20:00:00+00:00",
+      "mode": "spread",
+      "passed": true
+    },
+    {
+      "origin": "2026-10-04 20:00:00+00:00",
+      "mode": "spread_covariates",
+      "passed": true
+    }
+  ],
+  "past_covariates": {
+    "mfrr_direction": [
+      "fi_mfrr_direction"
+    ],
+    "wind_error": [
+      "x_wind_act",
+      "fi_wind_fc_da"
+    ],
+    "calculated_imbalance": [
+      "x_calc_imb"
+    ],
+    "nuclear_generation": [
+      "x_nuc"
+    ],
+    "net_import": [
+      "x_netimp"
+    ],
+    "frequency_deviation": [
+      "x_freq"
+    ],
+    "kinetic_energy": [
+      "x_kin"
+    ],
+    "scheduled_mfrr_spread": [
+      "x_sa_price",
+      "fi_spot_price"
+    ]
+  },
+  "known_covariates": {
+    "spot": [
+      "fi_spot_price"
+    ],
+    "wind_da": [
+      "fi_wind_fc_da"
+    ],
+    "consumption_da": [
+      "fi_consumption_fc_da"
+    ],
+    "solar_da": [
+      "fi_solar_fc_da"
+    ],
+    "residual_load_da": [
+      "fi_consumption_fc_da",
+      "fi_wind_fc_da",
+      "fi_solar_fc_da"
+    ]
+  },
+  "calendar_covariates": [
+    "hour_sin",
+    "hour_cos",
+    "weekend"
+  ],
+  "runtime_seconds": {
+    "price": 6.72341674999916,
+    "spread": 6.684246416989481,
+    "spread_covariates": 62.994548582995776
+  },
+  "original_artifact_sha256": {
+    "forecast_backtest.csv": "3324c377e2cb0d324f427b91847c7a9adcce688672c6b54d1cf1ef6e4d04869a",
+    "forecast_backtest_packageonly.csv": "0a2312d16630258d4c02030e69d3753a1dfbf09aa8504974123d6cd94e56f000",
+    "submission/validation_forecast_B.csv": "d2cfc1fb3a3bf344aeb8c61e509841e963064ed1a5e0c8b69f437243aaaa7dcc"
+  },
+  "packages": {
+    "chronos-forecasting": "2.3.2",
+    "torch": "2.15.0",
+    "transformers": "5.22.2",
+    "numpy": "2.5.4",
+    "pandas": "3.1.1",
+    "pyarrow": "26.0.1"
+  },
+  "scope": "Price quantiles only; no direction or spike probability head; no test-period scoring."
+}

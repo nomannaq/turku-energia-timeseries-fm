@@ -1,0 +1,18 @@
+{
+  "validation_format_passed": true,
+  "test_format_passed": true,
+  "independent_score_match": true,
+  "mutation_checks_passed": true,
+  "original_submission_unchanged": true,
+  "validation_origins": 672,
+  "test_origins": 673,
+  "unchanged_artifact_sha256": {
+    "forecast_backtest.csv": "3324c377e2cb0d324f427b91847c7a9adcce688672c6b54d1cf1ef6e4d04869a",
+    "forecast_backtest_packageonly.csv": "0a2312d16630258d4c02030e69d3753a1dfbf09aa8504974123d6cd94e56f000",
+    "submission/validation_forecast_B.csv": "d2cfc1fb3a3bf344aeb8c61e509841e963064ed1a5e0c8b69f437243aaaa7dcc"
+  },
+  "output_sha256": {
+    "submission/final_ensemble/validation_forecast.csv": "25043a336358897abc3aa767729c7ca38efb33bcf789eb59bd76cf582edb32fe",
+    "submission/final_ensemble/forecast_backtest.csv": "297e27eafba2d4d6055f5ef28f5dffdb7afd724ea0e31418f7a2e5dd9cecd1d3"
+  }
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "cutoff": "2026-09-20 14:00:00+00:00",
+    "origins_checked": 1842,
+    "bit_identical_inputs": true,
+    "bit_identical_cutoff_output": true
+  },
+  {
+    "cutoff": "2026-10-20 03:00:00+00:00",
+    "origins_checked": 2551,
+    "bit_identical_inputs": true,
+    "bit_identical_cutoff_output": true
+  }
+]

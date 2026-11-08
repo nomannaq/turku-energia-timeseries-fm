@@ -1,0 +1,30 @@
+{
+  "outages": [
+    {
+      "origin": "2026-07-05 21:00:00+00:00",
+      "unavailable_revision_removal": true
+    },
+    {
+      "origin": "2026-09-06 21:00:00+00:00",
+      "unavailable_revision_removal": true
+    },
+    {
+      "origin": "2026-09-20 14:00:00+00:00",
+      "unavailable_revision_removal": true
+    }
+  ],
+  "weather": [
+    {
+      "origin": "2026-07-05 21:00:00+00:00",
+      "unavailable_run_removal": true
+    },
+    {
+      "origin": "2026-09-06 21:00:00+00:00",
+      "unavailable_run_removal": true
+    },
+    {
+      "origin": "2026-09-20 14:00:00+00:00",
+      "unavailable_run_removal": true
+    }
+  ]
+}

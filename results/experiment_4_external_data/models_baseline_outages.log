@@ -1,0 +1,16 @@
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:242: IOError: sysctlbyname failed for 'hw.l1dcachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:242: IOError: sysctlbyname failed for 'hw.l2cachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:242: IOError: sysctlbyname failed for 'hw.l3cachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:242: IOError: sysctlbyname failed for 'hw.optional.neon'. Detail: [errno 1] Operation not permitted
+baseline: fold 2026-07-05–2026-07-19, 10.7s
+baseline: fold 2026-07-19–2026-08-02, 25.0s
+baseline: fold 2026-08-02–2026-08-16, 43.0s
+baseline: fold 2026-08-16–2026-08-30, 63.7s
+baseline: fold 2026-08-30–2026-09-06, 86.0s
+baseline {"rows_scored_price": 26700, "mae_p50": 42.02860619101124, "pinball_p10": 8.162031609363297, "pinball_p50": 21.01430309550562, "pinball_p90": 16.672375948314606, "calibration_pinball_mean": 12.417203778838951, "coverage_p10_p90": 0.7323595505617978, "rows_scored_spike": 26700, "brier_spike_high": 0.09531480390168055, "brier_spike_low": 0.08665802066209377, "brier_spike_mean": 0.09098641228188717, "observed_spike_high_share": 0.12134831460674157, "observed_spike_low_share": 0.1295880149812734, "rows_scored_direction": 26700, "brier_direction": 0.3940632821341446}
+outages: fold 2026-07-05–2026-07-19, 12.1s
+outages: fold 2026-07-19–2026-08-02, 27.1s
+outages: fold 2026-08-02–2026-08-16, 45.0s
+outages: fold 2026-08-16–2026-08-30, 65.1s
+outages: fold 2026-08-30–2026-09-06, 87.5s
+outages {"rows_scored_price": 26700, "mae_p50": 41.95415202996254, "pinball_p10": 8.160365296254682, "pinball_p50": 20.97707601498127, "pinball_p90": 16.55369869400749, "calibration_pinball_mean": 12.357031995131086, "coverage_p10_p90": 0.7358052434456929, "rows_scored_spike": 26700, "brier_spike_high": 0.09523081907988894, "brier_spike_low": 0.08640187755796752, "brier_spike_mean": 0.09081634831892824, "observed_spike_high_share": 0.12134831460674157, "observed_spike_low_share": 0.1295880149812734, "rows_scored_direction": 26700, "brier_direction": 0.39411755492693}

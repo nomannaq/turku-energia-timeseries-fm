@@ -1,0 +1,52 @@
+Availability checks: 9 passed
+timestral209m_price: 8/672, 0.2s
+timestral209m_price: 64/672, 1.4s
+timestral209m_price: 128/672, 2.6s
+timestral209m_price: 192/672, 4.0s
+timestral209m_price: 256/672, 5.2s
+timestral209m_price: 320/672, 6.5s
+timestral209m_price: 384/672, 7.7s
+timestral209m_price: 448/672, 9.0s
+timestral209m_price: 512/672, 10.2s
+timestral209m_price: 576/672, 11.5s
+timestral209m_price: 640/672, 12.7s
+timestral209m_price: 672/672, 13.3s
+timestral209m_price {"rows_scored": 26700, "mae_p50": 52.3042165124836, "pinball_p10": 6.859635171994984, "pinball_p90": 22.69791791512414, "calibration_pinball_mean": 14.778776543559562, "coverage_p10_p90": 0.7817228464419476, "below_p10": 0.109625468164794, "above_p90": 0.10865168539325842, "mean_interval_width": 156.72028592915123}
+timestral209m_spread: 8/672, 0.2s
+timestral209m_spread: 64/672, 1.3s
+timestral209m_spread: 128/672, 2.6s
+timestral209m_spread: 192/672, 3.8s
+timestral209m_spread: 256/672, 5.1s
+timestral209m_spread: 320/672, 6.3s
+timestral209m_spread: 384/672, 7.6s
+timestral209m_spread: 448/672, 8.8s
+timestral209m_spread: 512/672, 10.1s
+timestral209m_spread: 576/672, 11.3s
+timestral209m_spread: 640/672, 12.6s
+timestral209m_spread: 672/672, 13.2s
+timestral209m_spread {"rows_scored": 26700, "mae_p50": 44.32298425313678, "pinball_p10": 9.993605393106591, "pinball_p90": 18.64271053686321, "calibration_pinball_mean": 14.3181579649849, "coverage_p10_p90": 0.8056179775280898, "below_p10": 0.09632958801498127, "above_p90": 0.09805243445692884, "mean_interval_width": 140.17685644723392}
+timestral209m_spread_covariates: 8/672, 2.7s
+timestral209m_spread_covariates: 64/672, 19.2s
+timestral209m_spread_covariates: 128/672, 39.5s
+timestral209m_spread_covariates: 192/672, 59.6s
+timestral209m_spread_covariates: 256/672, 78.8s
+timestral209m_spread_covariates: 320/672, 97.9s
+timestral209m_spread_covariates: 384/672, 117.0s
+timestral209m_spread_covariates: 448/672, 136.7s
+timestral209m_spread_covariates: 512/672, 156.4s
+timestral209m_spread_covariates: 576/672, 176.1s
+timestral209m_spread_covariates: 640/672, 195.8s
+timestral209m_spread_covariates: 672/672, 205.8s
+timestral209m_spread_covariates {"rows_scored": 26700, "mae_p50": 43.81618789933678, "pinball_p10": 7.195877127325865, "pinball_p90": 18.3198454057097, "calibration_pinball_mean": 12.757861266517782, "coverage_p10_p90": 0.810374531835206, "below_p10": 0.08078651685393258, "above_p90": 0.10883895131086142, "mean_interval_width": 128.29870507018285}
+                          model  rows_scored   mae_p50  pinball_p10  pinball_p90  calibration_pinball_mean  coverage_p10_p90  below_p10  above_p90  mean_interval_width
+                       baseline        26700 66.203304    25.107578    23.247658                 24.177618          0.682884   0.152322   0.164794           111.511521
+                     lightgbm_B        26700 42.028598     8.162124    16.672376                 12.417250          0.732210   0.157603   0.110187            95.807264
+                 chronos2_price        26700 52.444106     7.044261    22.150748                 14.597505          0.730412   0.139738   0.129850           137.401352
+                chronos2_spread        26700 44.915869     9.934189    19.005608                 14.469899          0.801610   0.093521   0.104869           145.469935
+     chronos2_spread_covariates        26700 47.645813     8.251562    19.040495                 13.646028          0.756479   0.112210   0.131311           128.948651
+                 timesfm3_price        26700 53.068949     7.047493    24.094723                 15.571108          0.777416   0.100449   0.122135           161.204960
+                timesfm3_spread        26700 45.372786     9.946834    19.475304                 14.711069          0.811273   0.093521   0.095206           148.655175
+     timesfm3_spread_covariates        26700 43.533164     7.920178    17.593233                 12.756706          0.808764   0.078914   0.112322           119.046196
+            timestral209m_price        26700 52.304217     6.859635    22.697918                 14.778777          0.781723   0.109625   0.108652           156.720286
+           timestral209m_spread        26700 44.322984     9.993605    18.642711                 14.318158          0.805618   0.096330   0.098052           140.176856
+timestral209m_spread_covariates        26700 43.816188     7.195877    18.319845                 12.757861          0.810375   0.080787   0.108839           128.298705

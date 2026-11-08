@@ -1,0 +1,14 @@
+source,series_group,dataset_id,availability_type,lag_minutes,publish_day_offset,publish_time_local,confidence,note
+calendar,calendar,,always,,,,varma,"exception (D17): calendar series are known in advance, first_usable_origin_utc = data period start 2026-05-31T21:00:00Z"
+fingrid,imbalance_price,319,lag_after_period_end,60,,,oletus,D2
+fingrid,mfrr_price_volume,244;106;375;376,lag_after_period_end,60,,,oletus,D2
+fingrid,afrr_price_volume,347;348,lag_after_period_end,60,,,oletus,D2
+fingrid,mfrr_direction,369,lag_after_period_end,60,,,oletus,D17
+fingrid,consumption_production_actual,124;74,lag_after_period_end,30,,,oletus,"D17: 30 min (cautious, alignment of the series is uncertain)"
+fingrid,cross_border_flow,61;57;60;55,lag_after_period_end,30,,,oletus,"D17: 30 min (cautious, alignment of the series is uncertain)"
+fingrid,consumption_forecast_da,165,daily_local_time,,-1,13:00,varma,"D17: 13:00 Europe/Helsinki all year (covers 12:00 EET in summer time)"
+fingrid,wind_forecast_da,246,daily_local_time,,-1,13:00,varma,"D17: 13:00 Europe/Helsinki all year (covers 12:00 EET in summer time)"
+fingrid,solar_forecast_da,247,daily_local_time,,-1,13:00,varma,"D17: 13:00 Europe/Helsinki all year (covers 12:00 EET in summer time)"
+nordpool,spot_price,,daily_local_time,,-1,14:00,varma,D2
+entsoe,neighbour_imbalance_load,17.1.g;6.1.b,lag_after_period_end,120,,,oletus_tarkistettava,"D2; for hourly source periods the lag counts from the end of the hour"
+entsoe,transfer_capacity,11.1,daily_local_time,,-1,14:00,oletus_tarkistettava,"D17: FI-EE and EE-FI only"

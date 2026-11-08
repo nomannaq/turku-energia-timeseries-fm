@@ -1,0 +1,17 @@
+{
+  "scope": "Local post-hoc historical test score from packaged realised series; not official organizer actuals_test.csv",
+  "validation_labels_match": true,
+  "unique_delivery_quarters": 2728,
+  "forecast_origins": 673,
+  "rows": 26920,
+  "forecast_sha256_unchanged": {
+    "ensemble": "297e27eafba2d4d6055f5ef28f5dffdb7afd724ea0e31418f7a2e5dd9cecd1d3",
+    "previous_lightgbm": "3324c377e2cb0d324f427b91847c7a9adcce688672c6b54d1cf1ef6e4d04869a"
+  },
+  "source_sha256": {
+    "data/inputs.parquet": "45e40983bdb2429ee78a37811462542fcfd5ec2190751cf19e0f6c1a69f6283b",
+    "data/spot_nordpool.csv": "fdbe99eae9092794e47cbd4bfbe4cd39f49ccd7096492c1f417e618ba1a25ee1"
+  },
+  "scored_at_utc": "2026-11-07 23:41:33.411279+00:00",
+  "no_fitting_or_selection_performed": true
+}

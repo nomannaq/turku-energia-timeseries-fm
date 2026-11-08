@@ -1,0 +1,10 @@
+{
+  "experiments/experiment_4_features.py": "a367a073609950855fedcc8c9ff1148aa1387422ad277abedad6e0143054f1ab",
+  "experiments/experiment_4_external_data.py": "e84ed65d69029663fcab9362fca19ad9b25232b9ede3a0778c5a8c6055c07660",
+  "work_private/features_B.parquet": "e0513b7ac124295c8a63df9c2f7cc644c9eaf5be6db64d3afe46824e54cc1426",
+  "work_private/experiment4/outage_features.parquet": "e35afbcec6c94393eec42b3f202553061a3331ddca54e5e6570dc8c9c5563b79",
+  "work_private/experiment4/weather_features.parquet": "283146285f8c46b71532674cf125f4a77a19a45f56f679e26480a0981f48afb4",
+  "work_private/experiment4/weather_manifest.json": "727eb9ab34228b5840c37848f5f2bdd8fcd0125ea7594b16e50390e86f37d331",
+  "work_private/experiment4/outage_manifest.json": "2e6a580e45d6ba67e28afd05c6219e4ca523893d306c2f256eb135638c65b6a2",
+  "experiments/analyze_experiment_4.py": "9160ff24e55da36e67f21c1dd7b1ebe3dbe4ce6569d68e89c65cf6db8f0666ff"
+}

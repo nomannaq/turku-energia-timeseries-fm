@@ -1,0 +1,51 @@
+# Score summary
+
+- Scorer version: 0.1.1
+- Schema version: 1.0
+- Submission: validation_forecast.csv
+- Actuals: actuals_validation.csv
+- Spike margin: 50.00 EUR/MWh
+- Rows in submission: 26880
+- Rows scored (price metrics): 26700; skipped (no actual): 180
+- Rows scored (exceptional prices): 26700
+- Rows scored (direction): 26700
+
+## Overall results
+
+| Metric | Value | Use |
+|---|---|---|
+| MAE (p50) | 41.5988 | Level 1: accuracy |
+| Pinball loss p10 | 7.2510 | |
+| Pinball loss p90 | 16.5217 | |
+| Mean pinball loss p10 and p90 | 11.8864 | Level 1: calibration |
+| P10-P90 coverage | 0.7328 | supporting metric (target about 0.80) |
+| Brier p_spike_high | 0.0953 | |
+| Brier p_spike_low | 0.0863 | |
+| Mean Brier, exceptional prices | 0.0908 | Level 1: exceptional prices |
+| Three-class Brier, direction | 0.3929 | Level 1: direction |
+| Pinball loss p50 | 20.7994 | for information |
+| Observed share of high / low quarter-hours | 0.1213 / 0.1296 | for information |
+| Baseline MAE (p50) | n/a | for information |
+| MAE difference vs baseline (team - baseline) | n/a | for information |
+| MAE ratio vs baseline (team / baseline) | n/a | for information |
+
+## Results by forecast horizon
+
+| Hour | Steps | Rows | MAE | Pinball p10/p90 mean | Coverage | Brier spikes | Brier direction |
+|---|---|---|---|---|---|---|---|
+| 1 | 1-4 | 2688 | 36.0001 | 10.5663 | 0.7188 | 0.0767 | 0.3024 |
+| 2 | 5-8 | 2684 | 40.0509 | 11.3451 | 0.7224 | 0.0888 | 0.3755 |
+| 3 | 9-12 | 2680 | 41.5886 | 11.7382 | 0.7325 | 0.0906 | 0.4021 |
+| 4 | 13-16 | 2676 | 41.5775 | 11.7611 | 0.7493 | 0.0912 | 0.4033 |
+| 5 | 17-20 | 2672 | 41.8280 | 11.9123 | 0.7332 | 0.0920 | 0.4023 |
+| 6 | 21-24 | 2668 | 42.2702 | 12.0924 | 0.7395 | 0.0924 | 0.4027 |
+| 7 | 25-28 | 2664 | 42.6695 | 12.2656 | 0.7320 | 0.0925 | 0.4042 |
+| 8 | 29-32 | 2660 | 42.9415 | 12.2384 | 0.7387 | 0.0935 | 0.4094 |
+| 9 | 33-36 | 2656 | 43.3338 | 12.3968 | 0.7312 | 0.0947 | 0.4132 |
+| 10 | 37-40 | 2652 | 43.8059 | 12.5697 | 0.7308 | 0.0958 | 0.4148 |
+
+Lower is better for MAE, pinball loss and Brier scores. Points are calculated with `score.py --points` after all submissions have been scored.
+
+Wrote /Users/nomanqureshi/Downloads/TurkuEnergia_SinceAI2026/starter_package_v1/results/final_ensemble/official_validation_score/score_summary.csv
+Wrote /Users/nomanqureshi/Downloads/TurkuEnergia_SinceAI2026/starter_package_v1/results/final_ensemble/official_validation_score/score_summary.md
+Wrote /Users/nomanqureshi/Downloads/TurkuEnergia_SinceAI2026/starter_package_v1/results/final_ensemble/official_validation_score/score_by_horizon.csv

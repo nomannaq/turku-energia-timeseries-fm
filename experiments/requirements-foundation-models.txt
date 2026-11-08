@@ -1,0 +1,4 @@
+# Install requirements-chronos.txt first; install this file with --no-deps.
+# Pinned commits and archive hashes; Python source verified against the executed installation.
+timesfm @ https://github.com/google-research/timesfm/archive/e51928e27119cb17bebc005be2696b75e0a9e688.zip#sha256=20156acd11d4a79a72726c6b4d7d9e6c327bca7ad5efe2a458380c3f821c339d
+timestral @ https://github.com/mistralai/timestral/archive/a534bdbd244d64f3d9d743f46c7bf6fc330ed4ff.zip#sha256=c5a9ebaa267cced88c00195c2b89f70e6b7f803aa549ab21f4565f069c6ca4b6

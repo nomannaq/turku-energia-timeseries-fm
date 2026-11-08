@@ -1,0 +1,370 @@
+{
+  "baseline": {
+    "dir": {
+      "global": {
+        "learning_rate": 0.01612279459474707,
+        "num_leaves": 7,
+        "feature_fraction": 0.34629520075324716,
+        "lambda_l2": 2.8875763011898665,
+        "n_rounds": 150,
+        "min_data_in_leaf": 2690
+      },
+      "short": {
+        "learning_rate": 0.01612279459474707,
+        "num_leaves": 7,
+        "feature_fraction": 0.34629520075324716,
+        "lambda_l2": 2.8875763011898665,
+        "n_rounds": 150,
+        "min_data_in_leaf": 789
+      }
+    },
+    "spk": {
+      "global": {
+        "learning_rate": 0.01612279459474707,
+        "num_leaves": 7,
+        "feature_fraction": 0.34629520075324716,
+        "lambda_l2": 2.8875763011898665,
+        "n_rounds": 150,
+        "min_data_in_leaf": 2690
+      },
+      "short": {
+        "learning_rate": 0.01612279459474707,
+        "num_leaves": 7,
+        "feature_fraction": 0.34629520075324716,
+        "lambda_l2": 2.8875763011898665,
+        "n_rounds": 150,
+        "min_data_in_leaf": 789
+      }
+    },
+    "0.1": {
+      "global": {
+        "learning_rate": 0.008292073511893488,
+        "num_leaves": 23,
+        "feature_fraction": 0.8660539844000974,
+        "lambda_l2": 1.2587995631888016,
+        "n_rounds": 600,
+        "min_data_in_leaf": 1967
+      },
+      "short": {
+        "learning_rate": 0.008292073511893488,
+        "num_leaves": 23,
+        "feature_fraction": 0.8660539844000974,
+        "lambda_l2": 1.2587995631888016,
+        "n_rounds": 600,
+        "min_data_in_leaf": 448
+      }
+    },
+    "0.5": {
+      "global": {
+        "learning_rate": 0.014393084727999961,
+        "num_leaves": 14,
+        "min_data_in_leaf": 570,
+        "feature_fraction": 0.6690178536673007,
+        "lambda_l2": 8.221575306227177,
+        "n_rounds": 250
+      },
+      "short": {
+        "learning_rate": 0.03,
+        "num_leaves": 15,
+        "min_data_in_leaf": 300,
+        "feature_fraction": 0.5,
+        "lambda_l2": 10,
+        "n_rounds": 300
+      }
+    },
+    "0.9": {
+      "global": {
+        "learning_rate": 0.01612279459474707,
+        "num_leaves": 7,
+        "feature_fraction": 0.34629520075324716,
+        "lambda_l2": 2.8875763011898665,
+        "n_rounds": 150,
+        "min_data_in_leaf": 2690
+      },
+      "short": {
+        "learning_rate": 0.01612279459474707,
+        "num_leaves": 7,
+        "feature_fraction": 0.34629520075324716,
+        "lambda_l2": 2.8875763011898665,
+        "n_rounds": 150,
+        "min_data_in_leaf": 789
+      }
+    }
+  },
+  "outages": {
+    "dir": {
+      "global": {
+        "learning_rate": 0.015389138556420111,
+        "num_leaves": 4,
+        "min_data_in_leaf": 638,
+        "feature_fraction": 0.28468853201853633,
+        "lambda_l2": 6.026064887549161,
+        "n_rounds": 400
+      },
+      "short": {
+        "learning_rate": 0.03,
+        "num_leaves": 15,
+        "min_data_in_leaf": 300,
+        "feature_fraction": 0.5,
+        "lambda_l2": 10,
+        "n_rounds": 300
+      }
+    },
+    "spk": {
+      "global": {
+        "learning_rate": 0.01131504896917878,
+        "num_leaves": 23,
+        "feature_fraction": 0.47777572274910673,
+        "lambda_l2": 3.4734326204839197,
+        "n_rounds": 250,
+        "min_data_in_leaf": 1312
+      },
+      "short": {
+        "learning_rate": 0.01131504896917878,
+        "num_leaves": 23,
+        "feature_fraction": 0.47777572274910673,
+        "lambda_l2": 3.4734326204839197,
+        "n_rounds": 250,
+        "min_data_in_leaf": 573
+      }
+    },
+    "0.1": {
+      "global": {
+        "learning_rate": 0.008292073511893488,
+        "num_leaves": 23,
+        "feature_fraction": 0.8660539844000974,
+        "lambda_l2": 1.2587995631888016,
+        "n_rounds": 600,
+        "min_data_in_leaf": 1967
+      },
+      "short": {
+        "learning_rate": 0.008292073511893488,
+        "num_leaves": 23,
+        "feature_fraction": 0.8660539844000974,
+        "lambda_l2": 1.2587995631888016,
+        "n_rounds": 600,
+        "min_data_in_leaf": 448
+      }
+    },
+    "0.5": {
+      "global": {
+        "learning_rate": 0.014393084727999961,
+        "num_leaves": 14,
+        "min_data_in_leaf": 570,
+        "feature_fraction": 0.6690178536673007,
+        "lambda_l2": 8.221575306227177,
+        "n_rounds": 250
+      },
+      "short": {
+        "learning_rate": 0.03,
+        "num_leaves": 15,
+        "min_data_in_leaf": 300,
+        "feature_fraction": 0.5,
+        "lambda_l2": 10,
+        "n_rounds": 300
+      }
+    },
+    "0.9": {
+      "global": {
+        "learning_rate": 0.01612279459474707,
+        "num_leaves": 7,
+        "feature_fraction": 0.34629520075324716,
+        "lambda_l2": 2.8875763011898665,
+        "n_rounds": 150,
+        "min_data_in_leaf": 2690
+      },
+      "short": {
+        "learning_rate": 0.01612279459474707,
+        "num_leaves": 7,
+        "feature_fraction": 0.34629520075324716,
+        "lambda_l2": 2.8875763011898665,
+        "n_rounds": 150,
+        "min_data_in_leaf": 789
+      }
+    }
+  },
+  "weather": {
+    "dir": {
+      "global": {
+        "learning_rate": 0.01612279459474707,
+        "num_leaves": 7,
+        "feature_fraction": 0.34629520075324716,
+        "lambda_l2": 2.8875763011898665,
+        "n_rounds": 150,
+        "min_data_in_leaf": 2690
+      },
+      "short": {
+        "learning_rate": 0.01612279459474707,
+        "num_leaves": 7,
+        "feature_fraction": 0.34629520075324716,
+        "lambda_l2": 2.8875763011898665,
+        "n_rounds": 150,
+        "min_data_in_leaf": 789
+      }
+    },
+    "spk": {
+      "global": {
+        "learning_rate": 0.01612279459474707,
+        "num_leaves": 7,
+        "feature_fraction": 0.34629520075324716,
+        "lambda_l2": 2.8875763011898665,
+        "n_rounds": 150,
+        "min_data_in_leaf": 2690
+      },
+      "short": {
+        "learning_rate": 0.01612279459474707,
+        "num_leaves": 7,
+        "feature_fraction": 0.34629520075324716,
+        "lambda_l2": 2.8875763011898665,
+        "n_rounds": 150,
+        "min_data_in_leaf": 789
+      }
+    },
+    "0.1": {
+      "global": {
+        "learning_rate": 0.008292073511893488,
+        "num_leaves": 23,
+        "feature_fraction": 0.8660539844000974,
+        "lambda_l2": 1.2587995631888016,
+        "n_rounds": 600,
+        "min_data_in_leaf": 1967
+      },
+      "short": {
+        "learning_rate": 0.008292073511893488,
+        "num_leaves": 23,
+        "feature_fraction": 0.8660539844000974,
+        "lambda_l2": 1.2587995631888016,
+        "n_rounds": 600,
+        "min_data_in_leaf": 448
+      }
+    },
+    "0.5": {
+      "global": {
+        "learning_rate": 0.014393084727999961,
+        "num_leaves": 14,
+        "min_data_in_leaf": 570,
+        "feature_fraction": 0.6690178536673007,
+        "lambda_l2": 8.221575306227177,
+        "n_rounds": 250
+      },
+      "short": {
+        "learning_rate": 0.03,
+        "num_leaves": 15,
+        "min_data_in_leaf": 300,
+        "feature_fraction": 0.5,
+        "lambda_l2": 10,
+        "n_rounds": 300
+      }
+    },
+    "0.9": {
+      "global": {
+        "learning_rate": 0.01612279459474707,
+        "num_leaves": 7,
+        "feature_fraction": 0.34629520075324716,
+        "lambda_l2": 2.8875763011898665,
+        "n_rounds": 150,
+        "min_data_in_leaf": 2690
+      },
+      "short": {
+        "learning_rate": 0.01612279459474707,
+        "num_leaves": 7,
+        "feature_fraction": 0.34629520075324716,
+        "lambda_l2": 2.8875763011898665,
+        "n_rounds": 150,
+        "min_data_in_leaf": 789
+      }
+    }
+  },
+  "both": {
+    "dir": {
+      "global": {
+        "learning_rate": 0.015389138556420111,
+        "num_leaves": 4,
+        "min_data_in_leaf": 638,
+        "feature_fraction": 0.28468853201853633,
+        "lambda_l2": 6.026064887549161,
+        "n_rounds": 400
+      },
+      "short": {
+        "learning_rate": 0.03,
+        "num_leaves": 15,
+        "min_data_in_leaf": 300,
+        "feature_fraction": 0.5,
+        "lambda_l2": 10,
+        "n_rounds": 300
+      }
+    },
+    "spk": {
+      "global": {
+        "learning_rate": 0.01131504896917878,
+        "num_leaves": 23,
+        "feature_fraction": 0.47777572274910673,
+        "lambda_l2": 3.4734326204839197,
+        "n_rounds": 250,
+        "min_data_in_leaf": 1312
+      },
+      "short": {
+        "learning_rate": 0.01131504896917878,
+        "num_leaves": 23,
+        "feature_fraction": 0.47777572274910673,
+        "lambda_l2": 3.4734326204839197,
+        "n_rounds": 250,
+        "min_data_in_leaf": 573
+      }
+    },
+    "0.1": {
+      "global": {
+        "learning_rate": 0.014393084727999961,
+        "num_leaves": 14,
+        "min_data_in_leaf": 570,
+        "feature_fraction": 0.6690178536673007,
+        "lambda_l2": 8.221575306227177,
+        "n_rounds": 250
+      },
+      "short": {
+        "learning_rate": 0.03,
+        "num_leaves": 15,
+        "min_data_in_leaf": 300,
+        "feature_fraction": 0.5,
+        "lambda_l2": 10,
+        "n_rounds": 300
+      }
+    },
+    "0.5": {
+      "global": {
+        "learning_rate": 0.014393084727999961,
+        "num_leaves": 14,
+        "min_data_in_leaf": 570,
+        "feature_fraction": 0.6690178536673007,
+        "lambda_l2": 8.221575306227177,
+        "n_rounds": 250
+      },
+      "short": {
+        "learning_rate": 0.03,
+        "num_leaves": 15,
+        "min_data_in_leaf": 300,
+        "feature_fraction": 0.5,
+        "lambda_l2": 10,
+        "n_rounds": 300
+      }
+    },
+    "0.9": {
+      "global": {
+        "learning_rate": 0.014393084727999961,
+        "num_leaves": 14,
+        "min_data_in_leaf": 570,
+        "feature_fraction": 0.6690178536673007,
+        "lambda_l2": 8.221575306227177,
+        "n_rounds": 250
+      },
+      "short": {
+        "learning_rate": 0.03,
+        "num_leaves": 15,
+        "min_data_in_leaf": 300,
+        "feature_fraction": 0.5,
+        "lambda_l2": 10,
+        "n_rounds": 300
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+conformal abs {'dir_brier': np.float64(0.347), 'dir_brier_s1_4': np.float64(0.235), 'spk_brier': np.float64(0.345), 'p50_mae': np.float64(29.634), 'pin10': np.float64(5.762), 'pin90': np.float64(7.062), 'cov80': np.float64(0.63)}
+conformal scaled {'dir_brier': np.float64(0.347), 'dir_brier_s1_4': np.float64(0.235), 'spk_brier': np.float64(0.345), 'p50_mae': np.float64(29.634), 'pin10': np.float64(5.69), 'pin90': np.float64(7.178), 'cov80': np.float64(0.64)}
+chosen conformal: scaled {0: (np.float64(0.08649639175507506), np.float64(0.08942080244927972)), 1: (np.float64(0.08892317899524335), np.float64(0.18957675742143074)), 2: (np.float64(0.07563849706210628), np.float64(0.28991923805436465))}
+                              dir_brier  dir_brier_s1_4  spk_brier  p50_mae   pin10    pin90   cov80
+v2allwx_raw                      0.3918          0.2459     0.3179  41.4561  8.4362  16.4076  0.6328
+v2allwx_conformal                0.3918          0.2459     0.3179  41.4561  8.2481  16.6635  0.7348
+climatology                      0.4508             NaN     0.4275  44.2913     NaN      NaN     NaN
+v1_best (base+rt+wx_fi_wind)     0.4087          0.3085     0.3539  42.0791  8.6486  17.6137  0.5445
+bootstrap (mean, 2.5%, 97.5%, P(better)): {'dir vs climatology': (-0.059, -0.0835, -0.0339, 1.0), 'spk vs climatology': (-0.1096, -0.1505, -0.0726, 1.0), 'p50 abs err vs train-median': (-2.8352, -3.9955, -1.7684, 1.0)}
+   dir_brier  dir_brier_s1_4  spk_brier  p50_mae   pin10    pin90   cov80  steps
+0     0.2459          0.2459     0.2270  32.6321  6.8432  13.2586  0.7638    1-4
+1     0.3968             NaN     0.3225  41.5000  8.2293  16.3293  0.7259   5-16
+2     0.4139             NaN     0.3309  42.9191  8.4939  17.4047  0.7344  17-40
+SHAP top dir: [('dl_spot_rank_day', 0.063), ('dl_spot', 0.053), ('dl_spot_minus_daymean', 0.051), ('wx_fiw_t2_roll12', 0.045), ('st_sp_absmed672', 0.039), ('wx_om_mw_minus_da', 0.035), ('st_cons_mean96', 0.034), ('dl_wind_da_minus_o', 0.027), ('wx_fiw_pw_ramp3', 0.025), ('dl_dow', 0.022), ('wx_fiw_ws10', 0.021), ('rt_sa_last_minus_spot', 0.02)]
+SHAP top spk: [('wx_om_mw_minus_da', 0.127), ('wx_hel_sw', 0.088), ('wx_hel_ws', 0.085), ('st_afrr_dn_mean96', 0.076), ('st_cons_mean96', 0.074), ('st_werr_mean96', 0.069), ('st_sp_ewm4', 0.065), ('dl_spot_ramp1', 0.064), ('st_sp_max96', 0.063), ('st_sp_max24', 0.06), ('dl_spot_range_day', 0.057), ('dl_dow', 0.057)]
+SHAP top 0.5: [('rt_sa_last_minus_spot', 1.635), ('st_sp_ewm4', 1.622), ('wx_om_mw_minus_da', 0.997), ('st_cons_mean96', 0.844), ('dl_spot', 0.838), ('st_afrr_up_mean96', 0.801), ('st_sp_max24', 0.691), ('dl_dow', 0.672), ('st_sp_mean12', 0.639), ('st_sp_min24', 0.614), ('st_werr_mean96', 0.556), ('wx_fiw_ws10', 0.555)]
+SHAP top dir_steps1-4: [('dl_sa_price_t_minus_spot', 0.213), ('rt_freq_dev4', 0.207), ('rt_sa_last_minus_spot', 0.163), ('rt_ci_min_q', 0.137), ('st_up_ewm8', 0.095), ('rt_ci_max_q', 0.085), ('dl_spot_rank_day', 0.083), ('dl_spot_minus_daymean', 0.065), ('rt_wrt_err_d4', 0.064), ('rt_ci_last', 0.063), ('st_SE1_imb_mean4', 0.062), ('dl_spot', 0.05)]
+SHAP top 0.5_steps1-4: [('rt_sa_last_minus_spot', 8.83), ('dl_sa_price_t_minus_spot', 3.124), ('st_sp_slog_last', 2.326), ('rt_ci_max_q', 2.324), ('rt_freq_dev4', 2.261), ('rt_ci_min_q', 1.999), ('rt_sa_mean4_minus_spot', 1.974), ('st_sp_last', 1.959), ('dl_spot', 1.74), ('st_afrr_up_minus_spot', 1.676), ('rt_ci_last', 1.173), ('rt_wrt_err_d4', 1.159)]

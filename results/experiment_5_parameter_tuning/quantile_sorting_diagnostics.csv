@@ -1,0 +1,9 @@
+model,raw_quantile_crossing_rows,median_changed_by_initial_sort_rows,mean_abs_initial_median_shift,exported_median_changed_vs_control_rows,mean_abs_exported_median_shift_vs_control
+baseline_control,107,107,0.0063531317626997885,0,0.0
+baseline_tuned,124,124,0.007466220972016715,305,0.1281491517857143
+outages_control,100,100,0.0028368616700934824,0,0.0
+outages_tuned,81,81,0.0032552602047466127,290,0.16148479538690477
+weather_control,100,100,0.006137611762874248,0,0.0
+weather_tuned,119,119,0.01015004865836408,325,0.16935956101190477
+both_control,99,99,0.004817811210500157,0,0.0
+both_tuned,99,99,0.004817811210500157,0,0.0

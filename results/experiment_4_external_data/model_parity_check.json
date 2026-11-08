@@ -1,0 +1,6 @@
+{
+  "check": "Experiment fit vs directly extracted production fit; direction specialist steps 1\u20134; trained through official validation cutoff; first day predictions compared",
+  "max_abs_prediction_difference": 0.0,
+  "all_six_feature_family_column_lists_identical": true,
+  "production_source_sha256": "e9bacda4dd40a46d866f7ce0d7305aa893cd509159bb6b4ebd72a01dabfce850"
+}

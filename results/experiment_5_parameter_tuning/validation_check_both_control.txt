@@ -1,0 +1,25 @@
+VALIDATION PASSED
+
+File: validation_both_control.csv
+Validator version: 0.1.0
+Schema version: 1.0
+Forecast origins: 672 / 672
+Rows: 26880 / 26880
+File: OK
+Required columns: OK
+Data types: OK
+Forecast origins: OK
+Rows: OK
+Duplicate rows: OK
+Missing required values: OK
+Steps: OK
+Timestamps: OK
+Quantiles: OK
+Probabilities: OK
+Direction probabilities: OK
+Spike probabilities: OK
+Data cut-off rule: OK (optional column, 0 values given)
+Errors: 0
+Warnings: 0
+
+The submission is ready for scoring.

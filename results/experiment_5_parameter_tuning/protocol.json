@@ -1,0 +1,806 @@
+{
+  "experiment": 5,
+  "candidates_per_head_per_variant": 8,
+  "heads": [
+    "dir",
+    "spk",
+    "0.1",
+    "0.5",
+    "0.9"
+  ],
+  "variants": [
+    "baseline",
+    "outages",
+    "weather",
+    "both"
+  ],
+  "search_folds": [
+    [
+      "2026-07-19 21:00:00+00:00",
+      "2026-08-02 21:00:00+00:00"
+    ],
+    [
+      "2026-08-02 21:00:00+00:00",
+      "2026-08-16 21:00:00+00:00"
+    ]
+  ],
+  "confirmation": [
+    "2026-08-16 21:00:00+00:00",
+    "2026-08-30 21:00:00+00:00"
+  ],
+  "calibration": [
+    "2026-08-30 21:00:00+00:00",
+    "2026-09-06 21:00:00+00:00"
+  ],
+  "validation": [
+    "2026-09-06 21:00:00+00:00",
+    "2026-10-04 21:00:00+00:00"
+  ],
+  "confirmation_seeds": [
+    7,
+    19
+  ],
+  "final_fit_seed": 7,
+  "selection": "Two best search candidates plus incumbent; minimum mean confirmation loss over both seeds. Feature-set nomination uses confirmation p50 MAE.",
+  "objectives": {
+    "0.5": "MAE",
+    "0.1": "p10 pinball",
+    "0.9": "p90 pinball",
+    "dir": "multiclass Brier",
+    "spk": "mean high/low Brier before direction capping"
+  },
+  "notes": [
+    "All training targets must have target_fu <= fit cutoff; evaluation targets must be available by window end.",
+    "Search losses are for individual heads before quantile sorting, interval calibration and spike direction capping.",
+    "Candidate zero preserves inherited global and short-horizon settings. Other candidates tune both.",
+    "Official validation has been inspected in previous experiments and is not an independent final test.",
+    "Matched untuned controls use the same last-week calibration and seed as tuned models."
+  ],
+  "configs": {
+    "dir": [
+      {
+        "global": {
+          "learning_rate": 0.015389138556420111,
+          "num_leaves": 4,
+          "min_data_in_leaf": 638,
+          "feature_fraction": 0.28468853201853633,
+          "lambda_l2": 6.026064887549161,
+          "n_rounds": 400
+        },
+        "short": {
+          "learning_rate": 0.03,
+          "num_leaves": 15,
+          "min_data_in_leaf": 300,
+          "feature_fraction": 0.5,
+          "lambda_l2": 10,
+          "n_rounds": 300
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.038948132097760095,
+          "num_leaves": 7,
+          "feature_fraction": 0.38800294689069037,
+          "lambda_l2": 53.27195106518723,
+          "n_rounds": 400,
+          "min_data_in_leaf": 1635
+        },
+        "short": {
+          "learning_rate": 0.038948132097760095,
+          "num_leaves": 7,
+          "feature_fraction": 0.38800294689069037,
+          "lambda_l2": 53.27195106518723,
+          "n_rounds": 400,
+          "min_data_in_leaf": 168
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.008292073511893488,
+          "num_leaves": 23,
+          "feature_fraction": 0.8660539844000974,
+          "lambda_l2": 1.2587995631888016,
+          "n_rounds": 600,
+          "min_data_in_leaf": 1967
+        },
+        "short": {
+          "learning_rate": 0.008292073511893488,
+          "num_leaves": 23,
+          "feature_fraction": 0.8660539844000974,
+          "lambda_l2": 1.2587995631888016,
+          "n_rounds": 600,
+          "min_data_in_leaf": 448
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.049787327590981575,
+          "num_leaves": 4,
+          "feature_fraction": 0.834993170231076,
+          "lambda_l2": 1.2676572732131275,
+          "n_rounds": 600,
+          "min_data_in_leaf": 1967
+        },
+        "short": {
+          "learning_rate": 0.049787327590981575,
+          "num_leaves": 4,
+          "feature_fraction": 0.834993170231076,
+          "lambda_l2": 1.2676572732131275,
+          "n_rounds": 600,
+          "min_data_in_leaf": 179
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.046063360210903376,
+          "num_leaves": 23,
+          "feature_fraction": 0.43478417190414237,
+          "lambda_l2": 44.53796123116009,
+          "n_rounds": 600,
+          "min_data_in_leaf": 661
+        },
+        "short": {
+          "learning_rate": 0.046063360210903376,
+          "num_leaves": 23,
+          "feature_fraction": 0.43478417190414237,
+          "lambda_l2": 44.53796123116009,
+          "n_rounds": 600,
+          "min_data_in_leaf": 658
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.01131504896917878,
+          "num_leaves": 23,
+          "feature_fraction": 0.47777572274910673,
+          "lambda_l2": 3.4734326204839197,
+          "n_rounds": 250,
+          "min_data_in_leaf": 1312
+        },
+        "short": {
+          "learning_rate": 0.01131504896917878,
+          "num_leaves": 23,
+          "feature_fraction": 0.47777572274910673,
+          "lambda_l2": 3.4734326204839197,
+          "n_rounds": 250,
+          "min_data_in_leaf": 573
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.01612279459474707,
+          "num_leaves": 7,
+          "feature_fraction": 0.34629520075324716,
+          "lambda_l2": 2.8875763011898665,
+          "n_rounds": 150,
+          "min_data_in_leaf": 2690
+        },
+        "short": {
+          "learning_rate": 0.01612279459474707,
+          "num_leaves": 7,
+          "feature_fraction": 0.34629520075324716,
+          "lambda_l2": 2.8875763011898665,
+          "n_rounds": 150,
+          "min_data_in_leaf": 789
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.041799930187445926,
+          "num_leaves": 4,
+          "feature_fraction": 0.4621188742399466,
+          "lambda_l2": 4.515946151894805,
+          "n_rounds": 400,
+          "min_data_in_leaf": 1613
+        },
+        "short": {
+          "learning_rate": 0.041799930187445926,
+          "num_leaves": 4,
+          "feature_fraction": 0.4621188742399466,
+          "lambda_l2": 4.515946151894805,
+          "n_rounds": 400,
+          "min_data_in_leaf": 722
+        }
+      }
+    ],
+    "spk": [
+      {
+        "global": {
+          "learning_rate": 0.015389138556420111,
+          "num_leaves": 4,
+          "min_data_in_leaf": 638,
+          "feature_fraction": 0.28468853201853633,
+          "lambda_l2": 6.026064887549161,
+          "n_rounds": 400
+        },
+        "short": {
+          "learning_rate": 0.03,
+          "num_leaves": 15,
+          "min_data_in_leaf": 300,
+          "feature_fraction": 0.5,
+          "lambda_l2": 10,
+          "n_rounds": 300
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.038948132097760095,
+          "num_leaves": 7,
+          "feature_fraction": 0.38800294689069037,
+          "lambda_l2": 53.27195106518723,
+          "n_rounds": 400,
+          "min_data_in_leaf": 1635
+        },
+        "short": {
+          "learning_rate": 0.038948132097760095,
+          "num_leaves": 7,
+          "feature_fraction": 0.38800294689069037,
+          "lambda_l2": 53.27195106518723,
+          "n_rounds": 400,
+          "min_data_in_leaf": 168
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.008292073511893488,
+          "num_leaves": 23,
+          "feature_fraction": 0.8660539844000974,
+          "lambda_l2": 1.2587995631888016,
+          "n_rounds": 600,
+          "min_data_in_leaf": 1967
+        },
+        "short": {
+          "learning_rate": 0.008292073511893488,
+          "num_leaves": 23,
+          "feature_fraction": 0.8660539844000974,
+          "lambda_l2": 1.2587995631888016,
+          "n_rounds": 600,
+          "min_data_in_leaf": 448
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.049787327590981575,
+          "num_leaves": 4,
+          "feature_fraction": 0.834993170231076,
+          "lambda_l2": 1.2676572732131275,
+          "n_rounds": 600,
+          "min_data_in_leaf": 1967
+        },
+        "short": {
+          "learning_rate": 0.049787327590981575,
+          "num_leaves": 4,
+          "feature_fraction": 0.834993170231076,
+          "lambda_l2": 1.2676572732131275,
+          "n_rounds": 600,
+          "min_data_in_leaf": 179
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.046063360210903376,
+          "num_leaves": 23,
+          "feature_fraction": 0.43478417190414237,
+          "lambda_l2": 44.53796123116009,
+          "n_rounds": 600,
+          "min_data_in_leaf": 661
+        },
+        "short": {
+          "learning_rate": 0.046063360210903376,
+          "num_leaves": 23,
+          "feature_fraction": 0.43478417190414237,
+          "lambda_l2": 44.53796123116009,
+          "n_rounds": 600,
+          "min_data_in_leaf": 658
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.01131504896917878,
+          "num_leaves": 23,
+          "feature_fraction": 0.47777572274910673,
+          "lambda_l2": 3.4734326204839197,
+          "n_rounds": 250,
+          "min_data_in_leaf": 1312
+        },
+        "short": {
+          "learning_rate": 0.01131504896917878,
+          "num_leaves": 23,
+          "feature_fraction": 0.47777572274910673,
+          "lambda_l2": 3.4734326204839197,
+          "n_rounds": 250,
+          "min_data_in_leaf": 573
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.01612279459474707,
+          "num_leaves": 7,
+          "feature_fraction": 0.34629520075324716,
+          "lambda_l2": 2.8875763011898665,
+          "n_rounds": 150,
+          "min_data_in_leaf": 2690
+        },
+        "short": {
+          "learning_rate": 0.01612279459474707,
+          "num_leaves": 7,
+          "feature_fraction": 0.34629520075324716,
+          "lambda_l2": 2.8875763011898665,
+          "n_rounds": 150,
+          "min_data_in_leaf": 789
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.041799930187445926,
+          "num_leaves": 4,
+          "feature_fraction": 0.4621188742399466,
+          "lambda_l2": 4.515946151894805,
+          "n_rounds": 400,
+          "min_data_in_leaf": 1613
+        },
+        "short": {
+          "learning_rate": 0.041799930187445926,
+          "num_leaves": 4,
+          "feature_fraction": 0.4621188742399466,
+          "lambda_l2": 4.515946151894805,
+          "n_rounds": 400,
+          "min_data_in_leaf": 722
+        }
+      }
+    ],
+    "0.1": [
+      {
+        "global": {
+          "learning_rate": 0.014393084727999961,
+          "num_leaves": 14,
+          "min_data_in_leaf": 570,
+          "feature_fraction": 0.6690178536673007,
+          "lambda_l2": 8.221575306227177,
+          "n_rounds": 250
+        },
+        "short": {
+          "learning_rate": 0.03,
+          "num_leaves": 15,
+          "min_data_in_leaf": 300,
+          "feature_fraction": 0.5,
+          "lambda_l2": 10,
+          "n_rounds": 300
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.038948132097760095,
+          "num_leaves": 7,
+          "feature_fraction": 0.38800294689069037,
+          "lambda_l2": 53.27195106518723,
+          "n_rounds": 400,
+          "min_data_in_leaf": 1635
+        },
+        "short": {
+          "learning_rate": 0.038948132097760095,
+          "num_leaves": 7,
+          "feature_fraction": 0.38800294689069037,
+          "lambda_l2": 53.27195106518723,
+          "n_rounds": 400,
+          "min_data_in_leaf": 168
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.008292073511893488,
+          "num_leaves": 23,
+          "feature_fraction": 0.8660539844000974,
+          "lambda_l2": 1.2587995631888016,
+          "n_rounds": 600,
+          "min_data_in_leaf": 1967
+        },
+        "short": {
+          "learning_rate": 0.008292073511893488,
+          "num_leaves": 23,
+          "feature_fraction": 0.8660539844000974,
+          "lambda_l2": 1.2587995631888016,
+          "n_rounds": 600,
+          "min_data_in_leaf": 448
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.049787327590981575,
+          "num_leaves": 4,
+          "feature_fraction": 0.834993170231076,
+          "lambda_l2": 1.2676572732131275,
+          "n_rounds": 600,
+          "min_data_in_leaf": 1967
+        },
+        "short": {
+          "learning_rate": 0.049787327590981575,
+          "num_leaves": 4,
+          "feature_fraction": 0.834993170231076,
+          "lambda_l2": 1.2676572732131275,
+          "n_rounds": 600,
+          "min_data_in_leaf": 179
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.046063360210903376,
+          "num_leaves": 23,
+          "feature_fraction": 0.43478417190414237,
+          "lambda_l2": 44.53796123116009,
+          "n_rounds": 600,
+          "min_data_in_leaf": 661
+        },
+        "short": {
+          "learning_rate": 0.046063360210903376,
+          "num_leaves": 23,
+          "feature_fraction": 0.43478417190414237,
+          "lambda_l2": 44.53796123116009,
+          "n_rounds": 600,
+          "min_data_in_leaf": 658
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.01131504896917878,
+          "num_leaves": 23,
+          "feature_fraction": 0.47777572274910673,
+          "lambda_l2": 3.4734326204839197,
+          "n_rounds": 250,
+          "min_data_in_leaf": 1312
+        },
+        "short": {
+          "learning_rate": 0.01131504896917878,
+          "num_leaves": 23,
+          "feature_fraction": 0.47777572274910673,
+          "lambda_l2": 3.4734326204839197,
+          "n_rounds": 250,
+          "min_data_in_leaf": 573
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.01612279459474707,
+          "num_leaves": 7,
+          "feature_fraction": 0.34629520075324716,
+          "lambda_l2": 2.8875763011898665,
+          "n_rounds": 150,
+          "min_data_in_leaf": 2690
+        },
+        "short": {
+          "learning_rate": 0.01612279459474707,
+          "num_leaves": 7,
+          "feature_fraction": 0.34629520075324716,
+          "lambda_l2": 2.8875763011898665,
+          "n_rounds": 150,
+          "min_data_in_leaf": 789
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.041799930187445926,
+          "num_leaves": 4,
+          "feature_fraction": 0.4621188742399466,
+          "lambda_l2": 4.515946151894805,
+          "n_rounds": 400,
+          "min_data_in_leaf": 1613
+        },
+        "short": {
+          "learning_rate": 0.041799930187445926,
+          "num_leaves": 4,
+          "feature_fraction": 0.4621188742399466,
+          "lambda_l2": 4.515946151894805,
+          "n_rounds": 400,
+          "min_data_in_leaf": 722
+        }
+      }
+    ],
+    "0.5": [
+      {
+        "global": {
+          "learning_rate": 0.014393084727999961,
+          "num_leaves": 14,
+          "min_data_in_leaf": 570,
+          "feature_fraction": 0.6690178536673007,
+          "lambda_l2": 8.221575306227177,
+          "n_rounds": 250
+        },
+        "short": {
+          "learning_rate": 0.03,
+          "num_leaves": 15,
+          "min_data_in_leaf": 300,
+          "feature_fraction": 0.5,
+          "lambda_l2": 10,
+          "n_rounds": 300
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.038948132097760095,
+          "num_leaves": 7,
+          "feature_fraction": 0.38800294689069037,
+          "lambda_l2": 53.27195106518723,
+          "n_rounds": 400,
+          "min_data_in_leaf": 1635
+        },
+        "short": {
+          "learning_rate": 0.038948132097760095,
+          "num_leaves": 7,
+          "feature_fraction": 0.38800294689069037,
+          "lambda_l2": 53.27195106518723,
+          "n_rounds": 400,
+          "min_data_in_leaf": 168
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.008292073511893488,
+          "num_leaves": 23,
+          "feature_fraction": 0.8660539844000974,
+          "lambda_l2": 1.2587995631888016,
+          "n_rounds": 600,
+          "min_data_in_leaf": 1967
+        },
+        "short": {
+          "learning_rate": 0.008292073511893488,
+          "num_leaves": 23,
+          "feature_fraction": 0.8660539844000974,
+          "lambda_l2": 1.2587995631888016,
+          "n_rounds": 600,
+          "min_data_in_leaf": 448
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.049787327590981575,
+          "num_leaves": 4,
+          "feature_fraction": 0.834993170231076,
+          "lambda_l2": 1.2676572732131275,
+          "n_rounds": 600,
+          "min_data_in_leaf": 1967
+        },
+        "short": {
+          "learning_rate": 0.049787327590981575,
+          "num_leaves": 4,
+          "feature_fraction": 0.834993170231076,
+          "lambda_l2": 1.2676572732131275,
+          "n_rounds": 600,
+          "min_data_in_leaf": 179
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.046063360210903376,
+          "num_leaves": 23,
+          "feature_fraction": 0.43478417190414237,
+          "lambda_l2": 44.53796123116009,
+          "n_rounds": 600,
+          "min_data_in_leaf": 661
+        },
+        "short": {
+          "learning_rate": 0.046063360210903376,
+          "num_leaves": 23,
+          "feature_fraction": 0.43478417190414237,
+          "lambda_l2": 44.53796123116009,
+          "n_rounds": 600,
+          "min_data_in_leaf": 658
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.01131504896917878,
+          "num_leaves": 23,
+          "feature_fraction": 0.47777572274910673,
+          "lambda_l2": 3.4734326204839197,
+          "n_rounds": 250,
+          "min_data_in_leaf": 1312
+        },
+        "short": {
+          "learning_rate": 0.01131504896917878,
+          "num_leaves": 23,
+          "feature_fraction": 0.47777572274910673,
+          "lambda_l2": 3.4734326204839197,
+          "n_rounds": 250,
+          "min_data_in_leaf": 573
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.01612279459474707,
+          "num_leaves": 7,
+          "feature_fraction": 0.34629520075324716,
+          "lambda_l2": 2.8875763011898665,
+          "n_rounds": 150,
+          "min_data_in_leaf": 2690
+        },
+        "short": {
+          "learning_rate": 0.01612279459474707,
+          "num_leaves": 7,
+          "feature_fraction": 0.34629520075324716,
+          "lambda_l2": 2.8875763011898665,
+          "n_rounds": 150,
+          "min_data_in_leaf": 789
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.041799930187445926,
+          "num_leaves": 4,
+          "feature_fraction": 0.4621188742399466,
+          "lambda_l2": 4.515946151894805,
+          "n_rounds": 400,
+          "min_data_in_leaf": 1613
+        },
+        "short": {
+          "learning_rate": 0.041799930187445926,
+          "num_leaves": 4,
+          "feature_fraction": 0.4621188742399466,
+          "lambda_l2": 4.515946151894805,
+          "n_rounds": 400,
+          "min_data_in_leaf": 722
+        }
+      }
+    ],
+    "0.9": [
+      {
+        "global": {
+          "learning_rate": 0.014393084727999961,
+          "num_leaves": 14,
+          "min_data_in_leaf": 570,
+          "feature_fraction": 0.6690178536673007,
+          "lambda_l2": 8.221575306227177,
+          "n_rounds": 250
+        },
+        "short": {
+          "learning_rate": 0.03,
+          "num_leaves": 15,
+          "min_data_in_leaf": 300,
+          "feature_fraction": 0.5,
+          "lambda_l2": 10,
+          "n_rounds": 300
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.038948132097760095,
+          "num_leaves": 7,
+          "feature_fraction": 0.38800294689069037,
+          "lambda_l2": 53.27195106518723,
+          "n_rounds": 400,
+          "min_data_in_leaf": 1635
+        },
+        "short": {
+          "learning_rate": 0.038948132097760095,
+          "num_leaves": 7,
+          "feature_fraction": 0.38800294689069037,
+          "lambda_l2": 53.27195106518723,
+          "n_rounds": 400,
+          "min_data_in_leaf": 168
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.008292073511893488,
+          "num_leaves": 23,
+          "feature_fraction": 0.8660539844000974,
+          "lambda_l2": 1.2587995631888016,
+          "n_rounds": 600,
+          "min_data_in_leaf": 1967
+        },
+        "short": {
+          "learning_rate": 0.008292073511893488,
+          "num_leaves": 23,
+          "feature_fraction": 0.8660539844000974,
+          "lambda_l2": 1.2587995631888016,
+          "n_rounds": 600,
+          "min_data_in_leaf": 448
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.049787327590981575,
+          "num_leaves": 4,
+          "feature_fraction": 0.834993170231076,
+          "lambda_l2": 1.2676572732131275,
+          "n_rounds": 600,
+          "min_data_in_leaf": 1967
+        },
+        "short": {
+          "learning_rate": 0.049787327590981575,
+          "num_leaves": 4,
+          "feature_fraction": 0.834993170231076,
+          "lambda_l2": 1.2676572732131275,
+          "n_rounds": 600,
+          "min_data_in_leaf": 179
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.046063360210903376,
+          "num_leaves": 23,
+          "feature_fraction": 0.43478417190414237,
+          "lambda_l2": 44.53796123116009,
+          "n_rounds": 600,
+          "min_data_in_leaf": 661
+        },
+        "short": {
+          "learning_rate": 0.046063360210903376,
+          "num_leaves": 23,
+          "feature_fraction": 0.43478417190414237,
+          "lambda_l2": 44.53796123116009,
+          "n_rounds": 600,
+          "min_data_in_leaf": 658
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.01131504896917878,
+          "num_leaves": 23,
+          "feature_fraction": 0.47777572274910673,
+          "lambda_l2": 3.4734326204839197,
+          "n_rounds": 250,
+          "min_data_in_leaf": 1312
+        },
+        "short": {
+          "learning_rate": 0.01131504896917878,
+          "num_leaves": 23,
+          "feature_fraction": 0.47777572274910673,
+          "lambda_l2": 3.4734326204839197,
+          "n_rounds": 250,
+          "min_data_in_leaf": 573
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.01612279459474707,
+          "num_leaves": 7,
+          "feature_fraction": 0.34629520075324716,
+          "lambda_l2": 2.8875763011898665,
+          "n_rounds": 150,
+          "min_data_in_leaf": 2690
+        },
+        "short": {
+          "learning_rate": 0.01612279459474707,
+          "num_leaves": 7,
+          "feature_fraction": 0.34629520075324716,
+          "lambda_l2": 2.8875763011898665,
+          "n_rounds": 150,
+          "min_data_in_leaf": 789
+        }
+      },
+      {
+        "global": {
+          "learning_rate": 0.041799930187445926,
+          "num_leaves": 4,
+          "feature_fraction": 0.4621188742399466,
+          "lambda_l2": 4.515946151894805,
+          "n_rounds": 400,
+          "min_data_in_leaf": 1613
+        },
+        "short": {
+          "learning_rate": 0.041799930187445926,
+          "num_leaves": 4,
+          "feature_fraction": 0.4621188742399466,
+          "lambda_l2": 4.515946151894805,
+          "n_rounds": 400,
+          "min_data_in_leaf": 722
+        }
+      }
+    ]
+  },
+  "unchanged_artifact_sha256": {
+    "forecast_backtest.csv": "3324c377e2cb0d324f427b91847c7a9adcce688672c6b54d1cf1ef6e4d04869a",
+    "forecast_backtest_packageonly.csv": "0a2312d16630258d4c02030e69d3753a1dfbf09aa8504974123d6cd94e56f000",
+    "submission/validation_forecast_B.csv": "d2cfc1fb3a3bf344aeb8c61e509841e963064ed1a5e0c8b69f437243aaaa7dcc"
+  },
+  "input_sha256": {
+    "work_private/features_B.parquet": "e0513b7ac124295c8a63df9c2f7cc644c9eaf5be6db64d3afe46824e54cc1426",
+    "work_private/experiment4/outage_features.parquet": "e35afbcec6c94393eec42b3f202553061a3331ddca54e5e6570dc8c9c5563b79",
+    "work_private/experiment4/weather_features.parquet": "283146285f8c46b71532674cf125f4a77a19a45f56f679e26480a0981f48afb4"
+  },
+  "packages": {
+    "lightgbm": "4.7.0",
+    "numpy": "2.4.3",
+    "pandas": "3.0.1"
+  }
+}

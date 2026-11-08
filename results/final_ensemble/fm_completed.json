@@ -1,0 +1,62 @@
+{
+  "runtime_seconds": 570.622952042002,
+  "model": {
+    "model_id": "amazon/chronos-2",
+    "revision": "29ec3766d36d6f73f0696f85560a422f50e8498c",
+    "last_modified": "2026-06-05 11:55:42+00:00",
+    "downloaded_files": [
+      "model.safetensors",
+      "config.json",
+      "README.md"
+    ]
+  },
+  "model_sha256": "ddcda3c7508bf2528087723e98a20707cc04b7f370ae275a9fd88078ddba4f42",
+  "context": 2048,
+  "horizon": 42,
+  "bridge": 2,
+  "past": {
+    "mfrr_up_price": "fi_mfrr_up_price",
+    "mfrr_down_price": "fi_mfrr_down_price",
+    "mfrr_direction": "fi_mfrr_direction",
+    "mfrr_up_activated": "fi_mfrr_up_activated",
+    "mfrr_down_activated": "fi_mfrr_down_activated",
+    "calculated_imbalance": "x_calc_imb",
+    "sa_price": "x_sa_price"
+  },
+  "future": {
+    "spot": "fi_spot_price",
+    "wind_da": "fi_wind_fc_da",
+    "consumption_da": "fi_consumption_fc_da",
+    "solar_da": "fi_solar_fc_da"
+  },
+  "wind_error": "x_wind_rt - fi_wind_fc_da",
+  "batch_size": 64,
+  "origin_batch_size": 16,
+  "cross_learning": false,
+  "threads": 4,
+  "packages": {
+    "chronos-forecasting": "2.3.2",
+    "torch": "2.15.0",
+    "numpy": "2.5.4",
+    "pandas": "3.1.1"
+  },
+  "input_hashes": {
+    "data/inputs.parquet": "45e40983bdb2429ee78a37811462542fcfd5ec2190751cf19e0f6c1a69f6283b",
+    "data/spot_nordpool.csv": "fdbe99eae9092794e47cbd4bfbe4cd39f49ccd7096492c1f417e618ba1a25ee1",
+    "data/fingrid_124.parquet": "b66e219d32ffd58905ea25d4ce346bafc21d3317adb073cfdd9ba16916de9ba8",
+    "data/fingrid_165.parquet": "f1206cb667de3ae0733d0d432527bca2af5d1f576d98b255805fc61f43d8324b",
+    "data/fingrid_177.parquet": "61d7d81007fa675fb58aaca778be551e6c8f17716317e120f9f533ad37b54a66",
+    "data/fingrid_181.parquet": "762cc51a9763f5c925d68a2a61473ddd141f02d293a7d915648eb540b74c1785",
+    "data/fingrid_188.parquet": "8cbd4e4b737817878784dff30b41c8f26ba1192f3e1ef36c000985078cd6f28f",
+    "data/fingrid_194.parquet": "7a3ade2302379ad342057bf40df71ae90aff02ab67fd22202c15b0de7fa2fc6f",
+    "data/fingrid_244.parquet": "67401212f20c2b5731aeb218a973c196f8d2f8c8970e2ee25a73dec5658b5337",
+    "data/fingrid_245.parquet": "ca16501ae157ae0be197db2ea85df8622f930a3c86c91cef9e0852e82fc5dd46",
+    "data/fingrid_246.parquet": "1f21b574cdb8aec3c02599d6ad9a989c5d7d3eedfea7074096940cbe4b13eb7e",
+    "data/fingrid_260.parquet": "a9597bcb1ecff47000e7bb3f6c37d99ee8cc062b7554de08bd032ec142ed8e91",
+    "data/fingrid_319.parquet": "e070352124ab74fd1624844a02ebcfbcb4c2844abe626945f684650758ec507d",
+    "data/fingrid_369.parquet": "6327d9d32795c45c01ddd8d82b497eee6c33323a87c53269a5a4053cdf7423ee",
+    "data/fingrid_397.parquet": "a3b1c036d1d1c7ac1e0db27048eddff182f5b16ff24ff8f6b528fc20a5daffbe",
+    "data/fingrid_400.parquet": "f651ee9d0d3d1611acd99aee797a7ff56fba987dc209db0ca834db1f6716d54c",
+    "data/fingrid_75.parquet": "48165e4630fd9045098378bc3bfc03bc0775cd824157602eb62ac94009b20b89"
+  }
+}

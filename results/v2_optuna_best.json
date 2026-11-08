@@ -1,0 +1,26 @@
+{
+ "dir": {
+  "params": {
+   "learning_rate": 0.015389138556420111,
+   "num_leaves": 4,
+   "min_data_in_leaf": 638,
+   "feature_fraction": 0.28468853201853633,
+   "lambda_l2": 6.026064887549161,
+   "n_rounds": 400
+  },
+  "cv": 0.41380873667461376,
+  "default_cv": 0.41794553235249576
+ },
+ "0.5": {
+  "params": {
+   "learning_rate": 0.014393084727999961,
+   "num_leaves": 14,
+   "min_data_in_leaf": 570,
+   "feature_fraction": 0.6690178536673007,
+   "lambda_l2": 8.221575306227177,
+   "n_rounds": 250
+  },
+  "cv": 17.86930216320461,
+  "default_cv": 17.919926776260702
+ }
+}

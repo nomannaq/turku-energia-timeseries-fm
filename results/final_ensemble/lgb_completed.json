@@ -1,0 +1,107 @@
+{
+  "runtime_seconds": 635.0221934590081,
+  "seeds": [
+    7,
+    11,
+    23,
+    37,
+    51
+  ],
+  "seed_offsets": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "selected": {
+    "dir": "EW",
+    "spk": "EX",
+    "0.1": "E4",
+    "0.5": "EX",
+    "0.9": "EX"
+  },
+  "params": {
+    "dir": {
+      "learning_rate": 0.015389138556420111,
+      "num_leaves": 4,
+      "min_data_in_leaf": 638,
+      "feature_fraction": 0.28468853201853633,
+      "lambda_l2": 6.026064887549161,
+      "n_rounds": 400
+    },
+    "spk": {
+      "learning_rate": 0.015389138556420111,
+      "num_leaves": 4,
+      "min_data_in_leaf": 638,
+      "feature_fraction": 0.28468853201853633,
+      "lambda_l2": 6.026064887549161,
+      "n_rounds": 400
+    },
+    "0.1": {
+      "learning_rate": 0.014393084727999961,
+      "num_leaves": 14,
+      "min_data_in_leaf": 570,
+      "feature_fraction": 0.6690178536673007,
+      "lambda_l2": 8.221575306227177,
+      "n_rounds": 250
+    },
+    "0.5": {
+      "learning_rate": 0.014393084727999961,
+      "num_leaves": 14,
+      "min_data_in_leaf": 570,
+      "feature_fraction": 0.6690178536673007,
+      "lambda_l2": 8.221575306227177,
+      "n_rounds": 250
+    },
+    "0.9": {
+      "learning_rate": 0.014393084727999961,
+      "num_leaves": 14,
+      "min_data_in_leaf": 570,
+      "feature_fraction": 0.6690178536673007,
+      "lambda_l2": 8.221575306227177,
+      "n_rounds": 250
+    }
+  },
+  "short": {
+    "learning_rate": 0.03,
+    "num_leaves": 15,
+    "min_data_in_leaf": 300,
+    "feature_fraction": 0.5,
+    "lambda_l2": 10,
+    "n_rounds": 300
+  },
+  "feature_sha256": "e0513b7ac124295c8a63df9c2f7cc644c9eaf5be6db64d3afe46824e54cc1426",
+  "periods": {
+    "fold0": [
+      "2026-07-05 21:00:00+00:00",
+      "2026-07-19 21:00:00+00:00"
+    ],
+    "fold1": [
+      "2026-07-19 21:00:00+00:00",
+      "2026-08-02 21:00:00+00:00"
+    ],
+    "fold2": [
+      "2026-08-02 21:00:00+00:00",
+      "2026-08-16 21:00:00+00:00"
+    ],
+    "fold3": [
+      "2026-08-16 21:00:00+00:00",
+      "2026-08-30 21:00:00+00:00"
+    ],
+    "fold4": [
+      "2026-08-30 21:00:00+00:00",
+      "2026-09-06 21:00:00+00:00"
+    ],
+    "validation": [
+      "2026-09-06 21:00:00+00:00",
+      "2026-10-04 21:00:00+00:00"
+    ],
+    "test": [
+      "2026-10-04 21:00:00+00:00",
+      "2026-11-01 22:00:00+00:00"
+    ]
+  },
+  "lightgbm": "4.7.0",
+  "threads": 4,
+  "conformal": false
+}

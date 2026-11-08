@@ -1,0 +1,144 @@
+{
+  "selected_candidates": {
+    "baseline": {
+      "dir": 6,
+      "spk": 6,
+      "0.1": 2,
+      "0.5": 0,
+      "0.9": 6
+    },
+    "outages": {
+      "dir": 0,
+      "spk": 5,
+      "0.1": 2,
+      "0.5": 0,
+      "0.9": 6
+    },
+    "weather": {
+      "dir": 6,
+      "spk": 6,
+      "0.1": 2,
+      "0.5": 0,
+      "0.9": 6
+    },
+    "both": {
+      "dir": 0,
+      "spk": 5,
+      "0.1": 0,
+      "0.5": 0,
+      "0.9": 0
+    }
+  },
+  "confirmation": {
+    "baseline": {
+      "dir": {
+        "candidate": 6,
+        "mean_loss": 0.4375773983099086,
+        "incumbent_mean_loss": 0.4426697040811522
+      },
+      "spk": {
+        "candidate": 6,
+        "mean_loss": 0.11590725746309827,
+        "incumbent_mean_loss": 0.11601234185050593
+      },
+      "0.1": {
+        "candidate": 2,
+        "mean_loss": 6.964724353594537,
+        "incumbent_mean_loss": 7.039328066450963
+      },
+      "0.5": {
+        "candidate": 0,
+        "mean_loss": 37.77473804340208,
+        "incumbent_mean_loss": 37.77473804340208
+      },
+      "0.9": {
+        "candidate": 6,
+        "mean_loss": 11.616071370085047,
+        "incumbent_mean_loss": 12.302264205190308
+      }
+    },
+    "outages": {
+      "dir": {
+        "candidate": 0,
+        "mean_loss": 0.43747134457665376,
+        "incumbent_mean_loss": 0.43747134457665376
+      },
+      "spk": {
+        "candidate": 5,
+        "mean_loss": 0.11600961950397418,
+        "incumbent_mean_loss": 0.11613440208691331
+      },
+      "0.1": {
+        "candidate": 2,
+        "mean_loss": 7.448868441079281,
+        "incumbent_mean_loss": 7.450586004382881
+      },
+      "0.5": {
+        "candidate": 0,
+        "mean_loss": 37.211354239626274,
+        "incumbent_mean_loss": 37.211354239626274
+      },
+      "0.9": {
+        "candidate": 6,
+        "mean_loss": 11.567352725359486,
+        "incumbent_mean_loss": 11.663439559061477
+      }
+    },
+    "weather": {
+      "dir": {
+        "candidate": 6,
+        "mean_loss": 0.4374551116341961,
+        "incumbent_mean_loss": 0.4376235399012086
+      },
+      "spk": {
+        "candidate": 6,
+        "mean_loss": 0.11626692145076861,
+        "incumbent_mean_loss": 0.11656094954431709
+      },
+      "0.1": {
+        "candidate": 2,
+        "mean_loss": 7.013036002882213,
+        "incumbent_mean_loss": 7.079961724133845
+      },
+      "0.5": {
+        "candidate": 0,
+        "mean_loss": 37.75232961920899,
+        "incumbent_mean_loss": 37.75232961920899
+      },
+      "0.9": {
+        "candidate": 6,
+        "mean_loss": 11.82497751946594,
+        "incumbent_mean_loss": 12.40544864889281
+      }
+    },
+    "both": {
+      "dir": {
+        "candidate": 0,
+        "mean_loss": 0.43332994214326537,
+        "incumbent_mean_loss": 0.43332994214326537
+      },
+      "spk": {
+        "candidate": 5,
+        "mean_loss": 0.11561161162620409,
+        "incumbent_mean_loss": 0.11647047638112898
+      },
+      "0.1": {
+        "candidate": 0,
+        "mean_loss": 7.491864699750893,
+        "incumbent_mean_loss": 7.491864699750893
+      },
+      "0.5": {
+        "candidate": 0,
+        "mean_loss": 37.11376384492964,
+        "incumbent_mean_loss": 37.11376384492964
+      },
+      "0.9": {
+        "candidate": 0,
+        "mean_loss": 11.488643789104884,
+        "incumbent_mean_loss": 11.488643789104884
+      }
+    }
+  },
+  "nominated_feature_set": "both",
+  "frozen_at_utc": "2026-11-07T19:05:56.984942+00:00"
+}

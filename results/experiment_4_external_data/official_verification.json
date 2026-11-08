@@ -1,0 +1,42 @@
+[
+  {
+    "model": "baseline",
+    "command": "validate_submission.py",
+    "returncode": 0
+  },
+  {
+    "model": "baseline",
+    "command": "score.py",
+    "returncode": 0
+  },
+  {
+    "model": "outages",
+    "command": "validate_submission.py",
+    "returncode": 0
+  },
+  {
+    "model": "outages",
+    "command": "score.py",
+    "returncode": 0
+  },
+  {
+    "model": "weather",
+    "command": "validate_submission.py",
+    "returncode": 0
+  },
+  {
+    "model": "weather",
+    "command": "score.py",
+    "returncode": 0
+  },
+  {
+    "model": "both",
+    "command": "validate_submission.py",
+    "returncode": 0
+  },
+  {
+    "model": "both",
+    "command": "score.py",
+    "returncode": 0
+  }
+]

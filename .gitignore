@@ -1,0 +1,20 @@
+# API keys must never be committed
+.secrets/
+*.env
+# created by baseline.ipynb, not part of the distributed package
+baseline_output/
+# Python bytecode cache
+__pycache__/
+# optional virtual environment (README section 7.1)
+.venv/
+.venv-chronos/
+# Data files must not be published (README section 9)
+data/
+# Feature matrices contain licensed Nord Pool values.
+work_private/
+# Local editor and operating-system files.
+.idea/
+.DS_Store
+.env
+.env.*
+*.pyc

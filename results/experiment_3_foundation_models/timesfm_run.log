@@ -1,0 +1,50 @@
+Availability checks: 9 passed
+Loading weights from local directory
+timesfm3_price: 8/672, 0.4s
+timesfm3_price: 64/672, 2.3s
+timesfm3_price: 128/672, 4.5s
+timesfm3_price: 192/672, 6.7s
+timesfm3_price: 256/672, 8.8s
+timesfm3_price: 320/672, 11.0s
+timesfm3_price: 384/672, 13.2s
+timesfm3_price: 448/672, 15.4s
+timesfm3_price: 512/672, 17.6s
+timesfm3_price: 576/672, 20.0s
+timesfm3_price: 640/672, 22.4s
+timesfm3_price: 672/672, 23.7s
+timesfm3_price {"rows_scored": 26700, "mae_p50": 53.06894905710113, "pinball_p10": 7.0474925991216235, "pinball_p90": 24.094723128184413, "calibration_pinball_mean": 15.571107863653019, "coverage_p10_p90": 0.7774157303370787, "below_p10": 0.1004494382022472, "above_p90": 0.12213483146067415, "mean_interval_width": 161.20496031443278}
+timesfm3_spread: 8/672, 0.4s
+timesfm3_spread: 64/672, 2.3s
+timesfm3_spread: 128/672, 4.3s
+timesfm3_spread: 192/672, 6.4s
+timesfm3_spread: 256/672, 8.6s
+timesfm3_spread: 320/672, 10.7s
+timesfm3_spread: 384/672, 13.1s
+timesfm3_spread: 448/672, 15.5s
+timesfm3_spread: 512/672, 17.7s
+timesfm3_spread: 576/672, 20.0s
+timesfm3_spread: 640/672, 22.3s
+timesfm3_spread: 672/672, 23.5s
+timesfm3_spread {"rows_scored": 26700, "mae_p50": 45.37278612827012, "pinball_p10": 9.94683358675587, "pinball_p90": 19.475303821818148, "calibration_pinball_mean": 14.711068704287008, "coverage_p10_p90": 0.8112734082397004, "below_p10": 0.09352059925093632, "above_p90": 0.09520599250936329, "mean_interval_width": 148.65517451135185}
+timesfm3_spread_covariates: 8/672, 2.4s
+timesfm3_spread_covariates: 64/672, 17.5s
+timesfm3_spread_covariates: 128/672, 33.5s
+timesfm3_spread_covariates: 192/672, 49.4s
+timesfm3_spread_covariates: 256/672, 65.4s
+timesfm3_spread_covariates: 320/672, 81.3s
+timesfm3_spread_covariates: 384/672, 98.3s
+timesfm3_spread_covariates: 448/672, 114.9s
+timesfm3_spread_covariates: 512/672, 130.5s
+timesfm3_spread_covariates: 576/672, 145.9s
+timesfm3_spread_covariates: 640/672, 161.1s
+timesfm3_spread_covariates: 672/672, 168.8s
+timesfm3_spread_covariates {"rows_scored": 26700, "mae_p50": 43.533164474975834, "pinball_p10": 7.92017817727722, "pinball_p90": 17.59323348078221, "calibration_pinball_mean": 12.756705829029716, "coverage_p10_p90": 0.8087640449438203, "below_p10": 0.07891385767790263, "above_p90": 0.11232209737827716, "mean_interval_width": 119.04619565139996}
+                     model  rows_scored   mae_p50  pinball_p10  pinball_p90  calibration_pinball_mean  coverage_p10_p90  below_p10  above_p90  mean_interval_width
+                  baseline        26700 66.203304    25.107578    23.247658                 24.177618          0.682884   0.152322   0.164794           111.511521
+                lightgbm_B        26700 42.028598     8.162124    16.672376                 12.417250          0.732210   0.157603   0.110187            95.807264
+            chronos2_price        26700 52.444106     7.044261    22.150748                 14.597505          0.730412   0.139738   0.129850           137.401352
+           chronos2_spread        26700 44.915869     9.934189    19.005608                 14.469899          0.801610   0.093521   0.104869           145.469935
+chronos2_spread_covariates        26700 47.645813     8.251562    19.040495                 13.646028          0.756479   0.112210   0.131311           128.948651
+            timesfm3_price        26700 53.068949     7.047493    24.094723                 15.571108          0.777416   0.100449   0.122135           161.204960
+           timesfm3_spread        26700 45.372786     9.946834    19.475304                 14.711069          0.811273   0.093521   0.095206           148.655175
+timesfm3_spread_covariates        26700 43.533164     7.920178    17.593233                 12.756706          0.808764   0.078914   0.112322           119.046196

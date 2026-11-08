@@ -1,0 +1,1125 @@
+This is an electronic reprint of the original article. This reprint may differ from the original
+in pagination and typographic detail.
+
+
+Forecasting Finnish aFRR energy reserve market prices using deep learning and tree-
+based models
+Saleh, Abu; Amangeldina, Aruzhan; Tesfay, Tesfay W.; Lafond, Sébastien; Rexha, Hergys;
+Izhak, Olena
+Published in:
+Energy and AI
+
+
+DOI:
+10.1016/j.egyai.2026.100724
+
+
+Published: 01/05/2026
+
+
+
+Document Version
+Final published version
+
+
+Document License
+CC BY
+
+
+Link to publication
+
+
+
+
+Please cite the original version:
+Saleh, A., Amangeldina, A., Tesfay, T. W., Lafond, S., Rexha, H., & Izhak, O. (2026). Forecasting Finnish aFRR
+energy reserve market prices using deep learning and tree-based models. Energy and AI, 24, Article 100724.
+https://doi.org/10.1016/j.egyai.2026.100724
+
+
+
+
+General rights
+Copyright and moral rights for the publications made accessible in the public portal are retained by the authors and/or other copyright owners
+and it is a condition of accessing publications that users recognise and abide by the legal requirements associated with these rights.
+
+
+
+
+Take down policy
+If you believe that this document breaches copyright please contact us providing details, and we will remove access to the work immediately
+and investigate your claim.
+
+
+
+
+This document is downloaded from the Research Information Portal of ÅAU: 07. Nov. 2026
+                                                                        Energy and AI 24 (2026) 100724
+
+
+                                                                  Contents lists available at ScienceDirect
+
+
+                                                                           Energy and AI
+                                                         journal homepage: www.elsevier.com/locate/egyai
+
+
+
+
+Forecasting Finnish aFRR energy reserve market prices using deep learning
+and tree-based models
+Abu Saleh a ,∗, Aruzhan Amangeldina a , Tesfay W. Tesfay a , Sébastien Lafond a ,
+Hergys Rexha a , Olena Izhak b
+a Faculty of Science and Engineering, Department of Engineering and Information Technology, Åbo Akademi University, Turku, 20500, Finland
+b Elisa Oyj, Helsinki, 00061, Finland
+
+
+
+
+HIGHLIGHTS                                               GRAPHICAL                ABSTRACT
+
+• First study to forecast aFRR Down and
+  Up marginal energy prices in Finland.
+• Comparison of deep learning and tree-
+  based models for 48-hour price predic-
+  tion.
+• LightGBM delivers the most consistent
+  performance for Finnish aFRR price fore-
+  casting.
+• Comprehensive feature engineering with
+  market, weather, and time data.
+• Evaluation uses three strategies to ensure
+  robust and practical results.
+
+
+
+
+ARTICLE                INFO                              ABSTRACT
+
+Dataset link: https://doi.org/10.5281/zenodo.1           With the increased integration of renewable energy sources, electricity systems face growing challenges due to
+7494556                                                  the intermittency and volatility of weather-dependent generation. To maintain grid stability, reserve mechanisms
+Keywords:                                                such as the Automatic Frequency Restoration Reserve (aFRR) play a critical role by balancing supply and
+aFRR energy market                                       demand in real-time. However, the high volatility of aFRR energy prices complicates the decision-making
+Energy price forecasting                                 of reserve providers and market operators. To address this challenge, this paper aims to forecast 48-hour
+Frequency regulation                                     aFRR marginal energy prices in the Finnish electricity market under both Down- and Up-regulations. We
+Time series modeling                                     implement and compare two tree-based models, LightGBM and XGBoost, with two deep learning approaches,
+Feature engineering                                      the Temporal Fusion Transformer and the Time-series Dense Encoder. The models are trained using historical
+Deep learning                                            Finnish aFRR energy prices, complemented by relevant market and weather variables, and evaluated across
+Tree-based models
+                                                         three cross-validation strategies. The models achieved mean absolute errors of 17.5–17.8 for Down-regulation
+
+
+
+
+  ∗ Corresponding author.
+     E-mail address: Abu.Saleh@abo.fi (A. Saleh).
+
+https://doi.org/10.1016/j.egyai.2026.100724
+Received 4 December 2025; Received in revised form 10 February 2026; Accepted 15 March 2026
+Available online 16 March 2026
+2666-5468/© 2026 The Authors. Published by Elsevier Ltd. This is an open access article under the CC BY license (http://creativecommons.org/licenses/by/4.0/).
+A. Saleh et al.                                                                                                                   Energy and AI 24 (2026) 100724
+
+
+                                                and 55.7–60.1 for Up-regulation, with LightGBM delivering the most consistent performance under limited
+                                                data availability. To our knowledge, this is the first study to systematically compare data-driven forecasting
+                                                models for aFRR energy prices in the Finnish electricity market, providing an early-stage comparative baseline
+                                                and economic relevance for a diverse array of stakeholders.
+
+
+
+                                                                                  strategies? and (iii) To what extent do data availability and model
+1. Introduction                                                                   complexity affect forecasting performance in this market setting?
+                                                                                      The proposed forecasting framework uses historical Finnish aFRR
+     Renewable energy sources (RES), including wind and solar, have               energy prices, complemented by relevant market and weather vari-
+the potential to reduce greenhouse gas emissions and mitigate climate             ables. We implement and compare two tree-based models, LightGBM
+change. Over the past decade, the integration of RES into electricity             and XGBoost, and two deep learning methods, the Temporal Fusion
+grids has increased worldwide. In line with this trend, the Finnish               Transformer and the Time-series Dense Encoder. Model performance is
+government aims to expand renewable electricity, targeting carbon                 assessed using multiple error metrics across three validation strategies.
+neutrality by 2035 under the National Climate Act [1,2]. However, large-          The main contributions of this work are outlined below:
+scale weather-dependent generation presents new operational challenges.
+The stochastic and intermittent pattern of RES generation can threaten               • An overview of the design and operation of the Finnish aFRR
+                                                                                       reserve market.
+grid stability and, in extreme cases, lead to large-scale blackouts, as
+                                                                                     • Development and release of a cleaned and aggregated dataset
+illustrated by the 2025 Iberian blackout [3]. To manage short-term
+                                                                                       combining data from Fingrid and the Finnish Meteorological
+imbalances and maintain frequency stability, electricity systems rely on
+                                                                                       Institute.
+reserve markets that provide flexible balancing resources. Among these
+                                                                                     • Feature engineering and selection of key weather and market
+mechanisms, the Automatic Frequency Restoration Reserve (aFRR) is
+                                                                                       variables influencing aFRR price behavior, informed by literature,
+particularly important as it provides the first dynamic corrective action
+                                                                                       model-based feature importance, and expert input.
+following frequency deviations [4].
+                                                                                     • Systematic comparison of tree-based and deep learning models
+     In modern smart grids, data-driven methods are increasingly used
+                                                                                       for forecasting Down- and Up-regulation aFRR marginal energy
+to support monitoring and market operations [5]. Accurate forecast-
+                                                                                       prices.
+ing under price uncertainty is particularly important for operational
+                                                                                     • A robust evaluation framework using multiple performance metrics
+planning and loss minimization [6]. Within this context, forecasting
+                                                                                       and validation techniques.
+aFRR demand and prices over short- and long-term horizons is crucial
+                                                                                     • Practical forecasting insights to support market participation and
+for system operators and market participants. Reserve providers rely
+                                                                                       operational decision-making.
+on aFRR energy price forecasts as key inputs for market participation,
+investment decisions, and bidding optimization [7].                                  The paper is organized as follows: Section 2 reviews the Finnish
+     However, efficient bidding in the aFRR market remains challenging            aFRR market, focusing on the design and operation of the energy
+due to high price volatility and the complex interplay of market and              market. Section 3 presents an overview of prior research on forecasting
+external factors, such as weather conditions and system imbalances.               methodologies for electricity and reserve market variables. Section 4
+Bidding follows a marginal pricing regime, where accepted bids are                describes data sources and preprocessing steps. Section 5 outlines
+settled at the highest accepted price [8]. Therefore, reserve providers are       the general methodology, defining the forecasting objectives, feature
+incentivized to bid at the market’s marginal price. Conversely, forecast          engineering, and the modeling approaches. Section 6 details the training
+errors can result in mismatches between actual and scheduled deliveries,          procedure and experimental pipeline. Section 7 presents the results
+which are then settled financially at potentially unstable balancing              evaluated under three strategies. Section 8 discusses key findings,
+prices [9]. Market participants can thereby benefit from accurate short-          including feature impact and model comparisons. Finally, Section 9
+term forecasting to optimize bid acceptance and revenue and minimize              presents the conclusions, limitations, and future research directions.
+imbalance costs. In this study, we focus on a 48-hour forecast horizon, as
+it aligns with market timelines and enables the integration of forecasts          2. Automatic frequency restoration reserve (aFRR) market
+into broader operational strategies, such as planning for other market
+variables.                                                                            In the European power system, the grid frequency must be main-
+     Despite the central role of the aFRR in maintaining grid stability,          tained between 49.9 and 50.1 Hz [12]. Deviations between electricity
+forecasting its energy prices remains relatively unexplored. While                supply and demand result in frequency imbalances, which are corrected
+studies have investigated aFRR price prediction in selected European              through reserve markets coordinated by Transmission System Operators
+markets [4,10], no prior work has addressed forecasting of aFRR energy            (TSOs). In Finland, Fingrid fulfills this role by procuring balancing
+prices in the Finnish electricity system. This gap is particularly relevant       services from Balancing Service Providers (BSPs), such as power plants,
+given the inherent complexity of the Nordic energy landscape [11]                 storage operators, or flexible consumers [13], who adjust their output or
+and Finland’s market characteristics. The Finnish energy market differs           demand in response to TSO activation signals. Activation occurs in two
+from most of Europe by being weather- and interconnection-driven                  directions: Down and Up. During Up activation, BSPs inject energy by dis-
+rather than fuel-driven, resulting in low but highly variable prices.             charging batteries to raise the system frequency, while absorbing power
+The primary objective of this study is to develop and systematically              during Down activation by charging batteries to lower the frequency.
+evaluate data-driven models for short-term forecasting of Down- and               Fingrid organizes and procures balancing energy in four main reserve
+Up-regulation aFRR marginal energy prices in Finland. By providing the            markets: the Fast Frequency Reserve (FFR), the Frequency Containment
+first comparative assessment of tree-based and deep learning approaches           Reserve (FCR), the Automatic Frequency Restoration Reserve (aFRR),
+in this market context, the study establishes a reference framework for           and the Manual Frequency Restoration Reserve (mFRR) [14]. Fig. 1
+aFRR energy price forecasting and supports informed decision-making               illustrates the activation sequence of reserve markets as the frequency
+for market participants. Specifically, this study addresses the following         drops below 50 Hz.
+research questions: (i) How accurately can short-term aFRR energy prices              The aFRR is a secondary reserve mechanism designed to automati-
+be forecasted in the Finnish electricity market using data-driven models?         cally restore the system frequency to its nominal value. It comprises a
+(ii) How do tree-based and deep learning approaches compare in terms              capacity and energy market. The capacity market ensures the availability
+of predictive performance and robustness under different validation               of sufficient reserves and compensates BSPs for maintaining capacity,
+
+                                                                              2
+A. Saleh et al.                                                                                                                 Energy and AI 24 (2026) 100724
+
+
+
+
+                                     Fig. 1. Reserve activation sequence in the Finnish power system, based on [4].
+
+
+
+
+                           Fig. 2. Schematic representation of the Finnish aFRR energy market auction process, based on [10].
+
+
+while the energy market procures balancing energy in real time and             In Up-regulation, BSPs supply energy and receive the marginal Up price,
+compensates BSPs for delivered energy. While aFRR was first introduced         while in Down-regulation, they consume energy and are charged the
+into the Nordic power system in 2013 [15], Finland launched its aFRR           marginal Down price, unless the price is negative, in which case Fingrid
+energy activation market on June 12, 2024, following integration               compensates consumption.
+into the European PICASSO platform for cross-border trading [16].
+This integration enables participation in the aFRR energy market               3. Related work
+independently of the capacity market. This study examines the dynamics
+                                                                               3.1. aFRR price forecasting and BESS bidding strategies
+and price behavior of the newly established energy market.
+    The participation process in the Finnish aFRR energy market is
+                                                                                   Early research on aFRR price forecasting primarily relied on statis-
+summarized in Fig. 2. Following mandatory prequalification by Fingrid,
+                                                                               tical models and basic machine learning methods. For example, [10]
+eligible BSPs can submit energy bids containing the fields specified
+                                                                               compared statistical and machine learning approaches and found that
+in Fig. 3. Bids are submitted through Fingrid’s digital reserve trading        statistical models provided steadier and more accurate predictions, while
+system up to 7 days before the validity period and may be modified             exogenous variables offered limited improvements. Building on this
+until 25 minutes before the start, after which they become binding [15].       work, [17] proposed an optimization-based BESS bidding strategy for
+For each 15-minute validity period, Fingrid submits collected bids to          the aFRR market and concluded that profitability would require future
+the joint European aFRR energy market, where they are merged into              battery cost reductions and coordinated operational strategies. These
+a common merit order (Up-regulation: from lowest to highest price,             findings highlight the importance of reliable price forecasts for efficient
+Down-regulation: from highest to lowest). Balancing energy is activated        and profitable BESS operation.
+every 4 seconds, corresponding to the Market Time Unit (MTU), based                More recent studies have applied deep learning methods to reserve
+on real-time system needs. BSPs are compensated or charged an energy           market forecasting. [18] evaluated feed-forward neural networks, 1-
+fee for each MTU, determined by a uniform marginal pricing mechanism.          D CNNs, and LSTMs for forecasting marginal band prices in the
+
+                                                                           3
+A. Saleh et al.                                                                                                                  Energy and AI 24 (2026) 100724
+
+
+                                                                                 increasingly focused on complex hybrid architectures to better capture
+                                                                                 long-range dependencies. For instance, [26] proposed the EPformer,
+                                                                                 which combines BiLSTMs, Temporal Convolutional Networks, and a
+                                                                                 Transformer decoder, and employs a time–frequency loss function that
+                                                                                 explicitly penalizes errors on price peaks. Such architectures often rely
+                                                                                 on extensive preprocessing and architectural complexity. In contrast, this
+                                                                                 study examines whether specialized standalone models, such as the TFT
+                                                                                 and the computationally efficient TiDE, can deliver robust performance
+                                                                                 in the highly volatile aFRR market without hybrid model engineering.
+                                                                                     To our knowledge, this is the first study to address aFRR energy price
+                                                                                 forecasting in the Finnish market. Prior works, such as those in Spain [4]
+                                                                                 and Iberia [18], focused on mature markets with established historical
+                                                                                 data and did not evaluate modern tree-based models alongside deep
+                                                                                 learning architectures within a unified framework. Our work fills this gap
+                                                                                 by introducing a comparative, direction-sensitive forecasting approach
+                                                                                 that explicitly models Down- and Up-regulation as distinct targets.
+                                                                                 Moreover, this paper systematically evaluates both tree-based ensembles
+                                                                                 and deep learning models. Additionally, this study incorporates lessons
+                                                                                 from previous research, such as using feature selection for various
+         Fig. 3. Required input fields for aFRR energy bid submission.           exogenous inputs, as in [18], and tailoring model choices to the behavior
+                                                                                 of each price series, as in [20], to advance forecasting for the Finnish
+                                                                                 reserve power market. This setup reflects the operational realities faced
+Iberian aFRR market, finding that CNNs achieved the lowest errors                by BSPs in an emerging reserve market with limited historical data,
+and significantly outperformed previous benchmarks. Similarly, [4]               offering both methodological rigor and practical relevance.
+compared FNN, CNN, and LSTM models for Up and Down aFRR prices
+in Spain, showing that FNNs performed best for Up prices, while CNNs             4. Dataset
+were superior for Down prices. These results indicate that Down- and
+Up-regulation prices are governed by distinct market dynamics and                    The core dataset used in this study was obtained from the Fingrid
+benefit from different modeling approaches.                                      Open Data Platform [27] and includes aFRR energy and capacity
+                                                                                 market prices, day-ahead prices, and electricity consumption data.
+3.2. Day-ahead and intraday electricity price forecasting                        Weather-related variables were retrieved from the Finnish Meteorologi-
+                                                                                 cal Institute [28] and were used as exogenous features. The data spans
+     In intraday markets, [19] applied a LASSO-based regression frame-           the period from June 20, 2024, to March 16, 2025. For energy Down-
+work with exogenous variables and demonstrated that, contrary to                 and Up-regulation prices, data were collected at a 15-minute granularity,
+earlier assumptions, such inputs improve forecasting accuracy once               while capacity prices and spot price information were available at an
+day-ahead prices are known. They further showed that perfect fore-               hourly resolution. A representative sample of the 15-minute resolution
+sight of fundamental variables could reduce intraday price errors by             energy prices, including missing values, is illustrated in Fig. 4. The
+approximately 2%.                                                                limited data span is mainly a consequence of Finland’s recent entry
+     A comprehensive review by [20] showed that inconsistent datasets            into the PICASSO initiative, which affected market operations and data
+and evaluation protocols hinder fair comparisons in day-ahead price              availability.
+forecasting. To address this, they introduced an open-access toolbox with            Given the objective of forecasting energy prices for the subsequent
+standardized benchmarks, error metrics, and significance testing, while          48 h, all data were aggregated to an hourly level. This choice reflects a
+stressing the continued relevance of robust baseline models. Extending           trade-off between volatility preservation and forecast robustness. Hourly
+this work, [21] systematically evaluated machine learning models                 aggregation reduces high-frequency price fluctuations and smooths
+ranging from tree-based ensembles to neural networks and demonstrated            isolated spikes, particularly for Up-regulation prices, but improves signal-
+that incorporating cross-border price information substantially improves         to-noise characteristics and forecast stability for long-horizon predictions.
+forecasting accuracy, particularly during periods of extreme volatility.         Given the 48-hour forecasting horizon required for operational planning,
+Recent studies have also explored advanced signal processing and                 modeling at a 15-minute resolution would require predicting 192
+ensemble methods. [22] applied Functional Data Analysis to treat daily           time steps ahead, which substantially increases error accumulation,
+price profiles as continuous curves, outperforming traditional time-             especially in a newly established market with limited historical data. As
+series models such as ARIMA. Likewise, [23] showed that weighted                 a result, hourly aggregation was deemed more appropriate for reliable
+ensemble learning significantly improves forecasting accuracy compared           medium-horizon forecasting aligned with BSP planning timelines.
+to single models. A significant methodological difference lies in data               Temporal aggregation inevitably attenuates short-term volatility by
+preprocessing. Decomposition–combination techniques with extensive               averaging within-hour price movements. While this reduces isolated
+filtering, such as those applied to the Italian day-ahead market [24], are       spikes, sustained price events typically driven by prolonged system
+effective at smoothing price dynamics. However, such approaches may              imbalances remain identifiable. To quantify this effect, a comparative
+be unsuitable for aFRR markets, where extreme price spikes constitute            analysis of the September 2024 sample was performed. In the raw
+critical system signals rather than noise.                                       15-minute series, the maximum Up-regulation price reached 556.10
+                                                                                 EUR/MWh, which decreased to 305.46 EUR/MWh after hourly aggrega-
+3.3. Methodological advances: Deep learning                                      tion, representing a 45.1% reduction in extreme amplitude. The standard
+                                                                                 deviation, however, declined more modestly from 94.12 to 63.37,
+    The survey by [25] documents the widespread adoption of deep                 indicating that while high-frequency spikes are smoothed, the underlying
+learning for time series forecasting in energy markets and provides              market dynamics and structural variance are largely preserved.
+a foundation for electricity price forecasting. While CNNs and LSTMs                 This trade-off is acceptable for 48-hour operational planning, where
+remain strong baselines in electricity markets [4,18], recent research has       reducing error accumulation across 192 time-steps takes priority over
+
+                                                                             4
+A. Saleh et al.                                                                                                                  Energy and AI 24 (2026) 100724
+
+
+
+
+Fig. 4. Finland energy Down and Up prices for the 15-minute level dataset with missing values. The graph covers the dataset from September 1st - 30th, 2024.
+
+
+capturing instantaneous 15-minute peaks. Overall, the analysis demon-             imputation strategies; future work could explore this sensitivity quan-
+strates that hourly aggregation preserves the dominant price dynamics             titatively. A visualization of the preprocessed hourly dataset for the
+relevant for planning-level forecasting while mitigating the forecast             aforementioned sample, showing the aFRR energy prices with imputed
+difficulty that would arise from modeling at a 15-minute resolution.              missing values, is presented in Fig. 5.
+    Prior to temporal aggregation, missing values in the 15-minute price              Outlier analysis and removal were intentionally omitted both before
+series were imputed. Missing aFRR price observations arise from multiple          and after preprocessing to preserve real-world price fluctuations and
+mechanisms. In some cases, prices are absent due to technical issues              avoid filtering potentially meaningful market dynamics. Removing
+such as API outages. In others, both Down- and Up-regulation prices are           outliers would risk suppressing important signals relevant to forecasting
+simultaneously absent, reflecting normal system conditions with no aFRR           in a volatile market such as aFRR. After preprocessing, the final
+activation in either direction during the interval. Additionally, during          baseline dataset consisted of approximately 6456 hourly samples. Table
+unidirectional activations, a price is recorded only in the activated             1 summarizes the 15 core input features used for forecasting, including
+direction, while the opposite direction remains absent. Importantly,              market, weather, and time-based covariates.
+missing values do not correspond to zero prices. Empirically, zero-
+priced observations are extremely rare in the dataset (0.22% for                  5. Methodology
+Down-regulation and 0% for Up-regulation), indicating that zero is
+not a realistic representation of typical market conditions. Consequently,        5.1. Forecasting objective
+imputing missing values with zeros would introduce economically
+implausible price signals and bias the learning process.                               The objective is to forecast hourly Up-regulation and Down-regulation
+                                                                                                                               Up
+    Missing values were therefore imputed using a backward-looking                aFRR prices over a 48-hour horizon. Let 𝑃𝑡 and 𝑃𝑡Down denote the Down
+rolling mean computed over the previous 96 observations (24 h).                   and Up aFRR prices at hour 𝑡. Given historical data up to time 𝑡, our
+This window size was chosen to address a characteristic feature of                aim is to learn predictive functions:
+                                                                                                   (                     )
+the aFRR dataset: extended sequences of consecutive missing values,                  Up                 Up
+                                                                                  𝑃̂𝑡+1∶𝑡+48 = 𝑓Up {𝑃𝑡−𝜏 }𝑝𝜏=1 , 𝑋𝑡−𝜏∶𝑡+𝑞 ,                              (2)
+particularly in Up-regulation prices during periods of sustained system
+balance. In such cases, local imputation methods like linear interpolation           Down
+                                                                                                    ( Down 𝑝              )
+would be unsuitable, as they assume a direct connection between                   𝑃̂𝑡+1∶𝑡+48 = 𝑓Down {𝑃𝑡−𝜏 }𝜏=1 , 𝑋𝑡−𝜏∶𝑡+𝑞 ,                               (3)
+the nearest available points and can produce unrealistic intermediate                      Up             Down
+                                                                                  where 𝑃̂𝑡+1∶𝑡+48 and 𝑃̂𝑡+1∶𝑡+48 denotes the 48-hour-ahead forecast horizon
+values over long gaps. The 24-hour rolling mean instead provides a                starting from time 𝑡 + 1. The parameter 𝑝 is the number of past lags
+stable, economically consistent baseline that reflects recent market              used as inputs. 𝑋𝑡−𝜏∶𝑡+𝑞 represents exogenous covariates (e.g., market
+conditions, preserving diurnal patterns without introducing artificial            features, weather data, calendar information) available from time 𝑡 − 𝜏
+trends. Formally, the rolling mean imputation applied to the 15-minute            to 𝑡 + 𝑞, where 𝜏 is the lag index and 𝑞 is the availability horizon of
+price series is defined as follows:                                               future known covariates. The models are trained to produce multi-step
+                                                                                  forecasts for 48 future hourly values.
+       1 ∑
+          𝑁−1
+𝑃𝑡 =        𝑃 ,    where 𝑁 = 96                                         (1)
+       𝑁 𝑖=0 𝑡−𝑖
+                                                                                  5.2. Feature engineering and grouping
+where 𝑃𝑖 is the observation at time 𝑖, and the window size 96 corresponds
+to 24 h at a 15-minute interval resolution. While this approach provides             A comprehensive feature engineering pipeline is applied to enrich
+a stable baseline, the forecasting results may vary under alternative             the base dataset with predictive inputs. We start from raw market data,
+
+                                                                              5
+A. Saleh et al.                                                                                                                               Energy and AI 24 (2026) 100724
+
+
+
+
+Fig. 5. Finland energy Down and Up prices for the aggregated hourly dataset with imputed missing values. The graph covers the dataset from September 1st -
+30th, 2024.
+
+
+                  Table 1
+                  Categorized list of core features used in the final baseline dataset and their roles in forecasting.
+                   Feature category                Feature name                                        Description
+                   Market-only                     Up (target/Down predictor)                          aFRR energy Up-regulation price (EUR/MWh)
+                                                   Down (target/Up predictor)                          aFRR Down-regulation price (EUR/MWh)
+                                                   sp                                                  Spot price (EUR/MWh)
+                                                   Down_Cap                                            aFRR Down-regulation capacity price (EUR/MWh)
+                                                   Up_Cap                                              aFRR Up-regulation capacity price (EUR/MWh)
+                                                   electricity_consumption                             Measured electricity consumption (MW)
+                                                   electricity_consumption_Finnish_networks            Total consumption across Finnish networks (MW)
+                                                   electricity_consumption_forecast                    Forecasted electricity consumption (MW)
+                   Weather-only                    cloud_amount                                        Cloud cover index
+                                                   wind_speed                                          Wind speed (m/s)
+                                                   precipitation_amount                                Precipitation (mm)
+                                                   pressure                                            Surface pressure (hPa)
+                                                   air_temperature                                     Ambient air temperature (◦ C)
+                                                   relative_humidity                                   Relative humidity (%)
+                                                   wind_direction                                      Wind direction (degrees)
+                   Time-based                      is_public_holiday                                   Binary indicator for public holidays
+
+
+
+including historical aFRR prices, as well as weather data. Based on these                       circular variable, is encoded using sine and cosine components to
+inputs, the following feature categories are constructed:                                       preserve angular continuity.
+                                                                                              • Time-based features: Cyclical time features are encoded using
+     • Lagged features: Past values of the target and key signals at                            sine and cosine transforms [29], including hour of day, seasonal
+       multiple lags (e.g., 12, 24, 48 h) to capture autoregressive temporal
+                                                                                                indicators (e.g., month), and binary flags for weekends and
+       dependencies.
+                                                                                                holidays. For example, hour of day is represented as
+     • Rolling statistics: Rolling-window features, including mean and
+                                                                                                    (           )
+       standard deviation, computed over relevant windows (e.g., 24h                                  2𝜋 ⋅ hour
+                                                                                                sin
+       and 72 h) to capture recent variability and trends.                                               24
+     • Transformed weather metrics: We derived composite weather
+                                                                                               and
+       indicators such as wind chill1 and heat index.2 Wind direction, a                           (           )
+                                                                                                     2𝜋 ⋅ hour
+                                                                                               cos
+                                                                                                        24
+   1
+      Calculated as 𝑊 𝐶 = 13.12 + 0.6215𝑇 − 11.37𝑉 0.16 + 0.3965𝑇 𝑉 0.16 , where 𝑇 is           to capture daily cycles.
+air temperature (◦ C) and 𝑉 is wind speed (km/h), applied only when 𝑇 ≤ 10◦ C
+                                                                                              • Feature interactions and nonlinear transforms: Nonlinear trans-
+and 𝑉 > 4.8 km/h; otherwise 𝑊 𝐶 = 𝑇 .
+   2
+      Calculated as 𝐻𝐼 = −8.784695 + 1.61139411𝑇 + 2.338549𝑅 − 0.14611605𝑇 𝑅,                   formations (e.g., logarithmic or square-root scaling) applied to
+where 𝑇 is air temperature (◦ C) and 𝑅 is relative humidity (%), applied only                   skewed variables, as well as interaction terms between features
+when 𝑇 ≥ 27◦ C and 𝑅 > 40%; otherwise 𝐻𝐼 = 𝑇 .                                                  with known interdependencies (e.g., demand × temperature).
+
+                                                                                        6
+A. Saleh et al.                                                                                                                              Energy and AI 24 (2026) 100724
+
+
+                  Table 2
+                  Feature groups and their composition in experimental sets.
+                   Group                            Description                          Features      Example features
+                   Group 1 (Weather)                Raw meteorological data              7             Temperature, humidity, wind speed
+                   Group 2 (Market)                 Historical market data               8             Spot price, capacity prices
+                   Group 3 (Derived Market)         Engineered market indicators         30            Rolling averages, lagged values
+                   Group 4 (Derived Weather)        Processed weather data               31            Rolling averages, lagged values, seasonal patterns
+                   Group 5 (Time)                   Temporal indicators                  20            Day of week, holiday flags
+
+
+                           Table 3
+                           Composition of feature sets across feature groups.
+                            Feature set     Weather (7)       Market (8)        Derived market (30)      Derived weather (31)        Time (20)
+                            Set 1           3                 4                 11                       14                          8
+                            Set 2           5                 5                 13                       17                          11
+                            Set 3           4                 6                 16                       19                          12
+                            Set 4           6                 7                 19                       24                          16
+                            Set 5           7                 7                 23                       27                          19
+
+
+
+    To organize the modeling experiments, all features are categorized                   24 hours ahead. We combine two complementary modeling approaches:
+into five groups: (i) weather features, (ii) core market features, (iii) de-             tree-based gradient boosting models and deep neural networks, to
+rived market features, (iv) derived weather features, and (v) time-based                 capture both interpretable structures and complex temporal dynamics.
+features. Different combinations of these groups were used to train model                Each model is trained to produce a full 48-step forecast based on
+variants in order to evaluate their incremental contribution to forecast                 available input features.
+accuracy. Following the electricity price forecasting literature, calendar                   We employ LightGBM [30] and XGBoost [31] due to their efficiency
+covariates and cyclic time encoding are well established as effective                    with medium-sized tabular datasets and ability to model nonlinear
+inputs in electricity price and imbalance forecasting models [22,29].                    relationships with exogenous features. These ensembles are particu-
+A complete list of all individual features belonging to these groups is                  larly robust against the noisy features typical of volatile balancing
+provided in Table A.1, while the feature group combinations evaluated                    markets [32]. Complementing these, we utilize deep learning archi-
+in the experiments are summarized in Table 2.                                            tectures to capture long-range time dependencies. We implemented the
+                                                                                         Temporal Fusion Transformer (TFT) [33] for its interpretable attention
+5.3. Feature set construction                                                            mechanisms and variable selection networks [34], and the Time-series
+                                                                                         Dense Encoder (TiDE) [35] for its computationally efficient, MLP-based
+    In addition to feature grouping, we developed multiple feature sets                  global encoding capabilities [36].
+by combining different features from all five groups. In this study, we                      All models were trained using a fixed-length historical window
+intentionally moved beyond conventional feature elimination procedures                   to forecast the next 48 h of aFRR market prices. The input window
+(e.g., recursive feature elimination or exhaustive backward selection)                   included lagged target values and rolling statistical features, providing
+in favor of a hybrid and iterative approach. Feature selection was                       temporal context by capturing both short-term dependencies and broader
+guided by three principles: (i) the statistical relevance of features                    trends in the series. We distinguished between past covariates (features
+concerning the target variables, (ii) domain expertise provided by
+                                                                                         available up to the forecast start time, market data) and future covariates
+collaborating BSPs in electricity markets, and (iii) iterative validation
+                                                                                         (exogenous features known over the forecast horizon, including calendar
+of predictive performance. Our approach addresses the established
+                                                                                         attributes and weather forecasts) [37]. All models employed a direct
+drawbacks of conventional feature selection techniques in complex
+                                                                                         multi-step forecasting strategy, producing the entire 48-hour trajectory
+energy markets. Merten et al. (2020) argued in their study of the German
+                                                                                         in one pass rather than iteratively predicting one step at a time.
+aFRR market that correlation values and other basic statistical filters
+can be misleading, as they ‘‘often only consider linear relationships
+                                                                                         5.5. Performance metrics
+and neglect interdependencies between data sources’’. Rigid elimination
+strategies can easily overlook the possibility that a feature with a low
+individual correlation to the target variable may still be highly predictive                 To evaluate forecast accuracy, we used five standard error metrics:
+when interacting with other variables.                                                   Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), Normal-
+    This is particularly important for the Finnish aFRR market, which                    ized Mean Absolute Error (nMAE), Mean Absolute Scaled Error (MASE),
+experiences significant price volatility and lacks adequate historical                   and Root Mean Squared Scaled Error (RMSSE). These metrics offer a
+data. As demonstrated in Fig. B.9, a basic correlation ranking and                       comprehensive view of model performance by capturing both the scale
+SHapley Additive exPlanations (SHAP) feature importance from our                         and distribution of forecast errors. The definitions of the metrics are as
+baseline LightGBM model revealed notable differences. According to                       follows:
+SHAP, features with low correlation rankings still showed significant
+                                                                                              • Mean Absolute Error (MAE):
+predictive impact. Given these findings, we relied on a hybrid approach
+                                                                                                       1 ∑|
+                                                                                                          𝑁
+that combined correlation checks, feature importance scoring, and
+                                                                                               MAE =          𝐹 − 𝐴𝑡 ||                                                (4)
+expert-informed balancing of weather and market features. Through                                      𝑁 𝑡=1 | 𝑡
+this iterative process, we created feature sets that are both operationally
+and statistically significant. The generated feature sets are summarized                      • Root Mean Squared Error (RMSE):
+                                                                                                       √
+in Table 3.                                                                                            √
+                                                                                                       √1 ∑  𝑁
+                                                                                                RMSE = √       (𝐹 − 𝐴𝑡 )2                                              (5)
+5.4. Modeling approach                                                                                    𝑁 𝑡=1 𝑡
+                                                                                              • Normalized Mean Absolute Error (nMAE):
+   Our forecasting framework predicts aFRR prices 48 hours in advance                                   ∑𝑁 |          |
+using an end-to-end approach. This multi-horizon forecasting task gen-                                       |𝐹𝑡 − 𝐴𝑡 |
+                                                                                                nMAE = 𝑡=1∑𝑁 | |                                                       (6)
+erates a complete two-day price trajectory, enabling BSPs to submit bids
+                                                                                                            𝑡=1 |𝐴𝑡 |
+
+                                                                                     7
+A. Saleh et al.                                                                                                                  Energy and AI 24 (2026) 100724
+
+
+     • Mean Absolute Scaled Error (MASE):                                         view of the model’s performance over a long, continuous period, treating
+                  1 ∑𝑁 |            |                                             the entire test set as one large evaluation, similar to a standard hold-out
+                  𝑁    𝑡=1 |𝐹𝑡 − 𝐴𝑡 |                                             test.
+       MASE =      ∑                                                   (7)
+                1    𝑁      |         |                                               Segmented 48-hour Evaluation: Second, the test set was divided
+              𝑁−𝑚    𝑡=𝑚+1 |𝐴𝑡 − 𝐴𝑡−𝑚 |
+                                                                                  into 20 non-overlapping segments, each 48 h (2 days) in length. For
+     • Root Mean Squared Scaled Error (RMSSE):                                    each segment, the model generated a 48-hour forecast using the most
+               √
+               √      1 ∑𝑁                                                        recent 48 h of historical data prior to that segment as context (for
+               √                        2
+               √          𝑡=1 (𝐹𝑡 − 𝐴𝑡 )                                          example, using hours 𝑡 − 48 to 𝑡 to forecast 𝑡 + 1 to 𝑡 + 48) (see Fig.
+       RMSSE = √      𝑁
+                                                                       (8)
+                    1 ∑𝑁
+                        𝑡=𝑚+1 (𝐴𝑡 − 𝐴𝑡−𝑚 )
+                                          2                                       6(b)). Each segment was predicted independently, resetting any model
+                  𝑁−𝑚
+                                                                                  state between segments, yielding 20 separate forecast windows and
+   Here, 𝐹𝑡 denotes the forecasted price, 𝐴𝑡 represents the actual price,         corresponding error estimates. By analyzing the error statistics across
+and 𝑁 is the number of forecast steps. The nMAE is calculated using               these multiple 48-hour segments, we assessed the variability of model
+the absolute actual values in the denominator to ensure stability, even           performance over different periods in the test set. This protocol reveals
+when prices are close to or below zero. The MASE and RMSSE provide                how consistent or variable the forecast accuracy is across diverse time
+scale-independent comparisons by normalizing model errors against                 slices.
+a seasonal naïve benchmark with a seasonal period 𝑚 = 48. A value                     Sliding-Window Backtesting: We employed a sliding-window back-
+below one indicates that the model outperforms the seasonal naïve                 testing method, also known as walk-forward validation, to evaluate how
+forecast in predictive accuracy, while a value exceeding one indicates            well the models perform in real-world forecasting scenarios. The model
+underperformance relative to this baseline.                                       was initially trained on 60 days of data and used to predict the next
+                                                                                  48 h. For evaluation, only the last 24 h of each 48-hour forecast were
+6. Training and evaluation                                                        considered. The final performance metric was calculated by averaging all
+                                                                                  these 24-hour segments throughout the test period. After each prediction,
+6.1. Data splitting                                                               the window was shifted forward by 24 h (see Fig. 6(c)), and the model
+                                                                                  was fine-tuned using the newly added data. In this setup, the model
+                                                                                  generates a new 48-hour forecast every 24 h as the window advances,
+    The dataset was divided into three subsets using a 70/15/15 split:
+                                                                                  but it is fully retrained only every 60 days (1440 hourly steps) using all
+70% for training and 15% each for validation and testing. This standard
+                                                                                  data available up to that point. This retraining helps the model avoid
+approach ensures adequate data for model learning while preserving
+                                                                                  overfitting to old data and limits error accumulation. Between retraining
+sufficient samples for reliable evaluation.
+                                                                                  intervals, the same trained model continues to produce forecasts without
+    Specifically, the training set comprised 4497 data points, the valida-
+                                                                                  parameter updates. This process gradually expands the training set while
+tion set 976, and the test set 960, totaling 6457 entries. While a perfect
+                                                                                  maintaining chronological order, creating overlapping forecasts that
+15% split would allocate 968 data points to both the validation and test          reflect how the model would be used operationally, updated daily with
+sets, a slight adjustment was made to the test set’s length. To enhance           new information, and deployed to predict the next 48 h. This approach
+compatibility with BSPs and improve forecast consistency, 8 data points           closely mirrors a real-world scenario for BSPs, where models can be
+were moved from the test set to the validation set. This adjustment               fine-tuned daily with the latest data and used to submit bids 24 h in
+ensured that the test set was exactly divisible into 20 segments over 48 h,       advance. It also ensures temporal order and tests the model at multiple
+allowing for more structured evaluations. The training set was used to fit        sequential points.
+the models, while the validation set guided hyperparameter tuning and
+early stopping. Crucially, the test set, which is chronologically available       7. Results
+after the training and validation periods, was completely withheld during
+model development. All reported performance results are based solely                 This section presents the performance of four forecasting models—
+on this unseen test set, ensuring an objective measure of each model’s            LightGBM, XGBoost, TFT, and TiDE, in predicting the aFRR Down and
+generalization capability.                                                        Up prices. We evaluated these models using the process outlined in the
+                                                                                  Evaluation section.
+6.2. Hyperparameter tuning
+                                                                                  7.1. Continuous test block evaluation
+    We used Optuna to optimize the hyperparameters of all key models.
+For tree-based models, we tuned parameters such as learning rate,                     Table 4 summarizes the performance of each model based on static
+                                                                                  evaluation using a 70/15/15 train/validation/test split. For Down-
+number of trees, tree depth, and regularization strength by minimizing
+                                                                                  regulation, all models exhibit comparable performance, with MAE
+the validation MAE using the 70/15 split. For deep learning models, we
+                                                                                  values between 17.5 and 17.8. XGBoost achieves the lowest nMAE
+optimized network architecture parameters, including the number of
+                                                                                  of 0.958 and a MASE of 0.479, while LightGBM follows closely with
+layers, hidden units, and dropout rates, using Optuna’s Bayesian search.
+                                                                                  similar scaled errors. Among deep learning models, TFT achieves the
+In each case, Optuna conducted multiple trials, where the model was
+                                                                                  lowest RMSE (25.76), while TiDE records the highest (28.33). For
+trained on the training set and evaluated on the validation set. The
+                                                                                  Up-regulation, LightGBM delivers the strongest overall performance,
+best-performing configuration, with the lowest validation error, was
+                                                                                  although differences across models remain modest. XGBoost performs
+selected for final evaluation on the test set.                                    similarly in terms of MASE and RMSSE, whereas TFT shows higher
+                                                                                  MASE and RMSE due to occasional large deviations. TiDE performs
+6.3. Evaluation process                                                           weakest in this regime, with the highest MAE of 60.15. Across both
+                                                                                  regulations, all models outperform the seasonal naïve benchmark, as
+   To thoroughly assess model performance, we employed three distinct             indicated by MASE and RMSSE values below one, confirming adequate
+evaluation methods on the test set.                                               long-horizon generalization.
+   Continuous Test Block Evaluation: First, the model was evaluated                   Figs. 7 and 8 visually support the static evaluation results. XGBoost
+on the entire test set as one continuous block. In this approach, the             and LightGBM closely followed the actual data for both regulations, but
+model generates forecasts across the entire test period in sequence,              they showed less adaptability to volatility. In contrast, deep learning
+calculating prediction errors over the full 15% test horizon (see Fig.            models exhibited distinct behavioral flaws. TFT responded rapidly to
+6(a)). Without being retrained or reinitialized at intermediate points,           local peaks but frequently overshot, whereas TiDE produced overly
+the model produces a rolling forecast. This method provides an overall            smoothed forecasts that lagged during sudden price shifts.
+
+                                                                              8
+A. Saleh et al.                                                                                                                           Energy and AI 24 (2026) 100724
+
+
+
+
+Fig. 6. Overview of the three evaluation strategies: (a) continuous test block evaluation, (b) segmented 48-hour forecasting, and (c) sliding-window backtesting
+approach.
+
+
+                  Table 4
+                  Static evaluation (70/15/15 split) of model performance on Down- and Up-regulation aFRR prices, based on a single deterministic
+                  run with a fixed random seed (42).
+                   Model          Down-Regulation                                              Up-Regulation
+                                  MAE          nMAE        RMSE        MASE       RMSSE        MAE        nMAE        RMSE        MASE        RMSSE
+                   LightGBM       17.58        0.963       26.32       0.482      0.569        55.74      0.603       71.17       0.498       0.553
+                   XGBoost        17.51        0.958       26.14       0.479      0.593        57.76      0.625       69.86       0.506       0.516
+                   TFT            17.73        0.972       25.76       0.541      0.599        57.22      0.620       79.56       0.553       0.586
+                   TiDE           17.79        0.974       28.33       0.522      0.612        60.15      0.652       74.13       0.534       0.532
+
+
+
+
+                                      Fig. 7. Predicted vs. actual aFRR Down-regulation prices on the test set (15% of data).
+
+
+
+
+                                          Fig. 8. Predicted vs. actual aFRR Up-regulation prices on the test set (15% of data).
+
+
+
+
+                                                                                    9
+A. Saleh et al.                                                                                                                                Energy and AI 24 (2026) 100724
+
+
+                   Table 5
+                   Accuracy (%) within mean absolute error thresholds for Down- and Up-regulation.
+                     Model            Down-regulation (Accuracy %)                                     Up-regulation (Accuracy %)
+                                      ±5         ±10             ±25           ±50       ±100          ±5        ±10         ±25       ±50           ±100
+                     LightGBM         22.34      42.90           79.33         93.53     98.96         7.93      15.34       34.45     61.48         81.94
+                     XGBoost          16.81      33.61           71.82         94.26     99.06         4.28      9.50        22.44     43.11         79.96
+                     TFT              22.08      42.29           78.44         94.69     98.85         7.71      15.31       37.40     59.48         80.52
+                     TiDE             22.92      42.08           75.94         92.19     98.85         4.06      8.02        22.81     48.23         83.96
+
+
+Table 6                                                                                       captured volatile points in Fig. C.11. However, both deep learning
+Model performance across 20 non-overlapping 48-hour segments.                                 models struggled with scaled error metrics, particularly TiDE in both
+ Model            Down-regulation (MAE)                  Up-regulation (MAE)                  Down- and Up-regulation, where the naïve model outperformed them.
+                  Min           Avg           Max        Min           Avg      Max
+ LightGBM         9.41          17.64         42.47      21.74         56.71    106.11        7.5. Sliding window evaluation
+ XGBoost          9.81          17.76         42.59      32.20         54.69    102.42
+ TFT              9.94          19.31         41.23      22.26         73.14    107.91            The results of the sliding window evaluation are presented in
+ TiDE             9.63          21.47         41.57      26.41         54.03    111.01
+                                                                                              Table 8. During this evaluation, we periodically train models for
+                                                                                              continuous forecasting that must adapt to changing data patterns. In
+                                                                                              Down-regulation, TiDE demonstrated maximum stability by achieving
+7.2. Threshold-based accuracy                                                                 the lowest MAE (20.66) and minimal drift. Other models exhibited MASE
+                                                                                              and RMSSE values exceeding 1.0, indicating lower robustness than the
+    To validate the evaluation of the continuous test block, we distributed                   seasonal naïve benchmark. This behavior can be partly attributed to
+the MAE with predefined threshold values of ±5, ±10, ±25, ±50,                                the narrow price range of Down-regulation closer to zero, where small
+and ±100. Table 5 illustrates the percentage of predictions that fall                         absolute deviations are magnified in scaled error metrics, and frequent
+within these defined MAE thresholds. All models demonstrated strong                           retraining may amplify reactions to short-term volatility. Conversely,
+performance at higher threshold values (e.g., ≥93% at ±50 for Down                            in Up-regulation, characterized by higher, strictly positive price levels,
+and ≥80% at ±100 for Up). The differences between models become                               all models consistently outperformed the seasonal naïve benchmark, as
+more pronounced at stricter thresholds. LightGBM consistently achieves                        reflected in MASE and RMSSE values below 1.0. Figs. C.12 and C.13
+the highest accuracy across both low and high thresholds, while XGBoost                       visualize these predictive behaviors over time. Predicting in a sliding
+performs the weakest under tight error constraints. Global metrics like                       window is particularly challenging due to high signal variability and
+MAE (Table 4) suggest a marginal difference between models. The                               limited training data at the start of the evaluation window.
+threshold-based analysis highlights an operationally relevant advantage
+for LightGBM. Specifically, for Down-regulation at the tightest threshold                     7.6. Evaluation reasoning and insights
+(±5), LightGBM achieves an accuracy of 22.34% compared to XGBoost’s
+16.81%. This constitutes a relative improvement of approximately                                  The practical goals of using multiple model evaluation strategies
+32% in capturing small-scale price dynamics. Although TFT performed                           include selecting the best-performing model class and testing perfor-
+similarly to LightGBM, it was comparatively poor in other evaluations,                        mance across different data availability and optimization timelines.
+and TiDE did not perform as well in Up as in Down. Such differences are                       Furthermore, these evaluations assess long-term changes in performance,
+particularly important for market operations, where accurate prediction                       e.g., due to data drift, changes in the data-generating process, and
+of small deviations can directly impact bidding and settlement outcomes.                      structural breaks.
+                                                                                                  The continuous test block with test, train, and validation split
+7.3. Segmented evaluation across 48-hour windows                                              evaluation allowed us to conclude that gradient boosting frameworks
+                                                                                              are one of the best choices for predicting price movements in aFRR
+   As shown in Table 6, we evaluated the performance of the models                            energy markets. This was also supported by findings using a segmented
+over 20 non-overlapping 48-hour intervals. Tree-based models outper-                          48-hour window evaluation. This specific window length was selected in
+formed the others in average MAE, while deep-learning models achieved                         order to comply with the input requirements of the BSP’s optimization
+lower maximum MAE, although the minimum MAE remained relatively                               algorithm. Using fixed two-day windows allowed us to assess predictors’
+similar across all models. In Down-regulation, LightGBM demonstrated                          performance for daily planning under normal operational conditions.
+consistent performance, achieving a minimum MAE of 9.41 for Down                              Finally, the sliding windows approach and continuous retraining were
+prices and an average MAE of 17.64 across all segments. XGBoost                               tested to see how the models handle possible data drift, significant
+produced similar results but had a slightly higher minimum error. For                         changes in market regulation, and unexpected events (e.g., changes
+the Up target class, LightGBM and TFT exhibited better performance                            in aFRR prices due to blackouts, unscheduled maintenance breaks of
+with minimum MAEs of 21.74 and 22.26, respectively. However, TiDE                             large generating facilities). This approach is the closest to the practical
+stands out with an average MAE of 54.03.                                                      deployment of forecasting algorithms used at the BSP. It also allowed
+                                                                                              us to obtain ballpark execution time and efficiency figures for the
+7.4. Best 48-hour forecast segments                                                           algorithms. Table D.2 summarizes the analytical objectives and the
+                                                                                              specific insights derived from each evaluation.
+    Table 7 presents the optimal 48-hour forecast window for each
+model, indicating the test period during which the model achieved                             7.7. Comparison with previous studies
+its highest predictive accuracy. All models exhibit low MAE values for
+Down-regulation (9.41–9.94). Fig. C.10 shows the model’s performance                             To provide context for our results, we compare them with recent
+in the Down-regulation case. LightGBM demonstrated better short-term                          studies on aFRR price forecasting in other European markets, specifically
+responsiveness compared to the seasonal naïve benchmark. Alternatively,                       the Spanish aFRR study by [4] and the German aFRR study by [10]. The
+XGBoost had less stable adaptation to the 48-hour forecast period,                            Spanish study used deep learning techniques, employing the previous
+performing well in raw error metrics but exhibiting higher scaled errors.                     96 quarter-hour prices as predictors for the next day, and reported
+TFT proved competitive (nMAE 0.512 for Up-regulation) and effectively                         scaled errors based on a persistence baseline. [4] incorporated results
+
+                                                                                         10
+A. Saleh et al.                                                                                                                            Energy and AI 24 (2026) 100724
+
+
+                  Table 7
+                  Best 48-hour split evaluation results for each model.
+                   Model            Down-regulation                                              Up-regulation
+                                    MAE       nMAE           RMSE      MASE         RMSSE        MAE         nMAE      RMSE        MASE        RMSSE
+                   LightGBM         9.41      1.37           12.02     0.399        0.315        21.74       0.566     26.19       0.365       0.259
+                   XGBoost          9.81      1.43           11.78     1.048        1.130        32.20       0.544     43.32       0.732       0.689
+                   TFT              9.94      1.11           12.59     0.782        0.791        22.26       0.512     27.65       1.666       1.565
+                   TiDE             9.63      0.886          12.18     1.039        0.944        26.41       0.521     33.40       1.135       1.123
+
+
+                  Table 8
+                  Sliding window evaluation results for forecasting Down- and Up-regulation prices.
+                   Model            Down-regulation                                              Up-regulation
+                                    MAE           nMAE       RMSE      MASE         RMSSE        MAE         nMAE       RMSE       MASE        RMSSE
+                   LightGBM         33.53         1.597      40.41     1.631        1.412        61.06       0.657      81.99      0.833       0.823
+                   XGBoost          30.52         1.453      37.49     1.356        1.249        60.60       0.652      82.19      0.842       0.844
+                   TFT              32.52         1.549      39.30     1.821        1.561        67.57       0.727      92.99      0.949       0.960
+                   TiDE             20.66         1.075      27.17     0.997        0.946        61.83       0.819      83.81      0.843       0.841
+
+
+Table 9                                                                                   LightGBM is a better competitor. Among deep learning models, TiDE
+Comparison of forecasting performance with prior aFRR price forecasting studies.          excelled in the sliding window evaluation for Down-regulation, whereas
+ Reference        Down-regulation                     Up-regulation                       TFT offered high short-term accuracy but proved sensitive to volatility.
+                  MASE              RMSSE             MASE            RMSSE               Our models demonstrate competitive performance relative to recent
+ This work        0.482–0.541       0.569–0.612       0.498–0.553     0.516–0.586         European aFRR studies. Since direct comparison is complicated, our
+ [4]              0.7180            0.7594            0.6895          0.7202              MASE values of 0.482–0.541 (Down) and 0.498–0.553 (Up) substantially
+ [10]             0.7833            0.8013            0.9118          0.9051              outperform both the Spanish market [4] (MASE: 0.72/0.69) and the
+                                                                                          German market [10] (MASE: 0.78/0.91). This higher performance may
+                                                                                          reflect both methodological improvements and structural differences in
+from [10] and normalized the original MAE and RMSE values using                           the Finnish market.
+the same persistence model for consistent cross-market comparison.                            Crucially, aggregate metrics (MAE, RMSE) alone are insufficient
+Although our baseline differs by employing a seasonal-naïve model with                    to characterize operational usefulness in the aFRR context. In Down-
+                                                                                          regulation, where prices often hover near zero, scaled metrics (nMAE,
+a 48-hour periodicity, we ensure consistency by basing our comparison
+                                                                                          MASE) amplify small absolute deviations, distorting comparative assess-
+on the normalized MASE and RMSSE values from the Spanish study.
+                                                                                          ments. From an operational perspective, value lies less in minimizing
+The MASE values range from 0.482 to 0.541 for Down-regulation prices
+                                                                                          global average error and more in maintaining predictions within eco-
+and from 0.498 to 0.553 for Up-regulation prices, corresponding to
+                                                                                          nomically tolerable bounds. Our threshold-based analysis demonstrates
+the range observed across the four evaluated models. Our models
+                                                                                          that evaluating performance within these decision-relevant margins
+demonstrate significantly lower errors. Despite differences in temporal
+                                                                                          reveals operational distinctions that standard aggregate metrics obscure.
+resolution, market structure, and baseline definitions, our experimental
+                                                                                          Additionally, in a pay-as-bid market, deviations beyond narrow tolerance
+setup indicates that contemporary architectures like LightGBM and
+                                                                                          bands lead directly to mispriced bids and lost revenue. Consequently,
+TiDE can achieve competitive accuracy, and in some cases, even better
+                                                                                          LightGBM’s superiority in this study should be interpreted not as
+accuracy (see Table 9).
+                                                                                          a marginal reduction in statistical error, but as higher consistency
+    This comparison should be approached with caution. The studies use
+                                                                                          in producing economically viable price estimates. This viability is
+different data granularities and operate in different market contexts. Our
+                                                                                          reinforced by its unique stability in all evaluations, effectively avoiding
+dataset includes hourly aFRR prices, while the German market employs
+                                                                                          the volatility spikes observed in deep learning models. Furthermore,
+4-hour trading blocks, and the Spanish study used 15-minute intervals.
+                                                                                          its computational efficiency allows for frequent retraining to capture
+These variations can complicate forecasting and increase potential errors.
+                                                                                          rapid market shifts, a critical deployment requirement that heavier
+However, we can still compare forecasts across markets using metrics
+                                                                                          architectures cannot easily satisfy.
+like MASE and RMSSE, suggesting that our models are reliable, especially                      The configuration of the forecast horizon further reflects these
+in a European context.                                                                    operational realities. A 48-hour context window was selected to align
+                                                                                          with the Finnish aFRR market structure, in which BSPs submit bids
+8. Discussion                                                                             approximately 40 hours in advance. While longer historical windows
+                                                                                          were considered, aFRR price formation is driven by rapidly evolving
+    In this study, we benchmarked deep learning architectures against                     system imbalances. Extending the context window risks introducing
+tree-based ensembles in the Finnish aFRR energy market. To ensure a                       obsolete information that no longer correlates with the current state of
+robust evaluation, strict temporal separation was enforced between train-                 the grid. The chosen window, therefore, optimizes the trade-off between
+ing, validation, and test datasets to prevent data leakage. Techniques                    data freshness and sufficient coverage of the day-ahead planning horizon.
+such as early stopping, dropout, and regularization were employed to                      This necessity to capture rapid, short-term imbalances is most critical
+mitigate overfitting and ensure that the reported results reflect true                    for Up-regulation prices, which proved significantly more challenging
+generalization rather than memorization of historical patterns. The                       to forecast due to their higher volatility compared to Down-regulation.
+evaluation strategies adopted in this study are motivated by a research                       To interpret model behavior under these volatile conditions, we
+perspective aimed at analyzing market behavior through multiple                           employed SHAP analysis. It is important to note that feature importance
+analytical lenses. They do not imply that BSPs currently follow or are                    indicates predictive leverage, not necessarily physical causality. aFRR
+required to follow these specific evaluation practices.                                   prices emerge from proprietary BSP bidding strategies, TSO activation
+    After evaluating various strategies, LightGBM consistently demon-                     constraints, and portfolio-level decisions that are not publicly observable.
+strated robust performance. XGBoost performed comparably in many                          Nevertheless, the observed divergence in feature importance is econom-
+evaluations, but the threshold-based accuracy analysis highlights why                     ically plausible. Up-regulation prices tend to be scarcity-driven and
+
+                                                                                     11
+A. Saleh et al.                                                                                                                    Energy and AI 24 (2026) 100724
+
+
+sensitive to system stress, whereas Down-regulation prices are influenced                Future research should prioritize reassessing the scalability of deep
+by surplus conditions like high wind generation. These distinctions align            learning models as historical datasets expand, while also developing
+with known market behavior, validating that the models are learning                  hybrid architectures that merge LightGBM’s consistency with TiDE’s
+relevant economic signals rather than noise.                                         drift resistance. Furthermore, this framework should be extended to
+    Several contextual limitations must be considered when interpreting              other Nordic and European aFRR markets. This cross-market approach
+the relative performance of deep learning models. Most notably, the                  would also validate the applicability of our findings across different
+Finnish aFRR market has been operational only since mid-2024, resulting              market structures and bidding protocols.
+in a dataset of approximately 6456 hourly observations. This sample
+size is limited for high-capacity architectures such as the TFT, which               CRediT authorship contribution statement
+typically require substantially larger datasets to effectively generalize. In
+such small-sample regimes, the risk of overfitting increases, and complex                Abu Saleh: Writing – original draft, Software, Methodology, Inves-
+models may exhibit higher variance and reduced stability compared                    tigation, Formal analysis, Conceptualization. Aruzhan Amangeldina:
+to simpler alternatives. This limitation helps explain why tree-based                Writing – original draft, Visualization, Software, Methodology, Investiga-
+models performed more consistently and were more computationally                     tion. Tesfay W. Tesfay: Writing – original draft, Visualization, Software,
+efficient. No formal learning curve or ablation analysis was conducted, as           Methodology, Data curation. Sébastien Lafond: Writing – review
+further reducing the already constrained training set would compromise               & editing, Supervision, Project administration, Funding acquisition.
+statistical validity. As the aFRR market matures and longer time series              Hergys Rexha: Writing – review & editing, Validation, Supervision,
+become available, revisiting deep learning scalability and learning-curve            Formal analysis, Conceptualization. Olena Izhak: Writing – review &
+behavior represents a natural extension of this work.                                editing, Validation, Supervision, Resources, Project administration.
+    To address limited data and capture external and temporal sig-
+nals, we developed an extended feature engineering approach that                     Declaration of competing interest
+incorporated over 90 raw and derived features. An exhaustive search
+for all possible combinations (i.e., 295 ) is computationally infeasible.                The authors declare that they have no known competing financial
+Although we relied on feature importance scoring, domain knowledge,                  interests or personal relationships that could have appeared to influence
+previous studies, and iterative validation, there remains a risk of                  the work reported in this paper.
+overlooking relevant variables. The complexity and computational
+                                                                                     Acknowledgments
+demands of models are crucial to practical applicability, underscoring
+the operational advantages of the lightweight tree-based approaches
+                                                                                        This work was part of an academic collaboration between Åbo
+identified in this study.
+                                                                                     Akademi University and Elisa Oyj. The work has been partially
+    Finally, upon our request, partner BSP simulated its revenues
+                                                                                     supported by the funding of the EMJMD master’s program in Engineering
+based on an optimization that uses LightGBM’s aFRR energy price
+                                                                                     of Data-Intensive Intelligent Software Systems (EDISS), issued by the
+forecast. Later, it compared this to a naïve benchmark forecast, keeping
+                                                                                     European Union’s Education, Audiovisual and Culture Executive Agency
+everything else equal for a sample day trade. The simulation indicated
+                                                                                     (grant number 619819). The authors express their gratitude for the
+a substantial reduction in imbalance-related sanctions (approximately
+                                                                                     support and contributions from both partners throughout the project.
+23%) and a modest increase in total simulated revenues (around 1%).
+The result is intuitive: a more accurate energy price prediction helps
+                                                                                     Appendix A. Complete feature list
+estimate the opportunity costs of actions taken in the market. It is crucial
+for market operations as it allows finding the optimal timing for various
+                                                                                        See Table A.1.
+market activities in order to maximize revenues and avoid sanctions.
+                                                                                     Appendix B. Feature construction
+9. Conclusions and future work
+                                                                                         A key justification for our hybrid feature selection approach is
+    This study presents a comprehensive analysis of deep learning and                that the model itself shows a clear difference between simple linear
+tree-based models to forecast the aFRR energy prices in the Finnish                  correlation and true predictive importance. Although a correlation
+energy grid system. By framing the forecasting task through multiple                 analysis is a good place to start, it can be deceptive because it ignores
+complementary evaluation strategies, the study examined not only                     feature interactions and non-linear relationships, which are crucial in
+average predictive accuracy but also robustness, adaptability, and                   the intricate energy market. For example, the SHAP analysis ranks
+decision-relevant precision under realistic market constraints.                      dayofyear as the second most impactful feature, despite its weak
+    The results demonstrate that different testing regimes reveal distinct           correlation of only 0.235, suggesting a strong non-linear, seasonal
+aspects of forecast behavior. Within this framework, LightGBM consis-                influence that correlation is unable to capture. Similarly, Down_Cap
+tently performed well, while XGBoost’s performance was slightly worse                is the third most important feature according to SHAP, despite having
+but still comparable. TiDE demonstrated adaptability when retrained                  a negligible correlation of 0.084. This suggests that the way it inter-
+over time, while TFT showed potential but would benefit from a larger                acts with other variables is what gives it its predictive power. Even
+training dataset. The best models achieved mean absolute errors ranging              wind_direction aids in prediction, presumably through conditional
+from 17.5 to 17.8 for Down-regulation and 55 to 60 for Up-regulation.                effects that depend on other meteorological factors, as evidenced by its
+The average predicted Down-regulation price was 8.67 e/MWh, and the                  nearly zero correlation of 0.004. These examples show how some of the
+average Up-regulation price was 64.70 e/MWh. Up-regulation prices,                   model’s most useful predictors would have been mistakenly eliminated
+while more volatile, resulted in smaller normalized prediction errors                by a strict, correlation-based feature elimination.
+due to their higher price level.
+    A key methodological insight is that conventional aggregate error                Appendix C. Additional evaluation illustrations
+metrics alone are insufficient to assess practical forecasting value in
+aFRR markets. This perspective emphasizes consistency and decision-                     See Figs. C.10–C.13.
+relevant precision over marginal reductions in global error statistics.
+The study is inherently constrained by the limited historical depth of the           Appendix D. Evaluation insights
+Finnish aFRR market. Accordingly, this work should be viewed as an
+early-stage benchmark rather than a definitive ranking of model classes.                See Table D.2.
+
+                                                                                12
+A. Saleh et al.                                                                                                                         Energy and AI 24 (2026) 100724
+
+
+
+
+Table A.1
+Complete list of all features used in the forecasting model, including the 15 baseline input features as well as all additional derived, engineered, and time-based
+features.
+ Feature category           Feature name                                                         Description
+ Market-only                Up (target/Down predictor)                                           aFRR Up-regulation price (EUR/MWh)
+                            Down (target/up predictor)                                           aFRR Down-regulation price (EUR/MWh)
+                            sp                                                                   Spot price (EUR/MWh)
+                            Down_Cap                                                             aFRR Down-regulation capacity price (EUR/MWh)
+                            Up_Cap                                                               aFRR Up-regulation capacity price (EUR/MWh)
+                            electricity_consumption                                              Measured electricity consumption (MW)
+                            electricity_consumption_Finnish_networks                             Total consumption across Finnish networks (MW)
+                            electricity_consumption_forecast                                     Forecasted electricity consumption (MW)
+ Weather-only               cloud_amount                                                         Cloud cover index
+                            wind_speed                                                           Wind speed (m/s)
+                            precipitation_amount                                                 Precipitation amount (mm)
+                            pressure                                                             Surface pressure (hPa)
+                            air_temperature                                                      Ambient air temperature (◦ C)
+                            relative_humidity                                                    Relative humidity (%)
+                            wind_direction                                                       Wind direction (degrees)
+ Derived market             Down_lag_12, Down_lag_24, Down_lag_36, Down_lag_48                   Down price value from 12, 24, 36, and 48 h ago
+                            Up_lag_12, Up_lag_24, Up_lag_36, Up_lag_48                           Up price value from 12, 24, 36, and 48 h ago
+                            sp_lag_12, sp_lag_24, sp_lag_36, sp_lag_48                           Spot price value from 12, 24, 36, and 48 h ago
+                            electricity_consumption_lag_24, electricity_consumption_lag_48       Electricity consumption value from 24 and 48 h ago
+                            Down_rolling_mean_12, Down_rolling_mean_24                           Mean of Down price over the past 12 and 24 h
+                            Up_rolling_mean_12, Up_rolling_mean_24                               Mean of Up price over the past 12 and 24 h
+                            Down_rolling_std_12, Down_rolling_std_24                             Standard deviation of Down price over the past 12 and 24 h
+                            Up_rolling_std_12, Up_rolling_std_24                                 Standard deviation of Up price over the past 12 and 24 h
+                            sp_mean_24, sp_mean_48                                               Mean of Spot price over the past 24 and 48 h
+                            sp_std_12, sp_std_24                                                 Standard deviation of Spot price over the past 12 and 24 h
+                            electricity_consumption_rolling_mean_24                              Mean of electricity consumption over the past 24 h
+                            electricity_consumption_Finnish_networks_rolling_mean_24             Mean of Finnish networks electricity consumption over the past 24 h
+                            log_Down                                                             Log-transformed Down price (variance stabilization)
+                            log_Up                                                               Log-transformed Up price (variance stabilization)
+ Derived weather            lag_temp_3h, lag_temp_6h, lag_temp_9h                                Air temperature value from 3, 6, and 9 h ago
+                            lag_pressure_6h                                                      Surface pressure value from 6 h ago
+                            rolling_temp_6h, rolling_temp_12h                                    Mean of air temperature over the past 6 and 12 h
+                            rolling_humidity_6h                                                  Mean of relative humidity over the past 6 h
+                            wind_direction_sin, wind_direction_cos                               Circular encoding of wind direction
+                            wind_chill                                                           Perceived temperature accounting for wind effect
+                            heat_index                                                           Perceived temperature accounting for humidity effect
+                            dew_point                                                            Dew point temperature
+                            wind_power                                                           Proxy for wind energy potential (wind speed squared)
+                            storm_index                                                          Combined indicator of wind speed and precipitation
+                            humidity_x_wind                                                      Interaction term: humidity and wind speed
+                            wind_speed_x_hour                                                    Interaction term: wind speed and hour of day
+                            relative_humidity_x_air_temp                                         Interaction term: humidity and air temperature
+                            wind_speed_x_dayofweek                                               Interaction term: wind speed and day of week
+                            precipitation_x_hour                                                 Interaction term: precipitation and hour
+                            temp_x_hour, temp_x_dayofweek, temp_x_month                          Interaction terms: air temperature with hour, day of week, and month
+                            temp_diff_1h, temp_diff_24h                                          Temperature change over 1 and 24 h
+                            pressure_change_6h, pressure_change_12h                              Pressure change over 6 and 12 h
+                            log_wind_speed                                                       Log-transformed wind speed
+                            sqrt_precipitation                                                   Square-root transformed precipitation
+                            is_high_wind                                                         Binary indicator for high wind speed
+                            is_heavy_rain                                                        Binary indicator for heavy rainfall
+                            is_heat_wave                                                         Binary indicator for heatwave conditions
+ Time-based                 hour, dayofweek, month, year, dayofyear,                             Calendar-based time features
+                            dayofmonth, weekofyear, quarter
+                            hour_sin, hour_cos                                                   Cyclical encoding of hour of day
+                            dayofweek_sin, dayofweek_cos                                         Cyclical encoding of day of week
+                            month_sin, month_cos                                                 Cyclical encoding of month
+                            week_sin, week_cos                                                   Cyclical encoding of week of year
+                            is_weekend                                                           Binary indicator for weekend
+                            is_summer                                                            Binary indicator for summer season
+                            is_winter                                                            Binary indicator for winter season
+                            is_public_holiday                                                    Binary indicator for public holidays
+
+
+
+
+                                                                                     13
+A. Saleh et al.                                                                                                                     Energy and AI 24 (2026) 100724
+
+
+
+
+                                     (a) Feature–target correlation (Down           (b) SHAP feature importance (LightGBM,
+                                     price)                                         Down price)
+
+
+Fig. B.9. Comparison between linear correlation and SHAP-based feature importance for Down-regulation price forecasting. The correlation plot (left) shows linear
+relationships, while the SHAP plot (right) captures non-linear and interaction effects.
+
+
+
+
+                                   Fig. C.10. Predicted vs actual aFRR Down-regulation prices for the best 48-hour window.
+
+
+
+
+                                    Fig. C.11. Predicted vs actual aFRR Up-regulation prices for the best 48-hour window.
+
+
+
+
+                                                                               14
+A. Saleh et al.                                                                                                                               Energy and AI 24 (2026) 100724
+
+
+
+
+Fig. C.12. Predicted vs. actual aFRR Down-regulation prices using sliding window evaluation, showing the reference window (Feb 5–Mar 16, 2025) characterized
+by high price variability.
+
+
+
+
+Fig. C.13. Predicted vs. actual aFRR Up-regulation prices using sliding window evaluation, showing the reference window (Feb 5–Mar 16, 2025) characterized by
+high price variability.
+
+
+                  Table D.2
+                  Synthesis of evaluation strategies, operational relevance, and primary findings.
+                   Evaluation strategy              Operational context                              Key findings
+                   Continuous Test Block            Baseline generalization without retraining.      LightGBM achieves the best balance across
+                   (70/15/15 split, single          Tests long-horizon forecasting capability        Up/Down regulation (lowest MASE). While TiDE is
+                   960-hour forecast)               and overall model accuracy.                      competitive in specific metrics, LightGBM and
+                                                                                                     XGBoost offer the most consistent ‘‘out-of-the-box’’
+                                                                                                     fit for long horizons.
+                   Segmented 48h                    Day-ahead bidding reliability across             LightGBM achieves the lowest MAE in the ‘‘Best
+                   Windows                          diverse market conditions. Assesses              48h’’ scenarios (Down: 9.41, Up: 21.74). LightGBM
+                   (20 non-overlapping              forecast stability and variance under            is the safest choice for daily planning, as it
+                   blocks, independent              regime shifts.                                   minimizes error during standard market conditions
+                   forecasts)                                                                        better than deep learning alternatives.
+                   Sliding Window                   Production deployment with concept               TiDE is highly stable in Down-regulation (lowest
+                   (60-day training, 48h            drift. Simulates a real-world lifecycle          MAE 20.66), but LightGBM outperforms it
+                   forecast, 24h step,              where models adapt to evolving patterns          significantly in Up-regulation Threshold Accuracy
+                   periodic retraining)             through periodic retraining.                     (7.93% vs 4.06%). TiDE is a ‘‘specialist’’ for stable
+                                                                                                     trends, while LightGBM is a ‘‘generalist’’ that
+                                                                                                     handles the volatility of both Up and Down
+                                                                                                     markets effectively.
+
+
+
+
+                                                                                     15
+A. Saleh et al.                                                                                                                                       Energy and AI 24 (2026) 100724
+
+
+Data availability                                                                              [18] Cardo-Miota J, Pérez E, Beltran H. Deep learning-based forecasting of the
+                                                                                                    automatic frequency reserve restoration band price in the iberian electricity
+   The supporting dataset for this study has been published and is                                  market. Sustain Energy, Grids Netw 2023;35:101110. http://dx.doi.org/10.1016/
+                                                                                                    j.segan.2023.101110.
+publicly available in the Zenodo repository at https://doi.org/10.5281/
+                                                                                               [19] Marcjasz G, Uniejewski B, Weron R. Beating the naive—Combining LASSO with
+zenodo.17494556.                                                                                    naive intraday electricity price forecasts. Energies 2020;13(7):1667.
+                                                                                               [20] Lago J, Marcjasz G, De Schutter B, Weron R. Forecasting day-ahead electricity
+                                                                                                    prices: A review of state-of-the-art algorithms, best practices and an open-access
+References
+                                                                                                    benchmark. Appl Energy 2021;293:116983. http://dx.doi.org/10.1016/j.apenergy.
+                                                                                                    2021.116983.
+ [1] Hyvönen J, Koivunen T, Syri S. Possible bottlenecks in clean energy transitions:          [21] Tschora L, Pierre E, Plantevit M, Robardet C. Electricity price forecasting on
+     Overview and modelled effects – case Finland. J Clean Prod 2023;410:137317.
+                                                                                                    the day-ahead market using machine learning. Appl Energy 2022;313:118752.
+     http://dx.doi.org/10.1016/j.jclepro.2023.137317.
+                                                                                                    http://dx.doi.org/10.1016/j.apenergy.2022.118752.
+ [2] Ministry of the Environment. Finland’s national climate change policy. 2025,
+                                                                                               [22] Jan F, Iftikhar H, Tahir M, Khan M. Forecasting day-ahead electric power prices
+     [Accessed 03 May 2025], URL https://ym.fi/en/finland-s-national-climate-change-
+                                                                                                    with functional data analysis. Front Energy Res 2025;13:1477248.
+     policy.
+ [3] País E. The five seconds that plunged Spain into darkness. 2025,                          [23] Gonzales SM, Iftikhar H, López-Gonzales JL. Analysis and forecasting of electricity
+     URL https://english.elpais.com/spain/2025-05-01/the-five-seconds-that-plunged-                 prices using an improved time series ensemble approach: An application to the
+     spain-into-darkness.html, [Accessed 14 August 2025].                                           peruvian electricity market. Aims Math 2024;9(8):21952–71.
+ [4] Failing JM, Cardo-Miota J, Pérez E, Beltran H, Segarra-Tamarit J. Deep learning           [24] Iftikhar H, Turpo-Chaparro JE, Canas Rodrigues P, López-Gonzales JL. Forecasting
+     approaches for predicting the upward and downward energy prices in the                         day-ahead electricity prices for the Italian electricity market using a new
+     spanish automatic frequency restoration reserve market. Energy 2025;320:135245.                decomposition—combination technique. Energies 2023;16(18):6669.
+     http://dx.doi.org/10.1016/j.energy.2025.135245.                                           [25] Benidis K, Rangapuram SS, Flunkert V, Wang Y, Maddix D, Turkmen C, et al.
+ [5] Iftikhar H, Khan N, Raza MA, Abbas G, Khan M, Aoudia, et al. Electricity                       Deep learning for time series forecasting: Tutorial and literature survey. ACM
+     theft detection in smart grid using machine learning. Front Energy Res                         Comput Surv 2022;55(6):1–36.
+     2024;12:1383090.                                                                          [26] Fan H, Liu W, Zhang Z, Run W, Duan Y, Liu D. EPformer: Unlocking day-ahead
+ [6] Iftikhar H, Zywiołek J, López-Gonzales JL, Albalawi O. Electricity consumption                 electricity price forecasting accuracy using the time-frequency domain feature
+     forecasting using a novel homogeneous and heterogeneous ensemble learning.                     learning strategy considering renewable energy. Renew Energy 2026;125296.
+     Front Energy Res 2024;12:1442502.                                                         [27] Fingrid Oyj. Fingrid open data. 2025, URL https://data.fingrid.fi/en, [Accessed
+ [7] Merten M. Participation of battery storage systems in the automatic fre-
+                                                                                                    06 June 2025].
+     quency restoration reserve market based on machine learning (Ph.D. thesis),
+                                                                                               [28] Finnish Meteorological Institute. Finnish meteorological institute. 2025, URL
+     Rheinisch-Westfälische Technische Hochschule Aachen; 2020.
+                                                                                                    https://en.ilmatieteenlaitos.fi/, [Accessed 06 June 2025].
+ [8] Emissions-EUETScom. Balancing service provider (BSP). 2025, URL https://
+                                                                                               [29] Balázs I, Fodor A, Magyar A. Short-term system imbalance forecast using linear and
+     emissions-euets.com/balancing-service-provider-bsp, [Accessed 06 May 2025].
+ [9] Klyve ØS, Klæ boe G, Nygård MM, Marstein ES. Limiting imbalance settlement                     non-linear methods. Energy Syst 2024;1–22. http://dx.doi.org/10.1007/s12667-
+     costs from variable renewable energy sources in the nordics: Internal balancing                024-00641-3.
+     vs. balancing market participation. Appl Energy 2023;350:121696. http://dx.doi.           [30] Ke G, Meng Q, Finley T, Wang T, Chen W, Ma W, et al. Lightgbm: A
+     org/10.1016/j.apenergy.2023.121696.                                                            highly efficient gradient boosting decision tree. In: Guyon I, Luxburg UV,
+[10] Merten M, Rücker F, Schoeneberger I, Sauer DU. Automatic frequency                             Bengio S, Wallach H, Fergus R, Vishwanathan S, Garnett R, editors. Ad-
+     restoration reserve market prediction: Methodology and comparison of var-                      vances in neural information processing systems 30. Curran Associates,
+     ious approaches. Appl Energy 2020;268:114978. http://dx.doi.org/10.1016/j.                     Inc.; 2017, p. 3146–54, URL https://proceedings.neurips.cc/paper/2017/file/
+     apenergy.2020.114978, URL https://www.sciencedirect.com/science/article/pii/                   6449f44a102fde848669bdd9eb6b76fa-Paper.pdf, NeurIPS 2017.
+     S0306261920304906.                                                                        [31] Chen T, Guestrin C. Xgboost: A scalable tree boosting system. In: Proceedings
+[11] Shah I, Iftikhar H, Ali S. Modeling and forecasting electricity demand and                     of the 22nd ACM SIGKDD international conference on knowledge discovery and
+     prices: A comparison of alternative approaches. J Math Univ Tokushima                          data mining. New York, NY, USA: ACM; 2016, p. 785–94. http://dx.doi.org/10.
+     2022;2022(1):3581037.                                                                          1145/2939672.2939785.
+[12] Fingrid Oyj. Terms and conditions for balancing service providers (BSP). 2024,            [32] Di Persio L, Fraccarolo N. Energy consumption forecasts by gradient boost-
+     URL https://www.fingrid.fi/globalassets/dokumentit/fi/palvelut/kulutuksen-ja-
+                                                                                                    ing regression trees. Mathematics 2023;11(5):1068. http://dx.doi.org/10.3390/
+     tuotannon-liittaminen-kantaverkkoon/sjv2024—unofficial-english-translation.pdf,
+                                                                                                    math11051068.
+     [Accessed 05 May 2025].
+                                                                                               [33] Lim B, Arik SÖ, Loeff N, Pfister T. Temporal fusion transformers for interpretable
+[13] Fingrid Oyj. Reservitoimittajat ja heidän toimittamansa reservituotteet [balancing
+                                                                                                    multi-horizon time series forecasting. Int J Forecast 2021;37(4):1748–64. http:
+     service providers and reserve products]. 2025, URL https://www.fingrid.fi/
+     globalassets/dokumentit/fi/sahkomarkkinat/reservit/reservimarkkinatoimijat.pdf,                //dx.doi.org/10.1016/j.ijforecast.2021.07.017.
+     [Accessed 14 August 2025].                                                                [34] Voxlin D, Fredriksson DJ. Forecasting day-ahead and intraday electricity market
+[14] Fingrid Oyj. Reserve markets. 2024, URL https://www.fingrid.fi/en/electricity-                 prices with ARIMA, RNN-LSTM and TFT models. 2024, URL https://www.diva-
+     market/reserves/reserve-markets/, [Accessed 04 July 2025].                                     portal.org/smash/record.jsf?pid=diva2%3A1928790, [Accessed 13 May 2025].
+[15] Fingrid Oyj. Terms and conditions for providers of automatic frequency restoration        [35] Das A, Kong W, Sen R, Zhou Y. Long-term forecasting with tide: Time-series
+     reserves (aFRR). 2024, URL https://www.fingrid.fi/globalassets/dokumentit/en/                  dense encoder. 2023, arXiv preprint arXiv:2304.08424, Submitted to the Journal
+     electricity-market/reserves/afrr-liite-1-ehdot-20240612-eng.pdf, Entry into force              of Machine Learning Research, URL https://arxiv.org/abs/2304.08424.
+     12 June 2024.                                                                             [36] Zheng H, Lu Y, Sun Z, Panneerselvam J, Sun X, Liu L. Energy optimisation in
+[16] Optimeering. The finnish picasso: How the imbalance energy markets                             cloud datacentres with MC-tide: Mixed channel time-series dense encoder for
+     look following the introduction of the new IM. 2023, URL https:                                workload forecasting. Appl Energy 2024;374:123903. http://dx.doi.org/10.1016/
+     //www.optimeering.com/post/the-finnish-picasso-how-the-imbalance-energy-                       j.apenergy.2024.123903.
+     markets-look-following-the-introduction-of-the-new-im, [Accessed 04 June 2025].           [37] Herzen J, Lässig F, Piazzetta SG, Neuer T, Tafti L, Raille G, et al. Darts:
+[17] Merten M, Olk C, Schoeneberger I, Sauer DU. Bidding strategy for battery storage               User-friendly modern machine learning for time series. J Mach Learn Res
+     systems in the secondary control reserve market. Appl Energy 2020;268:114951.
+                                                                                                    2022;23(124):1–6.
+     http://dx.doi.org/10.1016/j.apenergy.2020.114951.
+
+
+
+
+                                                                                          16
+

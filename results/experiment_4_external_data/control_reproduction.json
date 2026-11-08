@@ -1,0 +1,23 @@
+{
+  "max_abs_difference_by_column": {
+    "p10": 1.4344999999999999,
+    "p50": 0.1492,
+    "p90": 0.0,
+    "p_up": 0.09590300000000002,
+    "p_down": 0.09587400000000001,
+    "p_none": 0.00034100000000000016,
+    "p_spike_high": 0.07119500000000001,
+    "p_spike_low": 0.06514799999999998
+  },
+  "mean_abs_difference_by_column": {
+    "p10": 0.03153852306547618,
+    "p50": 1.5033482142857163e-05,
+    "p90": 0.0,
+    "p_up": 0.0023011531994047616,
+    "p_down": 0.0023020404389880954,
+    "p_none": 5.054129464285714e-06,
+    "p_spike_high": 0.000458603162202381,
+    "p_spike_low": 0.00046750338541666665
+  },
+  "interpretation": "Use the freshly retrained baseline for paired ablations. Saved imported submission is a separate reference; exact production-function parity was checked on the short-horizon direction model."
+}

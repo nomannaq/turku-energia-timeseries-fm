@@ -1,0 +1,100 @@
+{
+  "experiment": 3,
+  "device": "cpu",
+  "origins": 672,
+  "first_origin": "2026-09-06 21:00:00+00:00",
+  "last_origin": "2026-10-04 20:00:00+00:00",
+  "context_quarters": 672,
+  "parameter_updates": 0,
+  "symmetric_averaging": true,
+  "nonnegative_clipping": false,
+  "availability_checks": [
+    {
+      "origin": "2026-09-06 21:00:00+00:00",
+      "mode": "price",
+      "passed": true
+    },
+    {
+      "origin": "2026-09-06 21:00:00+00:00",
+      "mode": "spread",
+      "passed": true
+    },
+    {
+      "origin": "2026-09-06 21:00:00+00:00",
+      "mode": "spread_covariates",
+      "passed": true
+    },
+    {
+      "origin": "2026-09-20 14:00:00+00:00",
+      "mode": "price",
+      "passed": true
+    },
+    {
+      "origin": "2026-09-20 14:00:00+00:00",
+      "mode": "spread",
+      "passed": true
+    },
+    {
+      "origin": "2026-09-20 14:00:00+00:00",
+      "mode": "spread_covariates",
+      "passed": true
+    },
+    {
+      "origin": "2026-10-04 20:00:00+00:00",
+      "mode": "price",
+      "passed": true
+    },
+    {
+      "origin": "2026-10-04 20:00:00+00:00",
+      "mode": "spread",
+      "passed": true
+    },
+    {
+      "origin": "2026-10-04 20:00:00+00:00",
+      "mode": "spread_covariates",
+      "passed": true
+    }
+  ],
+  "original_artifact_sha256": {
+    "forecast_backtest.csv": "3324c377e2cb0d324f427b91847c7a9adcce688672c6b54d1cf1ef6e4d04869a",
+    "forecast_backtest_packageonly.csv": "0a2312d16630258d4c02030e69d3753a1dfbf09aa8504974123d6cd94e56f000",
+    "submission/validation_forecast_B.csv": "d2cfc1fb3a3bf344aeb8c61e509841e963064ed1a5e0c8b69f437243aaaa7dcc"
+  },
+  "models": {
+    "timesfm3": {
+      "model_id": "google/timesfm-3.0-pytorch",
+      "revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+      "last_modified": "2026-09-02 15:44:59+00:00"
+    },
+    "timestral209m": {
+      "model_id": "mistralai/Timestral-209M",
+      "revision": "9874d252ab0aae16f7f7c999f98f98d6ad7d8365",
+      "last_modified": "2026-10-15 15:33:49+00:00"
+    }
+  },
+  "runtime_seconds": {
+    "timesfm3_price": 23.903931042004842,
+    "timesfm3_spread": 23.662413749989355,
+    "timesfm3_spread_covariates": 168.99228500001482,
+    "timestral209m_price": 13.491000584006542,
+    "timestral209m_spread": 13.393599167000502,
+    "timestral209m_spread_covariates": 206.03139008398284
+  },
+  "batch_independence_checks": {
+    "timesfm3_price": true,
+    "timesfm3_spread": true,
+    "timesfm3_spread_covariates": true,
+    "timestral209m_price": true,
+    "timestral209m_spread": true,
+    "timestral209m_spread_covariates": true
+  },
+  "scope": "Research price benchmark only; no direction/spike probabilities or test scoring.",
+  "packages": {
+    "timesfm": "3.0.2",
+    "timestral": "1.0.0",
+    "torch": "2.15.0",
+    "numpy": "2.5.4",
+    "pandas": "3.1.1"
+  },
+  "delay_bridge_quarters": 4
+}

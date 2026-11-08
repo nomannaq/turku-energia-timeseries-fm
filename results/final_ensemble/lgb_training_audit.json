@@ -1,0 +1,58 @@
+[
+  {
+    "period": "fold0",
+    "train_rows": 32420,
+    "prediction_rows": 13440,
+    "cutoff": "2026-07-05 21:00:00+00:00",
+    "latest_training_origin": "2026-07-05 19:00:00+00:00",
+    "latest_training_target_usable": "2026-07-05 21:00:00+00:00"
+  },
+  {
+    "period": "fold1",
+    "train_rows": 45860,
+    "prediction_rows": 13440,
+    "cutoff": "2026-07-19 21:00:00+00:00",
+    "latest_training_origin": "2026-07-19 19:00:00+00:00",
+    "latest_training_target_usable": "2026-07-19 21:00:00+00:00"
+  },
+  {
+    "period": "fold2",
+    "train_rows": 59300,
+    "prediction_rows": 13440,
+    "cutoff": "2026-08-02 21:00:00+00:00",
+    "latest_training_origin": "2026-08-02 19:00:00+00:00",
+    "latest_training_target_usable": "2026-08-02 21:00:00+00:00"
+  },
+  {
+    "period": "fold3",
+    "train_rows": 72740,
+    "prediction_rows": 13440,
+    "cutoff": "2026-08-16 21:00:00+00:00",
+    "latest_training_origin": "2026-08-16 19:00:00+00:00",
+    "latest_training_target_usable": "2026-08-16 21:00:00+00:00"
+  },
+  {
+    "period": "fold4",
+    "train_rows": 86180,
+    "prediction_rows": 6720,
+    "cutoff": "2026-08-30 21:00:00+00:00",
+    "latest_training_origin": "2026-08-30 19:00:00+00:00",
+    "latest_training_target_usable": "2026-08-30 21:00:00+00:00"
+  },
+  {
+    "period": "validation",
+    "train_rows": 92900,
+    "prediction_rows": 26880,
+    "cutoff": "2026-09-06 21:00:00+00:00",
+    "latest_training_origin": "2026-09-06 19:00:00+00:00",
+    "latest_training_target_usable": "2026-09-06 21:00:00+00:00"
+  },
+  {
+    "period": "test",
+    "train_rows": 119780,
+    "prediction_rows": 26920,
+    "cutoff": "2026-10-04 21:00:00+00:00",
+    "latest_training_origin": "2026-10-04 19:00:00+00:00",
+    "latest_training_target_usable": "2026-10-04 21:00:00+00:00"
+  }
+]

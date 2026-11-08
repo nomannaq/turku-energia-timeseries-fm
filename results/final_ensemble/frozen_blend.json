@@ -1,0 +1,50 @@
+{
+  "weights": {
+    "validation": [
+      0.7,
+      0.4,
+      0.5
+    ],
+    "test": [
+      0.7,
+      0.4,
+      0.6
+    ]
+  },
+  "selections": {
+    "validation": {
+      "specified_lgb_weights": [
+        0.7,
+        0.4,
+        0.5
+      ],
+      "reproduced_grid_weights": [
+        0.7,
+        0.4,
+        0.5
+      ],
+      "weights_match": true,
+      "selection_target_cutoff": "2026-09-06 21:00:00+00:00",
+      "eligible_rows": 60260,
+      "latest_eligible_target_fu": "2026-09-06 21:00:00+00:00"
+    },
+    "test": {
+      "specified_lgb_weights": [
+        0.7,
+        0.4,
+        0.6
+      ],
+      "reproduced_grid_weights": [
+        0.7,
+        0.4,
+        0.6
+      ],
+      "weights_match": true,
+      "selection_target_cutoff": "2026-10-04 21:00:00+00:00",
+      "eligible_rows": 87140,
+      "latest_eligible_target_fu": "2026-10-04 21:00:00+00:00"
+    }
+  },
+  "no_validation_based_changes": true,
+  "frozen_at_utc": "2026-11-07 20:03:05.838430+00:00"
+}

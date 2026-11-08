@@ -1,0 +1,50 @@
+W1107 19:26:14.814000 35199 .venv-chronos/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Availability checks: 9 passed
+Loading Chronos-2 on cpu; 672 origins, context 672
+Loading weights:   0%|          | 0/170 [00:00<?, ?it/s]Loading weights: 100%|██████████| 170/170 [00:00<00:00, 19338.03it/s]
+price: 8/672 origins, 0.2s
+price: 64/672 origins, 0.8s
+price: 128/672 origins, 1.4s
+price: 192/672 origins, 2.0s
+price: 256/672 origins, 2.6s
+price: 320/672 origins, 3.2s
+price: 384/672 origins, 3.8s
+price: 448/672 origins, 4.4s
+price: 512/672 origins, 5.0s
+price: 576/672 origins, 5.6s
+price: 640/672 origins, 6.3s
+price: 672/672 origins, 6.6s
+price {"rows_scored": 26700, "mae_p50": 52.44410577962567, "pinball_p10": 7.044261436014925, "pinball_p90": 22.15074789284938, "calibration_pinball_mean": 14.597504664432153, "coverage_p10_p90": 0.7304119850187266, "below_p10": 0.1397378277153558, "above_p90": 0.1298501872659176, "mean_interval_width": 137.4013518108768}
+spread: 8/672 origins, 0.1s
+spread: 64/672 origins, 0.6s
+spread: 128/672 origins, 1.3s
+spread: 192/672 origins, 1.9s
+spread: 256/672 origins, 2.5s
+spread: 320/672 origins, 3.1s
+spread: 384/672 origins, 3.7s
+spread: 448/672 origins, 4.4s
+spread: 512/672 origins, 5.0s
+spread: 576/672 origins, 5.6s
+spread: 640/672 origins, 6.2s
+spread: 672/672 origins, 6.5s
+spread {"rows_scored": 26700, "mae_p50": 44.91586942376755, "pinball_p10": 9.934189447289388, "pinball_p90": 19.005608337571385, "calibration_pinball_mean": 14.469898892430386, "coverage_p10_p90": 0.8016104868913858, "below_p10": 0.09352059925093632, "above_p90": 0.10486891385767791, "mean_interval_width": 145.46993525799405}
+spread_covariates: 8/672 origins, 0.8s
+spread_covariates: 64/672 origins, 6.0s
+spread_covariates: 128/672 origins, 12.0s
+spread_covariates: 192/672 origins, 18.1s
+spread_covariates: 256/672 origins, 24.0s
+spread_covariates: 320/672 origins, 30.0s
+spread_covariates: 384/672 origins, 36.0s
+spread_covariates: 448/672 origins, 42.0s
+spread_covariates: 512/672 origins, 47.9s
+spread_covariates: 576/672 origins, 53.8s
+spread_covariates: 640/672 origins, 59.8s
+spread_covariates: 672/672 origins, 62.8s
+spread_covariates {"rows_scored": 26700, "mae_p50": 47.645813275718865, "pinball_p10": 8.251561920371502, "pinball_p90": 19.040494772815418, "calibration_pinball_mean": 13.64602834659346, "coverage_p10_p90": 0.7564794007490637, "below_p10": 0.11220973782771536, "above_p90": 0.131310861423221, "mean_interval_width": 128.94865116801154}
+                     model  rows_scored   mae_p50  pinball_p10  pinball_p90  calibration_pinball_mean  coverage_p10_p90  below_p10  above_p90  mean_interval_width
+                  baseline        26700 66.203304    25.107578    23.247658                 24.177618          0.682884   0.152322   0.164794           111.511521
+                lightgbm_A        26700 42.744953     8.186777    17.316252                 12.751514          0.742022   0.157865   0.100112           105.885389
+                lightgbm_B        26700 42.028598     8.162124    16.672376                 12.417250          0.732210   0.157603   0.110187            95.807264
+            chronos2_price        26700 52.444106     7.044261    22.150748                 14.597505          0.730412   0.139738   0.129850           137.401352
+           chronos2_spread        26700 44.915869     9.934189    19.005608                 14.469899          0.801610   0.093521   0.104869           145.469935
+chronos2_spread_covariates        26700 47.645813     8.251562    19.040495                 13.646028          0.756479   0.112210   0.131311           128.948651
